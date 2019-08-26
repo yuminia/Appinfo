@@ -8,19 +8,58 @@ import java.util.Date;
  *
  */
 public class AppVersion {
-	private Integer id;			// int(30)
-	private Integer appId;		// int(30)
-	private String versionNo;	// varchar(50)
-	private String versionInfo;	// varchar(2000)
-	private Integer publishStatus;// int(30)
-	private String downloadLink;// varchar(500)
-	private Double versionSize;	// decimal(20,2)
-	private Integer createdBy;	// int(30)
-	private Date creationDate;// datetime
-	private Integer modifyBy;	// int(30)
-	private Date modifyDate;	// datetime
-	private String apkLocPath;	// varchar(500)
-	private String apkFileName;	// varchar(500)\
+	/**
+	 * int(30) 版本ID
+	 */
+	private Integer id;			
+	/**
+	 * int(30) appID
+	 */
+	private Integer appId;		
+	/**
+	 * varchar(50) 版本号
+	 */
+	private String versionNo;	
+	/**
+	 * varchar(2000) 版本信息
+	 */
+	private String versionInfo;	
+	/**
+	 * int(30) 发表状态
+	 */
+	private Integer publishStatus;
+	/**
+	 *varchar(500) 下载链接
+	 */
+	private String downloadLink;
+	/**
+	 * decimal(20,2) 版本大小
+	 */
+	private Double versionSize;	
+	/**
+	 * int(30) 创建者ID
+	 */
+	private Integer createdBy;	
+	/**
+	 * datetime 创建时间
+	 */
+	private Date creationDate;
+	/**
+	 * int(30) 更新者ID
+	 */
+	private Integer modifyBy;	
+	/**
+	 * datetime 更新者时间
+	 */
+	private Date modifyDate;	
+	/**
+	 * varchar(500)apk安装包路径
+	 */
+	private String apkLocPath;	
+	/**
+	 *  varchar(500) apk安装包文件名称
+	 */
+	private String apkFileName;	
 	
 	public AppVersion() {}
 	

@@ -2,21 +2,51 @@ package cn.app.bean;
 
 import java.util.Date;
 /**
- * 前台用户
+ * 开发者
  * @author Administrator
  *
  */
 public class UserDev {
-	private Integer id;			//int(30)
-	private String devCode;		// varchar(50)
-	private String devName;		// varchar(50)
-	private String devPassword;	// varchar(50)
-	private String devEmail;	// varchar(50)
-	private String devInfo;		// varchar(500)
-	private Integer createdBy;	// int(30)
-	private Date creationDate;	// datetime
-	private Integer modifyBy;	// int(30)
-	private Date modifyDate;	// datetime
+	/**
+	 * int(30) 开发者ID
+	 */
+	private Integer id;	
+	/**
+	 * varchar(50)开发者编码
+	 */
+	private String devCode;		
+	/**
+	 * varchar(50) 开发者名称
+	 */
+	private String devName;	
+	/**
+	 * varchar(50) 开发者密码
+	 */
+	private String devPassword;	
+	/**
+	 * varchar(50) 开发者邮箱
+	 */
+	private String devEmail;	
+	/**
+	 * varchar(500) 开发者信息
+	 */
+	private String devInfo;		
+	/**
+	 * int(30) 创建者ID
+	 */
+	private Integer createdBy;	
+	/**
+	 * datetime 创建时间
+	 */
+	private Date creationDate;	
+	/**
+	 * int(30) 更新者ID
+	 */
+	private Integer modifyBy;	
+	/**
+	 * datetime 更新时间
+	 */
+	private Date modifyDate;	
 	
 	public UserDev() {}
 	public Integer getId() {

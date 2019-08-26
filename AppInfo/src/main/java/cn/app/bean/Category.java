@@ -5,14 +5,38 @@ package cn.app.bean;
 import java.util.Date;
 
 public class Category {
-	private Integer id;			//  int(30)
-	private Integer parentId;	//  int(30)
-	private Integer createdBy;	//  int(30)
-	private Integer modifyBy;	//  int(30)
-	private String categoryCode;//  varchar(50)
-	private String categoryName;//  varchar(50)
-	private Date creationTime;	//  datetime
-	private Date modifyDate;	//  datetime
+	/**
+	 * int(30) 类别ID
+	 */
+	private Integer id;		
+	/**
+	 * int(30) 父类ID
+	 */
+	private Integer parentId;	
+	/**
+	 *  int(30) 创建者ID
+	 */
+	private Integer createdBy;	
+	/**
+	 * int(30) 更新者ID
+	 */
+	private Integer modifyBy;	
+	/**
+	 * varchar(50) 类别编码
+	 */
+	private String categoryCode;
+	/**
+	 * varchar(50)类别名称
+	 */
+	private String categoryName;  
+	/**
+	 *  datetime创建时间
+	 */
+	private Date creationTime;	
+	/**
+	 * datetime 更新时间
+	 */
+	private Date modifyDate;	  
 	
 	public Category() {}
 	
