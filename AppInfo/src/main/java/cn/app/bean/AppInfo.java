@@ -7,30 +7,54 @@ import java.util.Date;
  *
  */
 public class AppInfo {
-	private Integer id;				// int(30)
-	private String softwareName;		// varchar(50)
-	private String APKName;			// varchar(50)
-	private String supportROM;		// varchar(50)
-	private String interfaceLanguage;	// varchar(50)
-	private Double softwareSize;		// decimal(30,2)
-	private Date updateDate;			// date
-	private Integer devId;			// int(30)
-	private String appInfo;			// varchar(5000)
-	private Integer status;			// int(30)
-	private Date onSaleDate;			// datetime
-	private Date offSaleDate;			// datetime
-	private Integer flatformId;		// int(30)
-	private Integer categoryLevel1;	// int(30)
-	private Integer categoryLevel2;	// int(30)
-	private Integer categoryLevel3;	// int(30)
-	private Integer downloads;		// int(30)
-	private Integer createdBy;		// int(30)
-	private Date creationDate;		// datetime
-	private Integer modifyBy;			// int(30)
-	private Date modifyDate;			// datetime
-	private String logoPicPath;		// varchar(500)
-	private String logoLocPath;		// varchar(500)
-	private Integer versionId;		// int(30)
+	/**int(30) appID*/
+	private Integer id;		
+	/** varchar(50)软件名称*/
+	private String softwareName;
+	/** varchar(50)APK名称*/
+	private String APKName;	
+	/**varchar(50) 支持ROM*/
+	private String supportROM;	
+	/**varchar(50) 界面语言*/
+	private String interfaceLanguage;	
+	/**decimal(30,2) 软件大小*/
+	private Double softwareSize;	
+	/**date 更新时间*/
+	private Date updateDate;
+	/*** int(30) 开发者ID*/
+	private Integer devId;			
+	/** varchar(5000) APP简介*/
+	private String appInfo;	
+	/**int(30) APP状态*/
+	private Integer status;			
+	/**datetime 上架日期*/
+	private Date onSaleDate;
+	/** datetime 下架日期*/
+	private Date offSaleDate;			
+	/**int(30) 所属平台ID*/
+	private Integer flatformId;	
+	/**int(30) 一级分类*/
+	private Integer categoryLevel1;	
+	/** int(30) 二级分类*/
+	private Integer categoryLevel2;	
+	/** int(30) 三级分类*/
+	private Integer categoryLevel3;	
+	/**int(30)下载次数 */
+	private Integer downloads;		
+	/**int(30) 创建者ID*/
+	private Integer createdBy;		
+	/** datetime 创建时间*/
+	private Date creationDate;		
+	/**int(30)更新者ID*/
+	private Integer modifyBy;			
+	/**datetime 更新时间*/
+	private Date modifyDate;
+	/**varchar(500) logo图片*/
+	private String logoPicPath;		
+	/**varchar(500) logo图片路径 */
+	private String logoLocPath;		
+	/**int(30)版本信息id*/
+	private Integer versionId;	
 	
 	public AppInfo() {}
 	public Integer getId() {
