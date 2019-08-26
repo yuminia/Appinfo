@@ -3,17 +3,28 @@ package cn.app.bean;
 import java.util.Date;
 
 public class Promotion {//推销，促销
-	private Integer id;			//int
-	private Integer appId;		// int(30)
-	private Integer adPV;		// int(50)
-	private Integer carouselPosition;// int(30)
-	private Integer createdBy;	// int(30)
-	private Integer modifyBy;	// int(30)
-	private String adPicPath;	// varchar(100)
-	private Date startTime;		// datetime
-	private Date endTime;		// datetime
-	private Date creationDate;	// datetime
-	private Date modifyDate;	// datetime
+	/**int 主键 */
+	private Integer id;	
+	/**int(30)  APP ID*/
+	private Integer appId;		
+	/**int(50)页面浏览量*/
+	private Integer adPV;		
+	/** int(30) 上传平台*/
+	private Integer carouselPosition;
+	/**int(30) 创建者ID */
+	private Integer createdBy;	
+	/**int(30) 更新者ID*/
+	private Integer modifyBy;	
+	/** varchar(100)图片路径*/
+	private String adPicPath;	
+	/** datetime 更新开始时间*/
+	private Date startTime;		
+	/** datetime 结束时间*/
+	private Date endTime;	
+	/** datetime 创建时间*/
+	private Date creationDate;	
+	/** datetime 更新时间*/
+	private Date modifyDate;	
 	
 	public Promotion() {}
 	

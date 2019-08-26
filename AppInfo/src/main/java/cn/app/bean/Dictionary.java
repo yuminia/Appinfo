@@ -4,18 +4,26 @@ import java.util.Date;
 /**
  * 数据字典
  * @author Administrator
- *
  */
 public class Dictionary {
-	private Integer id;// int(30)
-	private String typeCode;// varchar(50)
-	private String typeName;// varchar(50)
-	private Integer valueId;// int(30)
-	private String valueName;// varchar(50)
-	private Integer createdBy;// int(30)
-	private Date creationDate;// datetime
-	private Integer modifyBy;// int(30)
-	private Date modifyDate;// datetime
+	/**int(30)数据字典ID*/
+	private Integer id;
+	/** varchar(50) 类型编码 */
+	private String typeCode;
+	/** varchar(50) 类型名称*/
+	private String typeName;
+	/** int(30) */
+	private Integer valueId;
+	/** varchar(50) */
+	private String valueName;
+	/** int(30) 创建者ID */
+	private Integer createdBy;
+	/**datetime 创建时间*/
+	private Date creationDate;
+	/**int(30) 更新者ID*/
+	private Integer modifyBy;
+	/** datetime更新时间*/
+	private Date modifyDate; 
 	
 	public Dictionary() {}
 	public Integer getId() {

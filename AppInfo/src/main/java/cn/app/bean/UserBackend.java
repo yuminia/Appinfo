@@ -4,18 +4,26 @@ import java.util.Date;
 /**
  * 后台用户 实体类
  * @author Administrator
- *
  */
 public class UserBackend {
-	private Integer id;			//int(30)
-	private String userCode;	// varchar(50)
-	private String userName;	// varchar(50)
-	private Integer userType;	// int(30)
-	private Integer createdBy;	// int(30)
-	private Date creationDate;// datetime
-	private Integer modifyBy;	// int(30)
-	private Date modifyDate;	// datetime 
-	private String userPassword;// varchar(50)
+	/** int(30) 后台用户ID*/
+	private Integer id;			
+	/** varchar(50) 后台用户编码*/
+	private String userCode;	
+	/** varchar(50) 后台用户名称 */
+	private String userName;	
+	/** int(30) 后台用户类型*/
+	private Integer userType;	
+	/**int(30) 创建者ID*/
+	private Integer createdBy;	
+	/** datetime 创建时间*/
+	private Date creationDate;
+	/**int(30) 更新者ID*/
+	private Integer modifyBy;	
+	/** datetime 更新时间*/
+	private Date modifyDate;	
+	/** varchar(50) 后台用户密码*/
+	private String userPassword;
 	
 	public UserBackend() {}
 	public Integer getId() {
