@@ -1,0 +1,14 @@
+diff a/AppInfo/src/main/java/cn/app/controller/UserBackendController.java b/AppInfo/src/main/java/cn/app/controller/UserBackendController.java	(rejected hunks)
+@@ -1,10 +1,9 @@
+ package cn.app.controller;
+ /**
+ * @author yuminia
+-* @version 创建时间5:04:46
++* @version ����ʱ�䣺2019��8��26�� ����5:04:46
+ * 
+ */
+ public class UserBackendController {
+-	//private ;
+-	//aaaaaaaaaaaaaatest
++
+ }
