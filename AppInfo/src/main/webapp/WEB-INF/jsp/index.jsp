@@ -13,17 +13,17 @@
 
     <!-- Bootstrap core CSS -->
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/animate.min.css" rel="stylesheet">
 
     <!-- Custom styling plus plugins -->
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/icheck/flat/green.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/custom.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/icheck/flat/green.css" rel="stylesheet">
 
 
-    <script src="js/jquery.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 </head>
 <body style="background:#F7F7F7;">
     
@@ -43,8 +43,8 @@
                             <input type="password" class="form-control" placeholder="Password" required="required" />
                         </div>
                         <div>
-                            <a class="btn btn-default submit" href="login.jsp">登录app开发者平台</a>
-                            <a class="btn btn-default submit" href="login.jsp">登录后台管理者平台</a>
+                            <a class="btn btn-default submit" href="${pageContext.request.contextPath}/login?DevOrBackend=Dev">登录app开发者平台</a>
+                            <a class="btn btn-default submit" href="${pageContext.request.contextPath}/login?DevOrBackend=Backend">登录后台管理者平台</a>
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">
