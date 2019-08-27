@@ -58,7 +58,6 @@
   		<groupId>commons-pool</groupId>
   		<artifactId>commons-pool</artifactId>
   		<version>1.6</version>
-  		<type>pom.lastUpdated</type>
   	</dependency>
   	<dependency>
   		<groupId>com.alibaba</groupId>
