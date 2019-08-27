@@ -69,13 +69,9 @@
                         	 style="position: absolute;right:0px;top:8px;" ></span>
                         </div>
                         <div><input type="text" class="form-control" placeholder="devName" name="devName" required="" /></div>
-                        <div><input type="password" class="form-control" placeholder="Password" required="" /></div>
+                        <div><input type="password" class="form-control" placeholder="Password" name="devPassword" required="" /></div>
                         <div><input type="email" class="form-control" placeholder="devEmail" name="devEmail" required="" /></div>
                         <div><input type="text" class="form-control" placeholder="devInfo" name="devInfo" required="" /></div>
-                        <div><input type="text" class="form-control" placeholder="devEmail" name="devEmail" required="" /></div>
-                        <div><input type="text" class="form-control" placeholder="devEmail" name="devEmail" required="" /></div>
-                        <div><input type="text" class="form-control" placeholder="devEmail" name="devEmail" required="" /></div>
-                        <div><input type="text" class="form-control" placeholder="devEmail" name="devEmail" required="" /></div>
 <!--                         <div><a class="btn btn-default submit" href="index.html">Submit</a></div> -->
                         <div><input type="submit" class="btn btn-default submit" value="Submit"/></div>
                         <div class="clearfix"></div>
@@ -106,7 +102,6 @@
 					url:"<%=request.getContextPath() %>/app/userDev/checkDevCode",
 					data:{"devCode":devCode},
 					success:function(data){
-						console.log(typeof data);
 						if( data == true ){//存在
 							$("#checkDevCodeSpan").css("color","red").html("用户名已存在,请重新输入")
 						}else if( data == false ){
