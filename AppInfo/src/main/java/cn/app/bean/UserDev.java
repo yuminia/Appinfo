@@ -1,11 +1,7 @@
 package cn.app.bean;
 
 import java.util.Date;
-/**
- * 开发者
- * @author Administrator
- *
- */
+/**开发者*/
 public class UserDev {
 	/** int(30) 开发者ID*/
 	private Integer id;	
@@ -24,9 +20,9 @@ public class UserDev {
 	/** datetime 创建时间*/
 	private Date creationDate;	
 	/** int(30) 更新者ID*/
-	private Integer modifyBy;	
+	private Integer modifyBy;
 	/** datetime 更新时间*/
-	private Date modifyDate;	
+	private Date modifyDate;
 	
 	public UserDev() {}
 	public Integer getId() {
