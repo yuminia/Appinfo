@@ -1,5 +1,6 @@
 package cn.app.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,13 @@ public class UserDevController {
 		return "userDev/userDevLogin";
 	}
 	
+	/** Dev 用户 注销 */
+	@RequestMapping("userDevlogOut")
+	public String userDevlogOut(UserDev userDev,HttpServletRequest request){
+		request.getSession().removeAttribute("loginUserDev");
+		return "userDev/userDevLogin";
+	}
+	
 	/** Dev 用户登录 提交 */
 	@RequestMapping("userDevLoginSubmit")
 	public String userDevLoginSubmit(UserDev userDev,HttpServletRequest request){
@@ -46,6 +54,8 @@ public class UserDevController {
 	/** Dev 用户注册 提交 */
 	@RequestMapping("userDevRegisterSubmit")
 	public String userDevRegisterSubmit(UserDev userDev){
+		userDev.setCreatedBy(1);
+		userDev.setCreationDate(new Date());
 		int res = userDevService.addUserDev(userDev);
 		if(res == 1){
 			return "userDev/userDevLogin";
