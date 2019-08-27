@@ -46,7 +46,7 @@
 	<bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
 		<property name="converters">
 			<set>
-				<bean class="com.qn.utils.StringToDateConverter">
+				<bean class="cn.app.utils.StringToDateConverter">
 					<constructor-arg value="yyyy-MM-dd"></constructor-arg>
 				</bean>
 			</set>
