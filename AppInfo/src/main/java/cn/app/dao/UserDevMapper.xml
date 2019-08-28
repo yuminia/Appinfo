@@ -2,17 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.app.dao.UserDevMapper">
 
-	<!-- Integer id;	int(30) 开发者ID
-	String devCode;	 	varchar(50)开发者编码
-	String devName;	 	varchar(50) 开发者名称
-	String devPassword;	varchar(50) 开发者密码
-	String devEmail;	varchar(50) 开发者邮箱
-	String devInfo;		varchar(500) 开发者信息
-	Integer createdBy;	int(30) 创建者ID
-	Date creationDate;	datetime 创建时间
-	Integer modifyBy;	int(30) 更新者ID
-	Date modifyDate;	datetime 更新时间 -->
-	
 	<!-- /**查询所有用户*/public List<UserDev> getUserDevList(UserDev UserDev); -->
 	<select id="getUserDevList" resultType="cn.app.bean.UserDev">
 		select * from dev_user 

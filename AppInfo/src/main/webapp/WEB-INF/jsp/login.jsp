@@ -25,6 +25,7 @@
 
     <script src="js/jquery.min.js"></script>
 </head>
+
 <body style="background:#F7F7F7;">
     
     <div class="">
@@ -37,13 +38,13 @@
                     <form>
                         <h1>登 录</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username" required="required" />
+                            <input type="text" class="form-control" placeholder="Username" required="required" name="userCode"/>
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" required="required" />
+                            <input type="password" class="form-control" placeholder="Password" required="required" name="userPassWord"/>
                         </div>
                         <div>
-                            <a class="btn btn-default submit" href="index.html">登入</a>
+                            <a class="btn btn-default submit" href="${pageContext.request.contextPath}/doLogin">登入</a>
                             <a class="reset_pass" href="#">忘记密码?</a>
                         </div>
                         <div class="clearfix"></div>
@@ -78,6 +79,7 @@
                             <input type="password" class="form-control" placeholder="Password" required="required" />
                         </div>
                         <div>
+                        	<input type="hidden" name="DevOrBackend" value="${DevOrBackend}"/>
                             <a class="btn btn-default submit" href="index.html">提交</a>
                         </div>
                         <div class="clearfix"></div>
