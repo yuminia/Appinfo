@@ -103,9 +103,11 @@
 					data:{"devCode":devCode},
 					success:function(data){
 						if( data == true ){//存在
-							$("#checkDevCodeSpan").css("color","red").html("用户名已存在,请重新输入")
+							$("#checkDevCodeSpan").css("color","red").html("用户名已存在,请重新输入");
+							return true;
 						}else if( data == false ){
-							$("#checkDevCodeSpan").css("color","green").html("用户名可注册")
+							$("#checkDevCodeSpan").css("color","green").html("用户名可注册");
+							return false;
 						}
 					}
 				})

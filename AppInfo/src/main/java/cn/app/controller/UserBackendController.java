@@ -12,10 +12,13 @@ import cn.app.service.UserBackendService;
 * 
 */
 @Controller
-@RequestMapping("/Backend/user")
+@RequestMapping("/app/Backend")
 public class UserBackendController {
 	@Autowired
 	private UserBackendService userBackendService;
 	
-	
+	@RequestMapping("login")
+	public String userBackendLogin(){
+		return "login";
+	}
 }

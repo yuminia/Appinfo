@@ -108,16 +108,22 @@
 	    <property name="resolveLazily" value="true"/>
 	</bean>
 	
-	<!-- 配置拦截器 
+	<!-- 拦截器 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/app/**"/>
-			<mvc:exclude-mapping path="/app/user/userAdd"/>
+			<mvc:mapping path="/app/userDev"/>
+			<bean class="cn.app.utils.DevLoginInterceptor"></bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/app/Backend"/>
+			<bean class="cn.app.utils.BackendLoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+			<!-- 	配置拦截器 <mvc:exclude-mapping path="/app/user/userAdd"/>
 			<mvc:exclude-mapping path="/app/user/userAddSave"/>
 			<mvc:exclude-mapping path="/app/user/userLogin"/>
 			<mvc:exclude-mapping path="/app/user/userLoginSubmit"/>
-			<bean class="cn.app.utils.LoginInterceptor"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors>-->
+	
+	-->
 	
 </beans>
