@@ -1,9 +1,21 @@
 package cn.app.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.app.service.UserBackendService;
+
 /**
 * @author yuminia
-* @version 创建时间：2019年8月26日 下午5:04:46
+* @version 鍒涘缓鏃堕棿5:04:46
 * 
 */
+@Controller
+@RequestMapping("/app/Backend")
 public class UserBackendController {
-
+	@Autowired
+	private UserBackendService userBackendService;
+	
+	
 }

@@ -27,9 +27,9 @@ public class UserDevController {
 	}
 	
 	/** 跳转 Dev 用户登录页面 */
-	@RequestMapping("userDevLogin")
+	@RequestMapping("login")
 	public String userDevLogin(){
-		return "userDev/userDevLogin";
+		return "login";
 	}
 	
 	/** Dev 用户 注销 */
