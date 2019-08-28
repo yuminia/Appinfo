@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,22 +9,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>App开发平台</title>
-
     <!-- Bootstrap core CSS -->
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/animate.min.css" rel="stylesheet">
-
+    <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/fonts/css/font-awesome.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/animate.min.css" rel="stylesheet">
     <!-- Custom styling plus plugins -->
-    <link href="css/custom.css" rel="stylesheet">
-    <link href="css/icheck/flat/green.css" rel="stylesheet">
-
-
-    <script src="js/jquery.min.js"></script>
+    <link href="${pageContext.request.contextPath}/static/css/custom.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/static/css/icheck/flat/green.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 </head>
 
 <body style="background:#F7F7F7;">
@@ -35,7 +29,11 @@
         <div id="wrapper">
             <div id="login" class="animate form">
                 <section class="login_content">
-                    <form>
+                	
+                    <form action="${pageContext.request.contextPath}/app/
+                    <c:if test="${DevOrBackend} eq 'Dev'" ><c:out>userDev/doLogin</c:out></c:if>
+                    <c:if test="${DevOrBackend} eq 'Backend'" ><c:out>Backend/doLogin</c:out></c:if>
+                    " method="post">
                         <h1>登 录</h1>
                         <div>
                             <input type="text" class="form-control" placeholder="Username" required="required" name="userCode"/>
@@ -67,7 +65,10 @@
             </div>
             <div id="register" class="animate form">
                 <section class="login_content">
-                    <form>
+                    <form action="${pageContext.request.contextPath}/app/
+	                    <c:if test="${DevOrBackend} eq 'Dev'" ><c:out>userDev/doRegister</c:out></c:if>
+	                    <c:if test="${DevOrBackend} eq 'Backend'" ><c:out>Backend/doRegister</c:out></c:if>
+                    " method="post">
                         <h1>注 册</h1>
                         <div>
                             <input type="text" class="form-control" placeholder="Username" required="required" />

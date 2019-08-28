@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,21 +9,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>App开发平台</title>
-
     <!-- Bootstrap core CSS -->
-
     <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="${pageContext.request.contextPath}/static/fonts/css/font-awesome.min.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/static/css/animate.min.css" rel="stylesheet">
-
     <!-- Custom styling plus plugins -->
     <link href="${pageContext.request.contextPath}/static/css/custom.css" rel="stylesheet">
     <link href="${pageContext.request.contextPath}/static/css/icheck/flat/green.css" rel="stylesheet">
-
-
     <script src="${pageContext.request.contextPath}/static/js/jquery.min.js"></script>
 </head>
 <body style="background:#F7F7F7;">
@@ -37,14 +31,12 @@
                     <form>
                         <h1>欢迎使用APP开发</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username" required="required" />
+                            <a id="Dev" class="btn btn-default submit" href="javascript:;">登录app开发者平台</a>
                         </div>
+                        <br />
+                        <br />
                         <div>
-                            <input type="password" class="form-control" placeholder="Password" required="required" />
-                        </div>
-                        <div>
-                            <a class="btn btn-default submit" href="${pageContext.request.contextPath}/login?DevOrBackend=Dev">登录app开发者平台</a>
-                            <a class="btn btn-default submit" href="${pageContext.request.contextPath}/login?DevOrBackend=Backend">登录后台管理者平台</a>
+                            <a id="Backend" class="btn btn-default submit" href="javascript:;">登录后台管理者平台</a>
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">
@@ -61,6 +53,13 @@
             </div>
         </div>
     </div>
-
+<script type="text/javascript">
+	$("#Dev").click(function(){
+		$("body").load("${pageContext.request.contextPath}/app/userDev/login","DevOrBackend="+'Dev');
+		});
+	$("#Backend").click(function(){
+		$("body").load("${pageContext.request.contextPath}/app/Backend/login","DevOrBackend="+'Backend');
+		});
+</script>
 </body>
 </html>

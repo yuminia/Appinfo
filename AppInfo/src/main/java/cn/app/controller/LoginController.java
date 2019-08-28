@@ -32,13 +32,15 @@ public class LoginController {
 	 * @return String
 	 * 
 	 */
-	public String doLogin(String userCode, String userPassword, Model model, String DevOrBackend) {
+	public String doLogin(String userCode, String userPassword, Model model,HttpServletRequest request) {
 		log.info("用户登录：" + userCode);
-		UserDev userDev = null;
+		UserDev userDev = new UserDev();
 		UserBackend userBackend = null;
-
+		String DevOrBackend = request.getParameter("DevOrBackend");
 		if ("Dev".equals(DevOrBackend)) {
-			userDev = userDevService.login(userCode, userPassword);
+			userDev.setDevCode(userCode);
+			userDev.setDevPassword(userPassword);
+			userDev = userDevService.getUserDevByUserDevCodeAndPassword(userDev);
 			log.info(userDev + "登录到 开发者 平台");
 			if (userDev == null) {
 				model.addAttribute("message", "用户名或密码错误！");

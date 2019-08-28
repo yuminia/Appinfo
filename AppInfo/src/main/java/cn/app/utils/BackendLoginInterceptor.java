@@ -8,20 +8,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import cn.app.bean.UserBackend;
-import cn.app.bean.UserDev;
-
 
 /**
 * @author yuminia
-* 
+* @version 创建时间：2019年8月28日 上午9:50:07
 * 
 */
-public class LoginInterceptor extends HandlerInterceptorAdapter{
+public class BackendLoginInterceptor  extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws IOException {
-		UserDev userDev = (UserDev)request.getSession().getAttribute("userDev");
 		UserBackend userBackend = (UserBackend)request.getSession().getAttribute("userBackend");
-		if (userDev==null&&userBackend==null) {
-			response.sendRedirect(request.getContextPath()+"/sys/user/login");
+		if (userBackend==null) {
+			response.sendRedirect(request.getContextPath()+"/index");
 			return false;
 		}else {
 			return true;
