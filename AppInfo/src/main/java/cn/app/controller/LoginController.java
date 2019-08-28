@@ -40,7 +40,7 @@ public class LoginController {
 	public String doLogin(String userCode, String userPassword,String DevOrBackend ,Model model,HttpServletRequest request) {
 		log.info("用户登录：" + userCode+"  pwd:"+userPassword);
 		UserDev userDev = new UserDev();
-		UserBackend userBackend = null;
+		UserBackend userBackend = new UserBackend();
 		if ("Dev".equals(DevOrBackend)) {
 			userDev.setDevCode(userCode);
 			userDev.setDevPassword(userPassword);
@@ -54,14 +54,16 @@ public class LoginController {
 				return "redirect:userDev/main";
 			}
 		} else if ("Backend".equals(DevOrBackend)) {
-		userBackend = userBackendService.loginToBackend(userCode, userPassword);
+			userBackend.setUserCode(userCode);
+			userBackend.setUserPassword(userPassword);
+			userBackend = userBackendService.loginToBackend(userBackend);
 			log.info(userBackend + "登录到 管理者 平台");
 			if (userBackend == null) {
 				model.addAttribute("message", "用户名或密码错误！");
 				return "login";
 			} else {
-				model.addAttribute("user", userBackend);
-				return "index";
+				request.getSession().setAttribute("loginUserBackend", userBackend);
+				return "redirect:Backend/main";
 			}
 		}
 		return "index";

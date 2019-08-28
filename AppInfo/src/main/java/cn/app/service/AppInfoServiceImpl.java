@@ -2,10 +2,14 @@ package cn.app.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import cn.app.bean.AppInfo;
 import cn.app.dao.AppInfoMapper;
-
+@Service("appInfoService")
 public class AppInfoServiceImpl implements AppInfoService {
+	@Autowired
 	private AppInfoMapper appInfoMapper;
 
 	/** 查询所有APP信息 */

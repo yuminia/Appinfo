@@ -1,5 +1,7 @@
 package cn.app.service;
 
+import java.util.List;
+
 import cn.app.bean.UserBackend;
 
 /**
@@ -8,19 +10,51 @@ import cn.app.bean.UserBackend;
 * 
 */
 public interface UserBackendService {
-	/**
-	 * 获取app信息列表
-	* @author yuminia
-	* @return List<AppInfo>
-	* 
-	*/
-	//public List<AppInfo> getAppInfoList();
 	
 	/**
 	 * 管理者平台登录
 	* @author yuminia
 	* @return UserBackend
-	* @param String userCode,String userPassword
+	* @param UserBackend userCode
 	*/
-	public UserBackend loginToBackend(String userCode,String userPassword);
+	public UserBackend loginToBackend(UserBackend userBackend);
+	
+	/**
+	 * 注册管理者用户
+	* @author yuminia
+	* @return Integer
+	* @param UserBackend userCode
+	*/
+	public Integer addUserBackend(UserBackend userBackend);
+	/**
+	 * 删除管理者用户
+	* @author yuminia
+	* @return Integer
+	* @param Integer id
+	*/
+	public Integer delUserBackend(Integer id);
+	
+	/**
+	 * 根据主键 id 获取管理者用户信息
+	* @author yuminia
+	* @return UserBackend
+	* @param Integer id
+	*/
+	public UserBackend getUserBackendById(Integer id);
+	
+	/**
+	 * 更改管理者用户信息
+	* @author yuminia
+	* @return Integer
+	* @param UserBackend userBackend
+	*/
+	public Integer updateUserBackend(UserBackend userBackend);
+	
+	/**
+	 * 获取管理者用户列表
+	* @author yuminia
+	* @return List<UserBackend>
+	* @param UserBackend userBackend
+	*/
+	public List<UserBackend> getUserBackendList(UserBackend userBackend);
 }

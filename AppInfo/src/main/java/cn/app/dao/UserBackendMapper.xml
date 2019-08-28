@@ -1,10 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.app.dao.UserBackendMapper">
-	
-	<select id="loginToBackend" resultType="UserBackend">
-			select * from backend_user  where 
-			userCode=#{userCode} and userPassword=#{userPassword}
-	</select>
 
+
+	<!-- 管理者平台登录 -->
+	<select id="loginToBackend" parameterType="cn.app.bean.UserBackend"
+	 resultType="cn.app.bean.UserBackend">
+			select * from backend_user  
+			where userCode=#{userCode} and userPassword=#{userPassword}
+	</select>
+	
+	<!-- 注册管理者用户 -->
+	<insert id="addUserBackend" parameterType="cn.app.bean.UserBackend">
+		insert into backend_user(
+			userCode,userName,userType,createdBy,creationDate,modifyBy,modifyDate,userPassword
+		)values(
+			#{userCode},#{userName},#{userType},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{userPassword}
+		)
+	</insert>
+	
+	<!-- 删除管理者用户 -->
+	<delete id="delUserBackend" parameterType="Integer">
+		delete from backend_user
+		where id=#{id}
+ 	 </delete>
+ 	 
+ 	 <!-- 根据主键 id 获取管理者用户信息 -->
+ 	 <select id="getUserBackendById" resultType="cn.app.bean.UserBackend">
+		select * from backend_user 
+		where id=#{id}
+	 </select>
+	 
+	 <!-- 更改管理者用户信息 -->
+	 <update id="updateUserBackend" parameterType="cn.app.bean.UserBackend">
+		update backend_user 
+		set userCode=#{userCode},
+			userName=#{userName},
+			userType=#{userType},
+			modifyBy=#{modifyBy},
+			modifyDate=#{modifyDate},
+			userPassword=#{userPassword} 
+		where id=#{id}
+	</update>
+	
+	<!-- 获取管理者用户列表 -->
+	<select id="getUserBackendList" resultType="cn.app.bean.UserBackend">
+		select * from backend_user 
+	</select>
+	
+	
 </mapper>

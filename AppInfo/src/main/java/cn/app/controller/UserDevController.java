@@ -64,9 +64,9 @@ public class UserDevController {
 		userDev.setCreationDate(new Date());
 		int res = userDevService.addUserDev(userDev);
 		if(res == 1){
-			return "userDev/userDevLogin";
+			return "login";
 		}
-		return null;
+		return "login";
 	}
 	
 	/** ajax匹配 DevCode */

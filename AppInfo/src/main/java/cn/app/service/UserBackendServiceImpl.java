@@ -1,11 +1,14 @@
 package cn.app.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.app.bean.UserBackend;
+import cn.app.dao.UserBackendMapper;
 
 /**
 * @author yuminia
@@ -17,12 +20,37 @@ import cn.app.bean.UserBackend;
 public class UserBackendServiceImpl implements UserBackendService{
 	
 	@Resource
-	private UserBackendService userBackendService;
+	private UserBackendMapper userBackendMapper;
 
-	public UserBackend loginToBackend(String userCode,String userPassword) {
-		
-		return userBackendService.loginToBackend(userCode, userPassword);
+	public UserBackend loginToBackend(UserBackend userBackend) {
+		return userBackendMapper.loginToBackend(userBackend);
 	}
+
+	@Override
+	public Integer addUserBackend(UserBackend userBackend) {
+		return userBackendMapper.addUserBackend(userBackend);
+	}
+
+	@Override
+	public Integer delUserBackend(Integer id) {
+		return userBackendMapper.delUserBackend(id);
+	}
+
+	@Override
+	public UserBackend getUserBackendById(Integer id) {
+		return userBackendMapper.getUserBackendById(id);
+	}
+
+	@Override
+	public Integer updateUserBackend(UserBackend userBackend) {
+		return userBackendMapper.updateUserBackend(userBackend);
+	}
+
+	@Override
+	public List<UserBackend> getUserBackendList(UserBackend userBackend) {
+		return userBackendMapper.getUserBackendList(userBackend);
+	}
+
 	
 
 }
