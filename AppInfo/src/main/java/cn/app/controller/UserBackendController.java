@@ -17,5 +17,8 @@ public class UserBackendController {
 	@Autowired
 	private UserBackendService userBackendService;
 	
-	
+	@RequestMapping("login")
+	public String userBackendLogin(){
+		return "login";
+	}
 }

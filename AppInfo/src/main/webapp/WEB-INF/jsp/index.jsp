@@ -55,10 +55,10 @@
     </div>
 <script type="text/javascript">
 	$("#Dev").click(function(){
-		$("body").load("${pageContext.request.contextPath}/app/userDev/login","DevOrBackend="+'Dev');
+		$("body").load("${pageContext.request.contextPath}/app/login","DevOrBackend="+'Dev');
 		});
 	$("#Backend").click(function(){
-		$("body").load("${pageContext.request.contextPath}/app/Backend/login","DevOrBackend="+'Backend');
+		$("body").load("${pageContext.request.contextPath}/app/login","DevOrBackend="+'Backend');
 		});
 </script>
 </body>

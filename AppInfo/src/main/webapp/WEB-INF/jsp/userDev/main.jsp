@@ -302,20 +302,21 @@
             <div class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
-                        <div class="title_left">
-                            <h3>Plain Page</h3>
-                        </div>
+                        <div class="title">
+                            <div>
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="First Name">
+                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+                                </div>
 
-                        <div class="title_right">
-                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search for...">
-                                    <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
+                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                    <input type="text" class="form-control" id="inputSuccess3" placeholder="Last Name">
+                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
                                 </div>
                             </div>
                         </div>
+
+<!--                         <div class="title_right"></div> -->
                     </div>
                     <div class="clearfix"></div>
 

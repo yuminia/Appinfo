@@ -19,6 +19,12 @@ public class UserDevController {
 	@Autowired
 	private UserDevService userDevService;
 	
+	/** Dev 用户 注销 */
+	@RequestMapping("main")
+	public String main(UserDev userDev,HttpServletRequest request){
+		request.getSession().removeAttribute("loginUserDev");
+		return "userDev/main";
+	}
 	
 	@RequestMapping("userDevList")
 	@ResponseBody
@@ -27,10 +33,10 @@ public class UserDevController {
 	}
 	
 	/** 跳转 Dev 用户登录页面 */
-	@RequestMapping("login")
-	public String userDevLogin(){
-		return "login";
-	}
+	//@RequestMapping("login")
+	//public String userDevLogin(){
+	//	return "login";
+	//}
 	
 	/** Dev 用户 注销 */
 	@RequestMapping("userDevlogOut")
