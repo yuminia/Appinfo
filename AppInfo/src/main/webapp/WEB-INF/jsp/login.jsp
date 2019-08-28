@@ -28,29 +28,25 @@
         <div id="wrapper">
             <div id="login" class="animate form">
                 <section class="login_content">
-                	
-                    <form action="${pageContext.request.contextPath}/app/doLogin
-                    <%-- <c:if test="${DevOrBackend eq 'Dev'} " ><c:out>userDev/doLogin</c:out></c:if>
-                    <c:if test="${DevOrBackend eq 'Backend'} " ><c:out>Backend/doLogin</c:out></c:if> --%>
-                    " method="post">
+                    <form action="${pageContext.request.contextPath}/app/doLogin" method="post">
                         <h1>登 录</h1>
                         <div>
                             <input type="text" class="form-control" placeholder="Username" required="required" name="userCode"/>
                         </div>
                         <div>
-                        
                             <input type="password" class="form-control" placeholder="Password" required="required" name="userPassword"/>
                         </div>
                         <div>
+                        	<input type="hidden" name="DevOrBackend" value="${DevOrBackend}">
                             <input type="submit" class="btn btn-default submit" value="登入">
                             <a class="reset_pass" href="#">忘记密码?</a>
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">
-
                             <p class="change_link">还未创建账号?
                                 <a href="#toregister" class="to_register"> 注册 </a>
                             </p>
+                            <c:out value="${message }"></c:out>
                             <div class="clearfix"></div>
                             <br />
                             <div>
@@ -65,24 +61,21 @@
             </div>
             <div id="register" class="animate form">
                 <section class="login_content">
-                    <form action="${pageContext.request.contextPath}/app/userDev/doRegister
-	                    <%-- <c:if test="${DevOrBackend eq 'Dev'}" ><c:out>userDev/doRegister</c:out></c:if>
-	                    <c:if test="${DevOrBackend eq 'Backend'}" ><c:out>Backend/doRegister</c:out></c:if> --%>
-                    " method="post">
+                	<c:if test="${DevOrBackend eq 'Dev'} " >
+                		<c:out value="
+                		<form action="${pageContext.request.contextPath}/app/userDev/doRegister" method="post">
                         <h1>注 册</h1>
-                        <div>
-                            <input type="text" class="form-control" placeholder="Username" required="required" />
+                        <div style="position: relative;">
+                        	<input id="registerDevCode" type="text" class="form-control" placeholder="devCode" name="devCode" required="" />
+                        	<span id="checkDevCodeSpan"
+                        	 style="position: absolute;right:0px;top:8px;" ></span>
                         </div>
-                        <div>
-                            <input type="email" class="form-control" placeholder="Email" required="required" />
-                        </div>
-                        <div>
-                            <input type="password" class="form-control" placeholder="Password" required="required" />
-                        </div>
-                        <div>
-                        	<input type="hidden" name="DevOrBackend" value="${DevOrBackend}"/>
-                            <a class="btn btn-default submit" href="index.html">提交</a>
-                        </div>
+                        <div><input type="text" class="form-control" placeholder="devName" name="devName" required="" /></div>
+                        <div><input type="password" class="form-control" placeholder="Password" name="devPassword" required="" /></div>
+                        <div><input type="email" class="form-control" placeholder="devEmail" name="devEmail" required="" /></div>
+                        <div><input type="text" class="form-control" placeholder="devInfo" name="devInfo" required="" /></div>
+<!--                         <div><a class="btn btn-default submit" href="index.html">Submit</a></div> -->
+                        <div><input type="submit" class="btn btn-default submit" value="提交"/></div>
                         <div class="clearfix"></div>
                         <div class="separator">
 
@@ -98,6 +91,15 @@
                         </div>
                     </form>
                     <!-- form -->
+                		"/>
+                	</c:if>
+                	
+                	<c:if test="${DevOrBackend eq 'Backend'} " >
+                		<c:out value="
+                		
+                		"/>
+                	</c:if>
+                    
                 </section>
                 <!-- content -->
             </div>
