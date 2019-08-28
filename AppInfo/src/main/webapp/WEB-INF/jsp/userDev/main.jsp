@@ -324,24 +324,50 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" style="height:600px;">
                                 <div class="x_title">
-                                    <h2>Plain Page</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <ul class="dropdown-menu" role="menu">
-                                                <li><a href="#">Settings 1</a>
-                                                </li>
-                                                <li><a href="#">Settings 2</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
+                                    <a class="btn btn-success btn-sm" href="#">新增App基础信息</a>
                                 </div>
+                            	
+                            	<div class="x_content">
+                                    <table id="example" class="table table-striped responsive-utilities jambo_table">
+                                        <thead>
+                                            <tr class="headings">
+                                                <th><input type="checkbox" class="tableflat"></th>
+                                                <th>软件名称 </th>
+                                                <th>APK名称</th>
+                                                <th>软件大小(单位:M) </th>
+                                                <th>所属平台 </th>
+                                                <th>所属分类(一级分类/二级分类/三级分类) </th>
+                                                <th>状态 </th>
+                                                <th>下载次数 </th>
+                                                <th>最新版本 </th>
+                                                <th class=" no-link last"><span class="nobr">操作</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr class="even pointer">
+                                                <td class="a-center "><input type="checkbox" class="tableflat"></td>
+                                                <td class=" ">软件名称</td>
+                                                <td class=" ">APK名称 </td>
+                                                <td class=" ">软件大小 <i class="success fa fa-long-arrow-up"></i>
+                                                </td>
+                                                <td class=" ">所属平台</td>
+                                                <td class=" ">所属分类</td>
+                                                <td class="a-right a-right ">状态</td>
+                                                <td class="a-right a-right ">下载次数</td>
+                                                <td class="a-right a-right ">最新版本</td>
+                                                <td class=" last">
+                                                	<a class="btn btn-xs btn-warning" href="#">修改</a>
+                                                	<a class="btn btn-xs btn-danger" href="#">删除</a>
+                                                </td>
+                                            </tr>
+                                            
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            	
                             </div>
                         </div>
                     </div>
