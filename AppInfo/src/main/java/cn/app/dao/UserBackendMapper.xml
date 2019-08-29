@@ -44,8 +44,11 @@
 	</update>
 	
 	<!-- 获取管理者用户列表 -->
-	<select id="getUserBackendList" resultType="cn.app.bean.UserBackend">
+	<select id="getUserBackendList" parameterType="cn.app.bean.UserBackend" resultType="cn.app.bean.UserBackend">
 		select * from backend_user 
+		<if test="userCode!=null and userCode!=''">
+			 where userCode like contat(%,#{userCode},%)
+		</if>
 	</select>
 	
 	

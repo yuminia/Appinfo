@@ -57,15 +57,15 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> APP管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="index.html">Dashboard</a>
+                                        <li><a id="appList" href="javascript:;">App列表</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="form.html">开发者用户</a>
+                                        <li><a id="adminList" href="javascript:;">开发者用户</a>
                                         </li>
-                                        <li><a href="form_advanced.html">管理者用户</a>
+                                        <li><a id="userList" href="javascript:;">管理者用户</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -213,7 +213,7 @@
             <!-- /top navigation -->
 
             <!-- page content -->
-            <div class="right_col" role="main">
+            <div id="right_col" class="right_col" role="main">
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
@@ -261,20 +261,20 @@
                                         <tbody>
                                         	<c:forEach items="${requestScope.appList}" var="appInfo">
                                             <tr class="even pointer">
-                                            	
                                                 <td class=" "><c:out value="${appInfo.softwareName}" default="暂无数据"/></td>
                                                 <td class=" "><c:out value="${appInfo.APKName}" default="暂无数据"/></td>
                                                 <td class=" "><c:out value="${appInfo.softwareSize}" default="暂无数据"/></td>
                                                 <td class=" "><c:out value="${appInfo.flatformId}" default="暂无数据"/></td>
-                                                <td class=" "><c:out value="${appInfo.categoryLevel3}" default="暂无数据"/></td>
+                                                <td class=" "><c:out value="${appInfo.categoryLevel1}'->'${appInfo.categoryLevel2}'->'${appInfo.categoryLevel3}" default="暂无数据"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.status}" default="暂无数据"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="暂无数据"/></td>
-                                                <td class="a-right a-right "><c:out value="暂无数据" default="暂无数据"/></td><!-- ${appInfo.versionNo} -->
+                                                <td class="a-right a-right "><c:out value="${appInfo.versionNo}" default="暂无数据"/></td>
                                                 <td class=" last">
-                                                	<a class="btn btn-xs btn-warning" href="#">审核</a>
+                                                	<a class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
                                                 </td>
                                             </tr>
                                             </c:forEach>
+                                            <!-- ${appInfo.versionNo} -->
                                         </tbody>
 
                                     </table>
@@ -325,7 +325,18 @@
     <script src="<%=request.getContextPath() %>/static/js/moris/raphael-min.js"></script>
     <script src="<%=request.getContextPath() %>/static/js/moris/morris.js"></script>
     <script src="<%=request.getContextPath() %>/static/js/moris/example.js"></script>
-
+	<script type="text/javascript">
+	$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/appList");
+	$("#adminList").click(function(){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList");
+		});
+	$("#appList").click(function(){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/appList");
+		});
+	$("#userList").click(function(){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/userList");
+		});
+	</script>
 </body>
 
 </html>
