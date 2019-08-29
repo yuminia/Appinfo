@@ -18,22 +18,15 @@
     <script src="<%=request.getContextPath() %>/static/js/jquery.min.js"></script>
 </head>
 
-
 <body class="nav-md">
-
     <div class="container body">
-
-
         <div class="main_container">
-
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
-
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
                     </div>
                     <div class="clearfix"></div>
-
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
@@ -45,9 +38,7 @@
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
-
                     <br />
-
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
@@ -301,25 +292,60 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
-                    <div class="page-title">
-                        <div class="title">
-                            <div>
-                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="First Name">
-                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                </div>
-
-                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                    <input type="text" class="form-control" id="inputSuccess3" placeholder="Last Name">
-                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                </div>
-                            </div>
-                        </div>
-
-<!--                         <div class="title_right"></div> -->
-                    </div>
-                    <div class="clearfix"></div>
-
+                	<div class="x_panel">
+	                	<div class="x_title">
+							<h2>
+								APP 信息管理维护 <i class="fa fa-user"></i><small>${devUserSession.devName}
+									- 您可以通过搜索或者其他的筛选项对APP的信息进行修改、删除等管理操作。^_^</small>
+							</h2>
+							<div class="clearfix"></div>
+						</div>
+	                    <div class="x_content">
+	                        <div class="row">
+	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+	                                <label for="ex1" >软件名称 </label>
+	                                <input type="text" id="ex1" class="form-control" style="width:117px;"><br>
+	                                
+	                                <label>一级分类 </label>
+	                                <select class="form-control">
+	                                	<option>-- 请选择 --</option>
+	                                </select>
+	                            </div>
+	                            
+	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+	                                <label>APP状态 </label>
+	                                <select class="form-control">
+	                                	<option>-- 请选择 --</option>
+	                                </select><br>
+	                                
+	                                <label>二级分类 </label>
+	                                <select class="form-control">
+	                                	<option>-- 请选择 --</option>
+	                                </select>
+	                            </div>
+	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+	                                <label>所属平台 </label>
+	                                <select class="form-control">
+	                                	<option>-- 请选择 --</option>
+	                                </select><br>
+	                                <label>三级分类 </label>
+	                                <select class="form-control">
+	                                	<option>-- 请选择 --</option>
+	                                </select>
+	                            </div>
+	                        </div><br>
+	                        
+							
+	                        <a class="btn btn-info btn-sm" href="#">
+	                        	查 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询
+	                        </a>
+	                    </div>
+	                    <div class="clearfix"></div>
+	                    <div class="row" style="width:1000px;margin:0 auto;">
+	                    	<i class="fa fa-long-arrow-right" style="color:#5bc0de;font-size:40px;"></i>
+	                    	<i class="fa fa-long-arrow-right" style="color:#5bc0de;font-size:40px;padding:0 0 0 400px;"></i>
+	                    </div>
+					</div>
                     <div class="row">
 
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -327,7 +353,6 @@
                                 <div class="x_title">
                                     <a class="btn btn-success btn-sm" href="#">新增App基础信息</a>
                                 </div>
-                            	
                             	<div class="x_content">
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                                         <thead>

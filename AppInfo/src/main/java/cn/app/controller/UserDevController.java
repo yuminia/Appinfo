@@ -19,10 +19,10 @@ public class UserDevController {
 	@Autowired
 	private UserDevService userDevService;
 	
-	/** Dev 用户 注销 */
+	/** 登录成功页面 main.jsp */
 	@RequestMapping("main")
 	public String main(UserDev userDev,HttpServletRequest request){
-		request.getSession().removeAttribute("loginUserDev");
+		//加载 相关AppInfo数据
 		return "userDev/main";
 	}
 	
@@ -32,11 +32,11 @@ public class UserDevController {
 		return userDevService.getUserDevList(null);
 	}
 	
-	/** 跳转 Dev 用户登录页面 */
-	//@RequestMapping("login")
-	//public String userDevLogin(){
-	//	return "login";
-	//}
+	/** 跳转 Dev 用户登录页面
+	@RequestMapping("login")
+	public String userDevLogin(){
+		return "login";
+	} */
 	
 	/** Dev 用户 注销 */
 	@RequestMapping("userDevlogOut")
