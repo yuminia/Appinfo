@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.app.bean.UserBackend;
+import cn.app.utils.PageHelper;
 
 /**
 * @author yuminia
@@ -64,4 +65,21 @@ public interface UserBackendMapper {
 	* @param UserBackend userBackend
 	*/
 	public List<UserBackend> getUserBackendList(UserBackend userBackend);
+	
+	/**
+	 * 查询条数
+	* @author yuminia
+	* @return Integer
+	* @param UserBackend userBackend
+	*/
+	public Integer getCount(UserBackend userBackend) ;
+
+	/**
+	 * 分页
+	* @author yuminia
+	* @return List<UserBackend>
+	* @param PageHelper ph,UserBackend userBackend
+	*/
+	public List<UserBackend> getUserBackendOfPageHelper(PageHelper ph,UserBackend userBackend);
+
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.app.bean.AppInfo;
@@ -16,6 +17,7 @@ import cn.app.bean.UserDev;
 import cn.app.service.AppInfoService;
 import cn.app.service.UserBackendService;
 import cn.app.service.UserDevService;
+import cn.app.utils.PageHelper;
 
 /**
 * @author yuminia
@@ -42,8 +44,24 @@ public class AppBackendController {
 		return "appBackend/audit";
 	}
 	@RequestMapping("adminList")
-	public String adminList(HttpServletRequest request,UserBackend userBackend){
-		request.setAttribute("adminList", userBackendService.getUserBackendList(userBackend));
+	public String adminList(HttpServletRequest request,@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
+			UserBackend userBackend){
+		int currentPage = Integer.parseInt(pageIndex);
+		PageHelper ph = new PageHelper();
+		int totalCount = userBackendService.getCount(userBackend);
+		
+		if(totalCount != 0){
+			ph.setPageSize(7);
+			ph.setTotalCount(totalCount);
+			if( currentPage <= 0 ){ currentPage = 1; }
+			if( currentPage >= ph.getTotalPageCount() ){ currentPage = ph.getTotalPageCount(); }
+		}
+		ph.setCurrentPage(currentPage);
+		
+		List<UserBackend> adminList = userBackendService.getUserBackendList(userBackend);
+		System.out.println("appInfoList--------------------------------------------" + adminList);
+		request.setAttribute("adminList", adminList);
+		request.setAttribute("ph", ph);
 		return "appBackend/adminList";
 	}
 	@RequestMapping("userList")
@@ -52,8 +70,24 @@ public class AppBackendController {
 		return "appBackend/userList";
 	}
 	@RequestMapping("appList")
-	public String appList(HttpServletRequest request,UserDev userDev){
-		request.setAttribute("appList", appInfoService.getAppInfoList());
+	public String appList(AppInfo appInfo,@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
+			HttpServletRequest request){
+		int currentPage = Integer.parseInt(pageIndex);
+		PageHelper ph = new PageHelper();
+		int totalCount = appInfoService.getCount(appInfo);
+		
+		if(totalCount != 0){
+			ph.setPageSize(7);
+			ph.setTotalCount(totalCount);
+			if( currentPage <= 0 ){ currentPage = 1; }
+			if( currentPage >= ph.getTotalPageCount() ){ currentPage = ph.getTotalPageCount(); }
+		}
+		ph.setCurrentPage(currentPage);
+		
+		List<AppInfo> appList = appInfoService.getAppInfoLikePageHelper(ph,appInfo);
+		System.out.println("appInfoList--------------------------------------------" + appList);
+		request.setAttribute("appList", appList);
+		request.setAttribute("ph", ph);
 		return "appBackend/appList";
 	}
 }

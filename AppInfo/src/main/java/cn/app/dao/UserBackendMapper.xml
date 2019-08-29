@@ -50,6 +50,29 @@
 			 where userCode like contat(%,#{userCode},%)
 		</if>
 	</select>
+	<!-- 获得条数 -->
+	<select id="getCount" parameterType="UserBackend" 
+		resultType="int">
+		select  count(1) 
+		from backend_user 
+		<trim prefix="where" prefixOverrides="and">
+			<if test="userName!=null and userName!=''">
+				and userName like concat('%',#{userName},'%') 
+			</if>
+		</trim>
+	</select>
+	<!-- 分页 -->
+	<select id="getUserBackendOfPageHelper" parameterType="map" 
+		resultType="UserBackend">
+		select id,userCode,userName,
+		userType,
+		(select userName from backend_user b where b.createdBy=createdBy)createdBy,
+		creationDate,
+		(select userName from backend_user b where b.modifyBy=modifyBy)modifyBy,
+		modifyDate
+		from backend_user 
+		limit #{ph.startNo},#{ph.pageSize}
+	</select>
 	
 	
 </mapper>
