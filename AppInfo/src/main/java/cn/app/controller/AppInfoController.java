@@ -29,6 +29,12 @@ public class AppInfoController {
 		return appInfoService.getAppInfoList(appInfo);
 		
 	}
+	/***/
+	@RequestMapping("AppInfo")
+	public String AppInfo(AppInfo appInfo){
+		return "userDev/SelectAppInfo";
+		
+	}
 	
 	
 	
