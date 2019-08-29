@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.app.dao.CategoryMapper">
+	
+	<!-- /**查询所有一级分类*/ public List<Category> getCategoryListByParentId(Integer parentId); -->
+	<select id="getCategoryListByParentId" parameterType="int" resultType="Category">
+		select * from app_category where parentId=#{parentId}
+	</select>
+	
+</mapper>

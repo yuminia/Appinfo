@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import cn.app.bean.AppInfo;
+import cn.app.bean.Category;
 import cn.app.bean.UserDev;
 import cn.app.service.AppInfoService;
+import cn.app.service.CategoryService;
 import cn.app.service.UserDevService;
 import cn.app.utils.PageHelper;
 
@@ -26,12 +28,15 @@ public class UserDevController {
 	private UserDevService userDevService;
 	@Autowired
 	private AppInfoService appInfoService;
-	
+	@Autowired
+	private CategoryService categoryService;
 	/** 登录成功页面 main.jsp */
 	@RequestMapping("main")
 	public String main(AppInfo appInfo,
 			@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
 			HttpServletRequest request ){
+		//加载 categoryList1
+		List<Category> categoryList1 = categoryService.getCategoryListByParentId(1);
 		
 		//加载 相关AppInfo 分页数据
 		int currentPage = Integer.parseInt(pageIndex);
@@ -49,6 +54,7 @@ public class UserDevController {
 		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,appInfo);
 		System.out.println("appInfoList--------------------------------------------" + appInfoList);
 		request.setAttribute("appInfoList", appInfoList);
+		request.setAttribute("categoryList1", categoryList1);
 		request.setAttribute("ph", ph);
 		return "userDev/main";
 	}
