@@ -25,10 +25,7 @@ public class UserBackendController {
 		return "login";
 	}*/
 	
-	@RequestMapping("main")
-	public String main(){
-		return "appBackend/main";
-	}
+	
 	
 	@RequestMapping("addAdmin")
 	public String userDevRegisterSubmit(UserBackend userBackend){

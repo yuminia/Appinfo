@@ -63,7 +63,7 @@ public class LoginController {
 				return "login";
 			} else {
 				request.getSession().setAttribute("loginUserBackend", userBackend);
-				return "redirect:Backend/main";
+				return "redirect:Backend/admin/main";
 			}
 		}
 		return "index";

@@ -1,7 +1,11 @@
 package cn.app.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import cn.app.bean.AppInfo;
 
 /**
 * @author yuminia
@@ -11,5 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository("appBackendMapper")
 @Transactional
 public interface AppBackendMapper {
+	
+	/**
+	* @author yuminia
+	* @return AppInfo
+	* @param Integer id
+	*/
+	public AppInfo getAppInfoById(Integer id);
+	
+	public Integer updateAppInfo(AppInfo appInfo);
+	
+	public List<AppInfo> getAppInfoList();
 
 }

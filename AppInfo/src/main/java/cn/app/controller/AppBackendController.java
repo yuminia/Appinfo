@@ -1,7 +1,10 @@
 package cn.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.app.service.AppBackendService;
 
 /**
 * @author yuminia
@@ -9,7 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 * 
 */
 @Controller
-@RequestMapping("/Backend/user")
+@RequestMapping("/app/Backend/admin")
 public class AppBackendController {
-
+	@Autowired
+	private AppBackendService appBackendService;
+	
+	@RequestMapping("main")
+	public String main(){
+		return "appBackend/main";
+	}
 }

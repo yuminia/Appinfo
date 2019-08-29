@@ -272,8 +272,7 @@
                                                 <td class="a-right a-right ">下载次数</td>
                                                 <td class="a-right a-right ">最新版本</td>
                                                 <td class=" last">
-                                                	<a class="btn btn-xs btn-warning" href="#">修改</a>
-                                                	<a class="btn btn-xs btn-danger" href="#">删除</a>
+                                                	<a class="btn btn-xs btn-warning" href="#">审核</a>
                                                 </td>
                                             </tr>
                                             

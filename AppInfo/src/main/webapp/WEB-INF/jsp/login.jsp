@@ -48,7 +48,7 @@
                                 	<a href="#toregister" class="to_register"> 注册 </a>
                             	</p>
                         	</c:if>
-                            <c:out value="${message }"></c:out>
+                            <c:out value="${message}"></c:out>
                             <div class="clearfix"></div>
                             <br />
                             <div>
@@ -98,6 +98,7 @@
             </div>
         </div>
     </div>
+    
 <script type="text/javascript">
 		//失去焦点 检查用户名
 		$("#registerDevCode").blur(function(){
