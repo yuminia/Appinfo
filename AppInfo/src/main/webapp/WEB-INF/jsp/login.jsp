@@ -28,29 +28,27 @@
         <div id="wrapper">
             <div id="login" class="animate form">
                 <section class="login_content">
-                	
-                    <form action="${pageContext.request.contextPath}/app/doLogin
-                    <%-- <c:if test="${DevOrBackend eq 'Dev'} " ><c:out>userDev/doLogin</c:out></c:if>
-                    <c:if test="${DevOrBackend eq 'Backend'} " ><c:out>Backend/doLogin</c:out></c:if> --%>
-                    " method="post">
+                    <form action="${pageContext.request.contextPath}/app/doLogin" method="post">
                         <h1>登 录</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username" required="required" name="userCode"/>
+                            <input type="text" class="form-control" placeholder="登录名" required="required" name="userCode"/>
                         </div>
                         <div>
-                        
-                            <input type="password" class="form-control" placeholder="Password" required="required" name="userPassword"/>
+                            <input type="password" class="form-control" placeholder="密码" required="required" name="userPassword"/>
                         </div>
                         <div>
+                        	<input type="hidden" name="DevOrBackend" value="${DevOrBackend}">
                             <input type="submit" class="btn btn-default submit" value="登入">
                             <a class="reset_pass" href="#">忘记密码?</a>
                         </div>
                         <div class="clearfix"></div>
                         <div class="separator">
-
-                            <p class="change_link">还未创建账号?
-                                <a href="#toregister" class="to_register"> 注册 </a>
-                            </p>
+                        	<c:if var="DorB" test="${requestScope.DevOrBackend eq 'Dev'}" >
+                        		<p class="change_link">还未创建账号?
+                                	<a href="#toregister" class="to_register"> 注册 </a>
+                            	</p>
+                        	</c:if>
+                            <c:out value="${message}"></c:out>
                             <div class="clearfix"></div>
                             <br />
                             <div>
@@ -65,24 +63,20 @@
             </div>
             <div id="register" class="animate form">
                 <section class="login_content">
-                    <form action="${pageContext.request.contextPath}/app/userDev/doRegister
-	                    <%-- <c:if test="${DevOrBackend eq 'Dev'}" ><c:out>userDev/doRegister</c:out></c:if>
-	                    <c:if test="${DevOrBackend eq 'Backend'}" ><c:out>Backend/doRegister</c:out></c:if> --%>
-                    " method="post">
+                	<c:if test="${requestScope.DevOrBackend eq 'Dev'}" >
+                		<form action="${pageContext.request.contextPath}/app/userDev/userDevRegisterSubmit" method="post">
                         <h1>注 册</h1>
-                        <div>
-                            <input type="text" class="form-control" placeholder="Username" required="required" />
+                        <div style="position: relative;">
+                        	<input id="registerDevCode" type="text" class="form-control" placeholder="devCode" name="devCode" required="required" />
+                        	<span id="checkDevCodeSpan"
+                        	 style="position: absolute;right:0px;top:8px;" ></span>
                         </div>
-                        <div>
-                            <input type="email" class="form-control" placeholder="Email" required="required" />
-                        </div>
-                        <div>
-                            <input type="password" class="form-control" placeholder="Password" required="required" />
-                        </div>
-                        <div>
-                        	<input type="hidden" name="DevOrBackend" value="${DevOrBackend}"/>
-                            <a class="btn btn-default submit" href="index.html">提交</a>
-                        </div>
+                        <div><input type="text" class="form-control" placeholder="登录名" name="devName" required="required" /></div>
+                        <div><input type="password" class="form-control" placeholder="密码" name="devPassword" required="required" /></div>
+                        <div><input type="email" class="form-control" placeholder="邮箱" name="devEmail" required="required" /></div>
+                        <div><input type="text" class="form-control" placeholder="开发者信息" name="devInfo" required="required" /></div>
+<!--                         <div><a class="btn btn-default submit" href="index.html">Submit</a></div> -->
+                        <div><input type="submit" class="btn btn-default submit" value="提交"/></div>
                         <div class="clearfix"></div>
                         <div class="separator">
 
@@ -98,11 +92,37 @@
                         </div>
                     </form>
                     <!-- form -->
+                	</c:if>
                 </section>
                 <!-- content -->
             </div>
         </div>
     </div>
-
+    
+<script type="text/javascript">
+		//失去焦点 检查用户名
+		$("#registerDevCode").blur(function(){
+			var devCode = $("#registerDevCode").val();
+			if( devCode != null && devCode.trim() != '' ){
+				$.ajax({
+					url:"<%=request.getContextPath() %>/app/userDev/checkDevCode",
+					data:{"devCode":devCode},
+					success:function(data){
+						if( data == true ){//存在
+							$("#checkDevCodeSpan").css("color","red").html("用户名已存在,请重新输入");
+							return true;
+						}else if( data == false ){
+							$("#checkDevCodeSpan").css("color","green").html("用户名可注册");
+							return false;
+						}
+					}
+				})
+			}
+		});
+		//获取焦点 清空提示
+		$("#registerDevCode").focus(function(){
+			$("#checkDevCodeSpan").html("");
+		});
+	</script>
 </body>
 </html>

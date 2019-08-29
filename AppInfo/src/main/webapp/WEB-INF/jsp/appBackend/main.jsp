@@ -23,140 +23,60 @@
 <body class="nav-md">
 
     <div class="container body">
+
+
         <div class="main_container">
+
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
+
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>APP 后台管理</span></a>
                     </div>
                     <div class="clearfix"></div>
+
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
                             <img src="<%=request.getContextPath() %>/static/images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>Anthony Fernando</h2>
+                            <span>欢迎,</span>
+                            <h2><c:out value="${loginUserBackend.userName}"/></h2>
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
+
                     <br />
+
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>高级管理员</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-home"></i> APP管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="index.html">Dashboard</a>
                                         </li>
-                                        <li><a href="index2.html">Dashboard2</a>
-                                        </li>
-                                        <li><a href="index3.html">Dashboard3</a>
-                                        </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-edit"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="form.html">General Form</a>
+                                        <li><a href="form.html">开发者用户</a>
                                         </li>
-                                        <li><a href="form_advanced.html">Advanced Components</a>
-                                        </li>
-                                        <li><a href="form_validation.html">Form Validation</a>
-                                        </li>
-                                        <li><a href="form_wizards.html">Form Wizard</a>
-                                        </li>
-                                        <li><a href="form_upload.html">Form Upload</a>
-                                        </li>
-                                        <li><a href="form_buttons.html">Form Buttons</a>
+                                        <li><a href="form_advanced.html">管理者用户</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="general_elements.html">General Elements</a>
-                                        </li>
-                                        <li><a href="media_gallery.html">Media Gallery</a>
-                                        </li>
-                                        <li><a href="typography.html">Typography</a>
-                                        </li>
-                                        <li><a href="icons.html">Icons</a>
-                                        </li>
-                                        <li><a href="glyphicons.html">Glyphicons</a>
-                                        </li>
-                                        <li><a href="widgets.html">Widgets</a>
-                                        </li>
-                                        <li><a href="invoice.html">Invoice</a>
-                                        </li>
-                                        <li><a href="inbox.html">Inbox</a>
-                                        </li>
-                                        <li><a href="calender.html">Calender</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="tables.html">Tables</a>
-                                        </li>
-                                        <li><a href="tables_dynamic.html">Table Dynamic</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="chartjs.html">Chart JS</a>
-                                        </li>
-                                        <li><a href="chartjs2.html">Chart JS2</a>
-                                        </li>
-                                        <li><a href="morisjs.html">Moris JS</a>
-                                        </li>
-                                        <li><a href="echarts.html">ECharts </a>
-                                        </li>
-                                        <li><a href="other_charts.html">Other Charts </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="menu_section">
-                            <h3>Live On</h3>
-                            <ul class="nav side-menu">
-                                <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-bug"></i>基础数据维护<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="e_commerce.html">E-commerce</a>
                                         </li>
-                                        <li><a href="projects.html">Projects</a>
-                                        </li>
-                                        <li><a href="project_detail.html">Project Detail</a>
-                                        </li>
-                                        <li><a href="contacts.html">Contacts</a>
-                                        </li>
-                                        <li><a href="profile.html">Profile</a>
-                                        </li>
                                     </ul>
-                                </li>
-                                <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li><a href="page_404.html">404 Error</a>
-                                        </li>
-                                        <li><a href="page_500.html">500 Error</a>
-                                        </li>
-                                        <li><a href="plain_page.html">Plain Page</a>
-                                        </li>
-                                        <li><a href="login.html">Login Page</a>
-                                        </li>
-                                        <li><a href="pricing_tables.html">Pricing Tables</a>
-                                        </li>
-
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a>
                                 </li>
                             </ul>
                         </div>
-
                     </div>
                     <!-- /sidebar menu -->
 
@@ -295,57 +215,26 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
-                	<div class="x_panel">
-	                	<div class="x_title">
-							<h2>
-								APP 信息管理维护 <i class="fa fa-user"></i><small>${devUserSession.devName}
-									- 您可以通过搜索或者其他的筛选项对APP的信息进行修改、删除等管理操作。^_^</small>
-							</h2>
-							<div class="clearfix"></div>
-						</div>
-	                    <div class="x_content">
-	                        <div class="row">
-	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
-	                                <label for="ex1" >软件名称 </label>
-	                                <input type="text" id="ex1" class="form-control" style="width:117px;"><br>
-	                                
-	                                <label>一级分类 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select>
-	                            </div>
-	                            
-	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
-	                                <label>APP状态 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select><br>
-	                                
-	                                <label>二级分类 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select>
-	                            </div>
-	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
-	                                <label>所属平台 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select><br>
-	                                <label>三级分类 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select>
-	                            </div>
-	                        </div><br>
-	                        
-							
-	                        <a class="btn btn-info btn-sm" href="#">查 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询</a>
-	                        
-	<!--                         <div class="title_right"></div> -->
-	                    </div>
-	                    <div class="clearfix"></div>
-					</div>
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Plain Page</h3>
+                        </div>
+
+                        <div class="title_right">
+                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                                <div class="input-group">
+                                    <p  class="form-control">注    销    ——→</p>
+                                    <span class="input-group-btn">
+                            <button id="logout" class="btn btn-default" type="button">登 出!</button>
+                        </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
                     <div class="row">
+
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" style="height:600px;">
                                 <div class="x_title">
@@ -371,48 +260,25 @@
                                         </thead>
 
                                         <tbody>
-                                        ${appInfoList }
-                                        <c:forEach items="${appInfoList }" var="item" varStatus="staus">
                                             <tr class="even pointer">
                                                 <td class="a-center "><input type="checkbox" class="tableflat"></td>
-                                                <td class=" ">${item.softwareName }</td>
-                                                <td class=" ">${item.APKName } </td>
-                                                <td class=" ">${item.softwareSize }</td>
-                                                <td class=" ">${item.flatformId }</td>
+                                                <td class=" ">软件名称</td>
+                                                <td class=" ">APK名称 </td>
+                                                <td class=" ">软件大小 <i class="success fa fa-long-arrow-up"></i>
+                                                </td>
+                                                <td class=" ">所属平台</td>
                                                 <td class=" ">所属分类</td>
-                                                <td class="a-right a-right ">${item.status }</td>
-                                                <td class="a-right a-right ">${item.downloads }</td>
+                                                <td class="a-right a-right ">状态</td>
+                                                <td class="a-right a-right ">下载次数</td>
                                                 <td class="a-right a-right ">最新版本</td>
                                                 <td class=" last">
-                                                	<a class="btn btn-xs btn-warning" href="#">修改</a>
-                                                	<a class="btn btn-xs btn-danger" href="#">删除</a>
+                                                	<a class="btn btn-xs btn-warning" href="#">审核</a>
                                                 </td>
                                             </tr>
-                                        </c:forEach>
+                                            
                                         </tbody>
+
                                     </table>
-                                    
-                                    
-                                    <nav aria-label="Page navigation">
-									  <ul class="pagination">
-									    <li>
-									      <a href="#" aria-label="Previous">
-									        <span aria-hidden="true">&laquo;</span>
-									      </a>
-									    </li>
-									    <li><a href="#">1</a></li>
-									    <li><a href="#">2</a></li>
-									    <li><a href="#">3</a></li>
-									    <li><a href="#">4</a></li>
-									    <li><a href="#">5</a></li>
-									    <li>
-									      <a href="#" aria-label="Next">
-									        <span aria-hidden="true">&raquo;</span>
-									      </a>
-									    </li>
-									  </ul>
-									</nav>
-                                    
                                 </div>
                             	
                             </div>
@@ -423,8 +289,8 @@
                 <!-- footer content -->
                 <footer>
                     <div class="">
-                        <p class="pull-right">Gentelella Alela! a Bootstrap 3 template by <a>Kimlabs</a>. |
-                            <span class="lead"> <i class="fa fa-paw"></i> Gentelella Alela!</span>
+                        <p class="pull-right">App开发平台<a>Kimlabs</a>. |
+                            <span class="lead"> <i class="fa fa-paw"></i> App开发平台</span>
                         </p>
                     </div>
                     <div class="clearfix"></div>

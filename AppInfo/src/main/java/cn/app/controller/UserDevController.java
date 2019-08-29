@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.app.bean.AppInfo;
 import cn.app.bean.UserDev;
+import cn.app.service.AppInfoService;
 import cn.app.service.UserDevService;
 
 @Controller
@@ -18,11 +20,17 @@ import cn.app.service.UserDevService;
 public class UserDevController {
 	@Autowired
 	private UserDevService userDevService;
+	@Autowired
+	private AppInfoService appInfoService;
 	
 	/** 登录成功页面 main.jsp */
 	@RequestMapping("main")
 	public String main(UserDev userDev,HttpServletRequest request){
 		//加载 相关AppInfo数据
+		List<AppInfo> appInfoList = appInfoService.getAppInfoList();
+		System.out.println("appInfoList--------------------------------------------");
+		System.out.println("appInfoList" + appInfoList);
+		request.setAttribute("appInfoList", appInfoList);
 		return "userDev/main";
 	}
 	
@@ -49,6 +57,7 @@ public class UserDevController {
 	@RequestMapping("userDevLoginSubmit")
 	public String userDevLoginSubmit(UserDev userDev,HttpServletRequest request){
 		UserDev dbuserDev = userDevService.getUserDevByUserDevCodeAndPassword(userDev);
+		System.out.println("===========================-----userDevLoginSubmit-----=========================");
 		if(dbuserDev != null){
 			request.getSession().setAttribute("loginUserDev", dbuserDev);
 			return "userDev/main";
@@ -64,9 +73,9 @@ public class UserDevController {
 		userDev.setCreationDate(new Date());
 		int res = userDevService.addUserDev(userDev);
 		if(res == 1){
-			return "userDev/userDevLogin";
+			return "login";
 		}
-		return null;
+		return "login";
 	}
 	
 	/** ajax匹配 DevCode */
