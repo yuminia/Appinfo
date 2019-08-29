@@ -4,15 +4,27 @@
 
 
 	<!-- /** 查询所有APP信息*/ public List<AppInfo> getAppInfoList(AppInfo appInfo); -->
+	<resultMap type="AppInfo" id="userRoleName">
+		<result column="rolename" property="userRoleName"/>
+	</resultMap>
 	<select id="getAppInfoList" resultType="AppInfo">
 		select
 		softwareName,APKName,softwareSize,flatformId,categoryLevel1,categoryLevel2,categoryLevel3,status,downloads,versionNo
-		from app_info info inner app_version version
-		where info.versionId=version.id 
-		<if test="softwareName!=null,softwareName!=''">
-			softwareName like contat(%,#{softwareName},%)
+		from app_info i , app_version v
+		where i.versionId=v.id 
+		<if test="softwareName!=null and softwareName!=''">
+			 and softwareName like contat(%,#{softwareName},%)
 		</if>
-		order by id DESC limit #{from},#{pageSize}
+		<!-- 
+		case
+  when studentresult>=90 then 'A级'
+  when studentresult between 80 and 89 then 'B级'
+  when studentresult between 70 and 79 then 'C级'
+  when studentresult between 60 and 69 then 'D级'
+  else 'E级'
+end
+		
+		order by id limit #{from},15 -->
 	</select>
 
 	<!-- /**根据ID查询APP信息*/public Integer getAppInfoById(Integer id); -->
@@ -21,8 +33,6 @@
 		softwareName,APKName,softwareSize,flatformId,categoryLevel1,categoryLevel2,categoryLevel3,status,downloads,versionNo
 		from app_info inner app_version version
 		where info.versionId=version.id and id=#{id}
-	
-	
 	</select>
 
 	<!-- /** 增加APP信息*/public Integer addAppInfo(AppInfo appInfo); -->
