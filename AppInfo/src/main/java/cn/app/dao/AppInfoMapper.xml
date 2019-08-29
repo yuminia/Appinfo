@@ -2,27 +2,25 @@
 <!DOCTYPE mapper PUBLIC "mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.app.dao.AppInfoMapper">
 
-
 	<!-- /** 查询所有APP信息*/ public List<AppInfo> getAppInfoList(AppInfo appInfo); -->
-	<resultMap type="AppInfo" id="userRoleName">
-		<result column="rolename" property="userRoleName"/>
-	</resultMap>
 	<select id="getAppInfoList" resultType="AppInfo">
-		select
-		softwareName,APKName,softwareSize,flatformId,categoryLevel1,categoryLevel2,categoryLevel3,status,downloads,versionNo
-		from app_info i , app_version v
+		select 
+			softwareName,APKName,softwareSize,flatformId,
+			categoryLevel1,categoryLevel2,categoryLevel3,
+			status,downloads,versionNo 
+		from app_info i , app_version v 
 		where i.versionId=v.id 
-		<if test="softwareName!=null and softwareName!=''">
-			 and softwareName like contat(%,#{softwareName},%)
-		</if>
+<!-- 		<if test="softwareName!=null and softwareName!=''"> -->
+<!-- 			 softwareName like contat(%,#{softwareName},%) -->
+<!-- 		</if> -->
 		<!-- 
 		case
-  when studentresult>=90 then 'A级'
-  when studentresult between 80 and 89 then 'B级'
-  when studentresult between 70 and 79 then 'C级'
-  when studentresult between 60 and 69 then 'D级'
-  else 'E级'
-end
+		  when studentresult>=90 then 'A级'
+		  when studentresult between 80 and 89 then 'B级'
+		  when studentresult between 70 and 79 then 'C级'
+		  when studentresult between 60 and 69 then 'D级'
+		  else 'E级'
+		end
 		
 		order by id limit #{from},15 -->
 	</select>
@@ -30,8 +28,9 @@ end
 	<!-- /**根据ID查询APP信息*/public Integer getAppInfoById(Integer id); -->
 	<select id="getAppInfoById" parameterType="int">
 		select
-		softwareName,APKName,softwareSize,flatformId,categoryLevel1,categoryLevel2,categoryLevel3,status,downloads,versionNo
-		from app_info inner app_version version
+			softwareName,APKName,softwareSize,flatformId,categoryLevel1,categoryLevel2,categoryLevel3,
+			status,downloads,versionNo 
+		from app_info inner app_version version 
 		where info.versionId=version.id and id=#{id}
 	</select>
 
@@ -60,7 +59,67 @@ end
 	</delete>
 	
 	
+	<!-- /**分页 并 模糊查询 APP信息*/public List<AppInfo> getAppInfoLikePageHelper(Map<String, Object> map); -->
+	<select id="getAppInfoLikePageHelper" parameterType="map" 
+		resultType="AppInfo">
+		select 
+			softwareName,APKName,softwareSize,
+			flatformId,(select flatformName from flatform where id=flatformId) flatformName,
+			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
+			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
+			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
+			versionId,(select versionNo from app_version where id=versionId) versionNo,
+			status,
+			downloads 
+		from app_info i , app_version v 
+		where i.versionId=v.id 
+		<if test="softwareName!=null and softwareName!=''">
+			and softwareName like concat('%',#{appInfo.softwareName},'%') 
+		</if>
+		<if test="categoryLevel1!=null and categoryLevel1!=''">
+			and categoryLevel1=#{appInfo.categoryLevel1} 
+		</if>
+		<if test="categoryLevel2!=null and categoryLevel2!=''">
+			and categoryLevel2=#{appInfo.categoryLevel2} 
+		</if>
+		<if test="categoryLevel3!=null and categoryLevel3!=''">
+			and categoryLevel3=#{appInfo.categoryLevel3} 
+		</if>
+		<if test="status!=null and status!=''">
+			and status=#{appInfo.status} 
+		</if>
+		<if test="softwareName!=null and softwareName!=''">
+			and flatformId=#{appInfo.flatformId} 
+		</if>
+		limit #{ph.startNo},#{ph.pageSize}
+	</select>
 	
-
-
+	<!-- /** 根据条件  查询总记录数 */ public Integer getCount(AppInfo appInfo); -->
+	<select id="getCount" parameterType="AppInfo" 
+		resultType="int">
+		select 
+			count(1) 
+		from app_info 
+		<trim prefix="where" prefixOverrides="and">
+			<if test="softwareName!=null and softwareName!=''">
+				and softwareName like concat('%',#{softwareName},'%') 
+			</if>
+			<if test="categoryLevel1!=null and categoryLevel1!=''">
+				and categoryLevel1=#{categoryLevel1} 
+			</if>
+			<if test="categoryLevel2!=null and categoryLevel2!=''">
+				and categoryLevel2=#{categoryLevel2} 
+			</if>
+			<if test="categoryLevel3!=null and categoryLevel3!=''">
+				and categoryLevel3=#{categoryLevel3} 
+			</if>
+			<if test="status!=null and status!=''">
+				and status=#{status} 
+			</if>
+			<if test="softwareName!=null and softwareName!=''">
+				and flatformId=#{flatformId} 
+			</if>
+		</trim>
+		
+	</select>
 </mapper>

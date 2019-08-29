@@ -1,6 +1,7 @@
 package cn.app.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.app.bean.AppInfo;
 
@@ -21,5 +22,11 @@ public interface AppInfoMapper {
 	
 	/**根据ID 删除APP信息*/
 	public Integer deleteAppInfo(Integer id);
+	
+	/**分页 并 模糊查询 APP信息*/
+	public List<AppInfo> getAppInfoLikePageHelper(Map<String, Object> map);
+	
+	/** 根据条件  查询总记录数 */
+	public Integer getCount(AppInfo appInfo);
 
 }

@@ -8,21 +8,48 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+
+import cn.app.bean.AppInfo;
 import cn.app.bean.UserDev;
+import cn.app.service.AppInfoService;
 import cn.app.service.UserDevService;
+import cn.app.utils.PageHelper;
 
 @Controller
 @RequestMapping("/app/userDev")
 public class UserDevController {
 	@Autowired
 	private UserDevService userDevService;
+	@Autowired
+	private AppInfoService appInfoService;
 	
-	/** Dev 用户 注销 */
+	/** 登录成功页面 main.jsp */
 	@RequestMapping("main")
-	public String main(UserDev userDev,HttpServletRequest request){
-		request.getSession().removeAttribute("loginUserDev");
+	public String main(AppInfo appInfo,
+			@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
+			HttpServletRequest request ){
+		
+		//加载 相关AppInfo 分页数据
+		int currentPage = Integer.parseInt(pageIndex);
+		PageHelper ph = new PageHelper();
+		int totalCount = appInfoService.getCount(appInfo);
+		
+		if(totalCount != 0){
+			ph.setPageSize(7);
+			ph.setTotalCount(totalCount);
+			if( currentPage <= 0 ){ currentPage = 1; }
+			if( currentPage >= ph.getTotalPageCount() ){ currentPage = ph.getTotalPageCount(); }
+		}
+		ph.setCurrentPage(currentPage);
+		
+		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,appInfo);
+		System.out.println("appInfoList--------------------------------------------" + appInfoList);
+		request.setAttribute("appInfoList", appInfoList);
+		request.setAttribute("ph", ph);
 		return "userDev/main";
 	}
 	
@@ -32,11 +59,11 @@ public class UserDevController {
 		return userDevService.getUserDevList(null);
 	}
 	
-	/** 跳转 Dev 用户登录页面 */
-	//@RequestMapping("login")
-	//public String userDevLogin(){
-	//	return "login";
-	//}
+	/** 跳转 Dev 用户登录页面
+	@RequestMapping("login")
+	public String userDevLogin(){
+		return "login";
+	} */
 	
 	/** Dev 用户 注销 */
 	@RequestMapping("userDevlogOut")
@@ -49,6 +76,7 @@ public class UserDevController {
 	@RequestMapping("userDevLoginSubmit")
 	public String userDevLoginSubmit(UserDev userDev,HttpServletRequest request){
 		UserDev dbuserDev = userDevService.getUserDevByUserDevCodeAndPassword(userDev);
+		System.out.println("===========================-----userDevLoginSubmit-----=========================");
 		if(dbuserDev != null){
 			request.getSession().setAttribute("loginUserDev", dbuserDev);
 			return "userDev/main";

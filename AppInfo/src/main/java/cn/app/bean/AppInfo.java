@@ -25,8 +25,13 @@ public class AppInfo {
 	private Integer devId;			
 	/** varchar(5000) APP简介*/
 	private String appInfo;	
-	/**int(30) APP状态*/
-	private Integer status;			
+	/**int(30) APP状态<br>
+	 * 1 待审核<br>
+	 * 2 审核未通过<br>
+	 * 3 审核通过<br>
+	 * 4 已上架<br>
+	 * 5 已下架*/
+	private Integer status;	
 	/**datetime 上架日期*/
 	private Date onSaleDate;
 	/** datetime 下架日期*/
@@ -56,6 +61,43 @@ public class AppInfo {
 	/**int(30)版本信息id*/
 	private Integer versionId;	
 	
+	private String categoryName1;
+	private String categoryName2;
+	private String categoryName3;
+	private String flatformName;
+	private String versionNo;
+	
+	
+	public String getVersionNo() {
+		return versionNo;
+	}
+	public void setVersionNo(String versionNo) {
+		this.versionNo = versionNo;
+	}
+	public String getFlatformName() {
+		return flatformName;
+	}
+	public void setFlatformName(String flatformName) {
+		this.flatformName = flatformName;
+	}
+	public String getCategoryName1() {
+		return categoryName1;
+	}
+	public void setCategoryName1(String categoryName1) {
+		this.categoryName1 = categoryName1;
+	}
+	public String getCategoryName2() {
+		return categoryName2;
+	}
+	public void setCategoryName2(String categoryName2) {
+		this.categoryName2 = categoryName2;
+	}
+	public String getCategoryName3() {
+		return categoryName3;
+	}
+	public void setCategoryName3(String categoryName3) {
+		this.categoryName3 = categoryName3;
+	}
 	public AppInfo() {}
 	public Integer getId() {
 		return id;

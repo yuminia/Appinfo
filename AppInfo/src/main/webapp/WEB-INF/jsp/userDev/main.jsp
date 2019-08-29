@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -22,18 +23,13 @@
 <body class="nav-md">
 
     <div class="container body">
-
-
         <div class="main_container">
-
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
-
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
                     </div>
                     <div class="clearfix"></div>
-
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
@@ -45,9 +41,7 @@
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
-
                     <br />
-
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
@@ -301,27 +295,63 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 <div class="">
-                    <div class="page-title">
-                        <div class="title">
-                            <div>
-                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                    <input type="text" class="form-control has-feedback-left" id="inputSuccess2" placeholder="First Name">
-                                    <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
-                                </div>
-
-                                <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                    <input type="text" class="form-control" id="inputSuccess3" placeholder="Last Name">
-                                    <span class="fa fa-user form-control-feedback right" aria-hidden="true"></span>
-                                </div>
-                            </div>
-                        </div>
-
-<!--                         <div class="title_right"></div> -->
-                    </div>
-                    <div class="clearfix"></div>
-
+                	<div class="x_panel">
+	                	<div class="x_title">
+							<h2>
+								APP 信息管理维护 <i class="fa fa-user"></i><small>${devUserSession.devName}
+									- 您可以通过搜索或者其他的筛选项对APP的信息进行修改、删除等管理操作。^_^</small>
+							</h2>
+							<div class="clearfix"></div>
+						</div>
+	                    <div class="x_content">
+	                        <div class="row">
+	                        
+	                        	<form class="form-horizontal form-label-left" id="searchCriteria">
+		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+		                                <label for="ex1" >软件名称 </label>
+		                                <input name="softwareName" type="text" id="ex1" class="form-control" style="width:117px;"><br>
+		                                
+		                                <label>一级分类 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select>
+		                            </div>
+		                            
+		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+		                                <label>APP状态 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select><br>
+		                                
+		                                <label>二级分类 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select>
+		                            </div>
+		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+		                                <label>所属平台 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select><br>
+		                                <label>三级分类 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select>
+		                            </div>
+		                        </form>
+		                        
+	                        </div><br>
+	                        
+							
+	                        <a href="javascript:pageAppInfoList(${ph.currentPage-1});" class="btn btn-info btn-sm" >
+	                        	查 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询
+	                        </a>
+	                        
+	<!--                         <div class="title_right"></div> -->
+	                    </div>
+	                    <div class="clearfix"></div>
+					</div>
                     <div class="row">
-
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" style="height:600px;">
                                 <div class="x_title">
@@ -347,28 +377,95 @@
                                         </thead>
 
                                         <tbody>
+                                        <c:forEach items="${appInfoList }" var="item" varStatus="staus">
                                             <tr class="even pointer">
                                                 <td class="a-center "><input type="checkbox" class="tableflat"></td>
-                                                <td class=" ">软件名称</td>
-                                                <td class=" ">APK名称 </td>
-                                                <td class=" ">软件大小 <i class="success fa fa-long-arrow-up"></i>
-                                                </td>
-                                                <td class=" ">所属平台</td>
-                                                <td class=" ">所属分类</td>
-                                                <td class="a-right a-right ">状态</td>
-                                                <td class="a-right a-right ">下载次数</td>
-                                                <td class="a-right a-right ">最新版本</td>
+                                                <td class=" ">${item.softwareName }</td>
+                                                <td class=" ">${item.APKName } </td>
+                                                <td class=" ">${item.softwareSize }</td>
+                                                <td class=" ">${item.flatformName }</td>
+                                                <td class=" ">${item.categoryName1 }->${item.categoryName2 }->${item.categoryName3 }</td>
+												
+												<!--/**int(30) APP状态<br>
+												 * 1 待审核<br>* 2 审核未通过<br>* 3 审核通过<br>* 4 已上架<br>* 5 已下架*/-->
+												
+												<c:if test="${item.status == 1 }">
+                                                	<td class="a-right a-right ">待审核</td>
+                                                </c:if>
+												<c:if test="${item.status == 2 }">
+                                                	<td class="a-right a-right ">审核未通过</td>
+                                                </c:if>
+												<c:if test="${item.status == 3 }">
+                                                	<td class="a-right a-right ">审核通过</td>
+                                                </c:if>
+												<c:if test="${item.status == 4 }">
+                                                	<td class="a-right a-right ">已上架</td>
+                                                </c:if>
+												<c:if test="${item.status == 5 }">
+                                                	<td class="a-right a-right ">已下架</td>
+                                                </c:if>
+                                                <c:if test="${item.downloads==null or  item.downloads==''}">
+                                                	<td class="a-right a-right ">0</td>
+                                                </c:if>
+                                                <c:if test="${item.downloads!=null and  item.downloads!=''}">
+                                                	<td class="a-right a-right ">${item.downloads }</td>
+                                                </c:if>
+                                                <td class="a-right a-right ">${item.versionNo }</td>
                                                 <td class=" last">
                                                 	<a class="btn btn-xs btn-warning" href="#">修改</a>
                                                 	<a class="btn btn-xs btn-danger" href="#">删除</a>
                                                 </td>
                                             </tr>
-                                            
+                                        </c:forEach>
                                         </tbody>
-
                                     </table>
+                                    
+                                    
+                                    <nav aria-label="Page navigation">
+									  <ul class="pagination">
+									  	<c:if test="${ph.currentPage != 1 }">
+									    	<li>
+									    		<a href="javascript:pageAppInfoList(${ph.currentPage-1});" aria-label="Previous">
+									    			<span aria-hidden="true">&laquo;</span>
+									    		</a>
+									    	</li>
+										</c:if>
+										
+										<c:forEach begin="1" end="${ph.totalPageCount }" varStatus="statu">
+											<c:if test="${ph.currentPage == statu.count }">
+												<li>
+													<a class="middleNum" style="background:#999;" 
+														href="javascript:pageAppInfoList(${statu.count });">
+														${statu.count }
+													</a>
+												</li>
+											</c:if>
+											<c:if test="${ph.currentPage != statu.count }">
+												<li><a class="middleNum" 
+												href="javascript:pageAppInfoList(${statu.count });">${statu.count }</a></li>
+											</c:if>
+										</c:forEach>
+										
+										<c:if test="${ph.currentPage != ph.totalPageCount }">
+										    <li>
+										      <a href="javascript:pageAppInfoList(${ph.currentPage+1 });" aria-label="Next">
+										      	<span aria-hidden="true">&raquo;</span>
+										      </a>
+										    </li>
+										</c:if>
+									    
+									  </ul>
+									</nav>
+                                    
                                 </div>
-                            	
+        <script type="text/javascript">
+	      	//AppList 跳转
+			function pageAppInfoList(pageIndex){
+				var data = $("#searchCriteria").serialize();
+				$("body").load("${pageContext.request.contextPath}/app/userDev/main",
+					{"pageIndex":pageIndex,"userName":"${userName}"})
+			};
+        </script>
                             </div>
                         </div>
                     </div>
