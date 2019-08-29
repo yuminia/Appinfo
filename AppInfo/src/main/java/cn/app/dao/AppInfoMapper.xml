@@ -58,6 +58,7 @@
 	where id=#{id}
 	</delete>
 	
+	
 	<!-- /**分页 并 模糊查询 APP信息*/public List<AppInfo> getAppInfoLikePageHelper(Map<String, Object> map); -->
 	<select id="getAppInfoLikePageHelper" parameterType="map" 
 		resultType="AppInfo">
