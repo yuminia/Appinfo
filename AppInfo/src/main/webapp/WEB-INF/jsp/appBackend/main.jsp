@@ -269,7 +269,7 @@
                                                 <td class=" "><c:out value="${appInfo.categoryLevel3}" default="暂无数据"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.status}" default="暂无数据"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="暂无数据"/></td>
-                                                <td class="a-right a-right "><c:out value="${appInfo.versionNo}" default="暂无数据"/></td>
+                                                <td class="a-right a-right "><c:out value="暂无数据" default="暂无数据"/></td><!-- ${appInfo.versionNo} -->
                                                 <td class=" last">
                                                 	<a class="btn btn-xs btn-warning" href="#">审核</a>
                                                 </td>
