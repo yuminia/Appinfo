@@ -22,11 +22,12 @@ public class AppInfoController {
 	private AppInfoService appInfoService;
 	
 	
+	
 	/** 查询所有APP信息*/
 	@RequestMapping("getAppInfoList")
 	@ResponseBody
-	public List<AppInfo> getAppInfoList(AppInfo appInfo){
-		return appInfoService.getAppInfoList(appInfo);
+	public List<AppInfo> getAppInfoList(){
+		return appInfoService.getAppInfoList();
 		
 	}
 	

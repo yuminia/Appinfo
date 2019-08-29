@@ -13,7 +13,7 @@ import cn.app.bean.AppInfo;
 public interface AppInfoService {
 	
 	/** 查询所有APP信息*/
-	public List<AppInfo> getAppInfoList(AppInfo appInfo);
+	public List<AppInfo> getAppInfoList();
 	
 	/**根据ID查询APP信息*/	
 	public AppInfo getAppInfoById(Integer id);

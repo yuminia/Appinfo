@@ -14,9 +14,9 @@ public class AppInfoServiceImpl implements AppInfoService {
 
 	/** 查询所有APP信息 */
 	@Override
-	public List<AppInfo> getAppInfoList(AppInfo appInfo) {
+	public List<AppInfo> getAppInfoList() {
 
-		return appInfoMapper.getAppInfoList(appInfo);
+		return appInfoMapper.getAppInfoList();
 	}
 
 	/** 根据ID查询APP信息 */
