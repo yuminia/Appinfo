@@ -217,7 +217,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Plain Page</h3>
+                            <h3>App列表</h3>
                         </div>
 
                         <div class="title_right">
@@ -245,7 +245,6 @@
                                     <table id="example" class="table table-striped responsive-utilities jambo_table">
                                         <thead>
                                             <tr class="headings">
-                                                <th><input type="checkbox" class="tableflat"></th>
                                                 <th>软件名称 </th>
                                                 <th>APK名称</th>
                                                 <th>软件大小(单位:M) </th>
@@ -260,22 +259,22 @@
                                         </thead>
 
                                         <tbody>
+                                        	<c:forEach items="${requestScope.appList}" var="appInfo">
                                             <tr class="even pointer">
-                                                <td class="a-center "><input type="checkbox" class="tableflat"></td>
-                                                <td class=" ">软件名称</td>
-                                                <td class=" ">APK名称 </td>
-                                                <td class=" ">软件大小 <i class="success fa fa-long-arrow-up"></i>
-                                                </td>
-                                                <td class=" ">所属平台</td>
-                                                <td class=" ">所属分类</td>
-                                                <td class="a-right a-right ">状态</td>
-                                                <td class="a-right a-right ">下载次数</td>
-                                                <td class="a-right a-right ">最新版本</td>
+                                            	
+                                                <td class=" "><c:out value="${appInfo.softwareName}" default="暂无数据"/></td>
+                                                <td class=" "><c:out value="${appInfo.APKName}" default="暂无数据"/></td>
+                                                <td class=" "><c:out value="${appInfo.softwareSize}" default="暂无数据"/></td>
+                                                <td class=" "><c:out value="${appInfo.flatformId}" default="暂无数据"/></td>
+                                                <td class=" "><c:out value="${appInfo.categoryLevel3}" default="暂无数据"/></td>
+                                                <td class="a-right a-right "><c:out value="${appInfo.status}" default="暂无数据"/></td>
+                                                <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="暂无数据"/></td>
+                                                <td class="a-right a-right "><c:out value="${appInfo.versionNo}" default="暂无数据"/></td>
                                                 <td class=" last">
                                                 	<a class="btn btn-xs btn-warning" href="#">审核</a>
                                                 </td>
                                             </tr>
-                                            
+                                            </c:forEach>
                                         </tbody>
 
                                     </table>
