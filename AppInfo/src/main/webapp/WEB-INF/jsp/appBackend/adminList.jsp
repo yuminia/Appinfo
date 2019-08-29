@@ -61,6 +61,42 @@
                                      </tbody>
 
                                  </table>
+                                 <p>共 ${ph.totalCount } 条，${ph.totalPageCount }页</p>
+                                 <nav aria-label="Page navigation">
+									  <ul class="pagination">
+									  	<c:if test="${ph.currentPage != 1 }">
+									    	<li>
+									    		<a href="javascript:pageAppInfoList(${ph.currentPage-1});" aria-label="Previous">
+									    			<span aria-hidden="true">&laquo;</span>
+									    		</a>
+									    	</li>
+										</c:if>
+										
+										<c:forEach begin="1" end="${ph.totalPageCount }" varStatus="statu">
+											<c:if test="${ph.currentPage == statu.count }">
+												<li>
+													<a class="middleNum" style="background:#999;" 
+														href="javascript:pageAppInfoList(${statu.count });">
+														${statu.count }
+													</a>
+												</li>
+											</c:if>
+											<c:if test="${ph.currentPage != statu.count }">
+												<li><a class="middleNum" 
+												href="javascript:pageAppInfoList(${statu.count });">${statu.count }</a></li>
+											</c:if>
+										</c:forEach>
+										
+										<c:if test="${ph.currentPage != ph.totalPageCount }">
+										    <li>
+										      <a href="javascript:pageAppInfoList(${ph.currentPage+1 });" aria-label="Next">
+										      	<span aria-hidden="true">&raquo;</span>
+										      </a>
+										    </li>
+										</c:if>
+									    
+									  </ul>
+									</nav>
                              </div>
                          	
                          </div>

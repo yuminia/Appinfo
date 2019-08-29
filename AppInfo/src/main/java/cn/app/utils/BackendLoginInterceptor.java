@@ -16,9 +16,10 @@ import cn.app.bean.UserBackend;
 */
 public class BackendLoginInterceptor  extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws IOException {
-		UserBackend userBackend = (UserBackend)request.getSession().getAttribute("userBackend");
+		UserBackend userBackend = (UserBackend)request.getSession().getAttribute("loginUserBackend");
+		System.out.println("拦截器===============================================");
 		if (userBackend==null) {
-			response.sendRedirect(request.getContextPath()+"/index");
+			response.sendRedirect(request.getContextPath()+"/app/logout");
 			return false;
 		}else {
 			return true;

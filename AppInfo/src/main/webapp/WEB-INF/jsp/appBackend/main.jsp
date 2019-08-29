@@ -125,8 +125,8 @@
                                     </li>
                                     <li><a href="javascript:;">Help</a></li>
                                     <li>
-                                    	<a href="<%=request.getContextPath() %>/app/userDev/userDevlogOut">
-                                    		<i class="fa fa-sign-out pull-right"></i> Log Out
+                                    	<a href="<%=request.getContextPath() %>/app/index">
+                                    		<i class="fa fa-sign-out pull-right"></i> 注销
                                     	</a>
                                     </li>
                                 </ul>

@@ -17,9 +17,9 @@ import cn.app.bean.UserDev;
 */
 public class DevLoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws IOException {
-		UserDev userDev = (UserDev)request.getSession().getAttribute("userDev");
+		UserDev userDev = (UserDev)request.getSession().getAttribute("loginUserDev");
 		if (userDev==null) {
-			response.sendRedirect(request.getContextPath()+"/index");
+			response.sendRedirect(request.getContextPath()+"/app/logout");
 			return false;
 		}else {
 			return true;

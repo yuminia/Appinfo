@@ -130,9 +130,9 @@
                                             </c:forEach>
                                             <!-- ${appInfo.versionNo} -->
                                         </tbody>
-
+										
                                     </table>
-                                    
+                                    	<p>共 ${ph.totalCount } 条，${ph.totalPageCount }页</p>
                                     <nav aria-label="Page navigation">
 									  <ul class="pagination">
 									  	<c:if test="${ph.currentPage != 1 }">
