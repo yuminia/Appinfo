@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+
 
 import cn.app.bean.AppInfo;
 import cn.app.bean.UserDev;
 import cn.app.service.AppInfoService;
 import cn.app.service.UserDevService;
+import cn.app.utils.PageHelper;
 
 @Controller
 @RequestMapping("/app/userDev")
@@ -25,12 +29,27 @@ public class UserDevController {
 	
 	/** 登录成功页面 main.jsp */
 	@RequestMapping("main")
-	public String main(UserDev userDev,HttpServletRequest request){
-		//加载 相关AppInfo数据
-		List<AppInfo> appInfoList = appInfoService.getAppInfoList();
-		System.out.println("appInfoList--------------------------------------------");
-		System.out.println("appInfoList" + appInfoList);
+	public String main(AppInfo appInfo,
+			@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
+			HttpServletRequest request ){
+		
+		//加载 相关AppInfo 分页数据
+		int currentPage = Integer.parseInt(pageIndex);
+		PageHelper ph = new PageHelper();
+		int totalCount = appInfoService.getCount(appInfo);
+		
+		if(totalCount != 0){
+			ph.setPageSize(7);
+			ph.setTotalCount(totalCount);
+			if( currentPage <= 0 ){ currentPage = 1; }
+			if( currentPage >= ph.getTotalPageCount() ){ currentPage = ph.getTotalPageCount(); }
+		}
+		ph.setCurrentPage(currentPage);
+		
+		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,appInfo);
+		System.out.println("appInfoList--------------------------------------------" + appInfoList);
 		request.setAttribute("appInfoList", appInfoList);
+		request.setAttribute("ph", ph);
 		return "userDev/main";
 	}
 	

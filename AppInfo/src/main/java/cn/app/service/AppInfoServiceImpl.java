@@ -1,12 +1,15 @@
 package cn.app.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.app.bean.AppInfo;
 import cn.app.dao.AppInfoMapper;
+import cn.app.utils.PageHelper;
 @Service("appInfoService")
 public class AppInfoServiceImpl implements AppInfoService {
 	@Autowired
@@ -41,6 +44,19 @@ public class AppInfoServiceImpl implements AppInfoService {
 	@Override
 	public Integer deleteAppInfo(Integer id) {
 		return appInfoMapper.deleteAppInfo(id);
+	}
+
+	@Override
+	public List<AppInfo> getAppInfoLikePageHelper(PageHelper ph, AppInfo appInfo) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("ph", ph);
+		map.put("appInfo", appInfo);
+		return appInfoMapper.getAppInfoLikePageHelper(map);
+	}
+
+	@Override
+	public Integer getCount(AppInfo appInfo) {
+		return appInfoMapper.getCount(appInfo);
 	}
 
 }

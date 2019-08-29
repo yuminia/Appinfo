@@ -305,41 +305,47 @@
 						</div>
 	                    <div class="x_content">
 	                        <div class="row">
-	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
-	                                <label for="ex1" >软件名称 </label>
-	                                <input type="text" id="ex1" class="form-control" style="width:117px;"><br>
-	                                
-	                                <label>一级分类 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select>
-	                            </div>
-	                            
-	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
-	                                <label>APP状态 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select><br>
-	                                
-	                                <label>二级分类 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select>
-	                            </div>
-	                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
-	                                <label>所属平台 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select><br>
-	                                <label>三级分类 </label>
-	                                <select class="form-control">
-	                                	<option>-- 请选择 --</option>
-	                                </select>
-	                            </div>
+	                        
+	                        	<form class="form-horizontal form-label-left" id="searchCriteria">
+		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+		                                <label for="ex1" >软件名称 </label>
+		                                <input name="softwareName" type="text" id="ex1" class="form-control" style="width:117px;"><br>
+		                                
+		                                <label>一级分类 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select>
+		                            </div>
+		                            
+		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+		                                <label>APP状态 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select><br>
+		                                
+		                                <label>二级分类 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select>
+		                            </div>
+		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+		                                <label>所属平台 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select><br>
+		                                <label>三级分类 </label>
+		                                <select class="form-control">
+		                                	<option>-- 请选择 --</option>
+		                                </select>
+		                            </div>
+		                        </form>
+		                        
 	                        </div><br>
 	                        
 							
-	                        <a class="btn btn-info btn-sm" href="#">查 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询</a>
+	                        <a href="javascript:pageAppInfoList(${ph.currentPage-1});" class="btn btn-info btn-sm" >
+	                        	查 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;询
+	                        </a>
 	                        
 	<!--                         <div class="title_right"></div> -->
 	                    </div>
@@ -371,18 +377,40 @@
                                         </thead>
 
                                         <tbody>
-                                        ${appInfoList }
                                         <c:forEach items="${appInfoList }" var="item" varStatus="staus">
                                             <tr class="even pointer">
                                                 <td class="a-center "><input type="checkbox" class="tableflat"></td>
                                                 <td class=" ">${item.softwareName }</td>
                                                 <td class=" ">${item.APKName } </td>
                                                 <td class=" ">${item.softwareSize }</td>
-                                                <td class=" ">${item.flatformId }</td>
-                                                <td class=" ">所属分类</td>
-                                                <td class="a-right a-right ">${item.status }</td>
-                                                <td class="a-right a-right ">${item.downloads }</td>
-                                                <td class="a-right a-right ">最新版本</td>
+                                                <td class=" ">${item.flatformName }</td>
+                                                <td class=" ">${item.categoryName1 }->${item.categoryName2 }->${item.categoryName3 }</td>
+												
+												<!--/**int(30) APP状态<br>
+												 * 1 待审核<br>* 2 审核未通过<br>* 3 审核通过<br>* 4 已上架<br>* 5 已下架*/-->
+												
+												<c:if test="${item.status == 1 }">
+                                                	<td class="a-right a-right ">待审核</td>
+                                                </c:if>
+												<c:if test="${item.status == 2 }">
+                                                	<td class="a-right a-right ">审核未通过</td>
+                                                </c:if>
+												<c:if test="${item.status == 3 }">
+                                                	<td class="a-right a-right ">审核通过</td>
+                                                </c:if>
+												<c:if test="${item.status == 4 }">
+                                                	<td class="a-right a-right ">已上架</td>
+                                                </c:if>
+												<c:if test="${item.status == 5 }">
+                                                	<td class="a-right a-right ">已下架</td>
+                                                </c:if>
+                                                <c:if test="${item.downloads==null or  item.downloads==''}">
+                                                	<td class="a-right a-right ">0</td>
+                                                </c:if>
+                                                <c:if test="${item.downloads!=null and  item.downloads!=''}">
+                                                	<td class="a-right a-right ">${item.downloads }</td>
+                                                </c:if>
+                                                <td class="a-right a-right ">${item.versionNo }</td>
                                                 <td class=" last">
                                                 	<a class="btn btn-xs btn-warning" href="#">修改</a>
                                                 	<a class="btn btn-xs btn-danger" href="#">删除</a>
@@ -395,26 +423,49 @@
                                     
                                     <nav aria-label="Page navigation">
 									  <ul class="pagination">
-									    <li>
-									      <a href="#" aria-label="Previous">
-									        <span aria-hidden="true">&laquo;</span>
-									      </a>
-									    </li>
-									    <li><a href="#">1</a></li>
-									    <li><a href="#">2</a></li>
-									    <li><a href="#">3</a></li>
-									    <li><a href="#">4</a></li>
-									    <li><a href="#">5</a></li>
-									    <li>
-									      <a href="#" aria-label="Next">
-									        <span aria-hidden="true">&raquo;</span>
-									      </a>
-									    </li>
+									  	<c:if test="${ph.currentPage != 1 }">
+									    	<li>
+									    		<a href="javascript:pageAppInfoList(${ph.currentPage-1});" aria-label="Previous">
+									    			<span aria-hidden="true">&laquo;</span>
+									    		</a>
+									    	</li>
+										</c:if>
+										
+										<c:forEach begin="1" end="${ph.totalPageCount }" varStatus="statu">
+											<c:if test="${ph.currentPage == statu.count }">
+												<li>
+													<a class="middleNum" style="background:#999;" 
+														href="javascript:pageAppInfoList(${statu.count });">
+														${statu.count }
+													</a>
+												</li>
+											</c:if>
+											<c:if test="${ph.currentPage != statu.count }">
+												<li><a class="middleNum" 
+												href="javascript:pageAppInfoList(${statu.count });">${statu.count }</a></li>
+											</c:if>
+										</c:forEach>
+										
+										<c:if test="${ph.currentPage != ph.totalPageCount }">
+										    <li>
+										      <a href="javascript:pageAppInfoList(${ph.currentPage+1 });" aria-label="Next">
+										      	<span aria-hidden="true">&raquo;</span>
+										      </a>
+										    </li>
+										</c:if>
+									    
 									  </ul>
 									</nav>
                                     
                                 </div>
-                            	
+        <script type="text/javascript">
+	      	//AppList 跳转
+			function pageAppInfoList(pageIndex){
+				var data = $("#searchCriteria").serialize();
+				$("body").load("${pageContext.request.contextPath}/app/userDev/main",
+					{"pageIndex":pageIndex,"userName":"${userName}"})
+			};
+        </script>
                             </div>
                         </div>
                     </div>
