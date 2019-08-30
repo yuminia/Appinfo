@@ -24,10 +24,8 @@
 <script src="<%=request.getContextPath()%>/static/js/jquery.min.js"></script>
 </head>
 <body class="nav-md">
-
 	<div class="container body">
 		<div class="main_container">
-
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view"></div>
 			</div>

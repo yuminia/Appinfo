@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="">
+<mapper namespace="cn.app.dao.AdminMapper">
 	<!-- /**分页 并 模糊查询 APP信息*/public List<AppInfo> getAppInfoLikePageHelper(Map<String, Object> map); -->
 	<select id="getAppInfoLikePageHelper" parameterType="map" 
 		resultType="AppInfo">
@@ -10,7 +10,7 @@
 			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
 			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
 			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
-			versionId,(select versionNo from app_version where id=versionId) versionNo,
+			versionId,v.*,
 			status,
 			downloads 
 		from app_info i , app_version v 

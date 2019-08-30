@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.app.bean.AppInfo;
 import cn.app.bean.UserBackend;
 import cn.app.bean.UserDev;
+import cn.app.service.AdminService;
 import cn.app.service.AppInfoService;
 import cn.app.service.UserBackendService;
 import cn.app.service.UserDevService;
@@ -27,6 +28,8 @@ import cn.app.utils.PageHelper;
 @Controller
 @RequestMapping("/app/Backend/admin")
 public class AppBackendController {
+	@Autowired
+	private AdminService adminService;
 	@Autowired
 	private AppInfoService appInfoService;
 	@Autowired
@@ -74,7 +77,7 @@ public class AppBackendController {
 			HttpServletRequest request){
 		int currentPage = Integer.parseInt(pageIndex);
 		PageHelper ph = new PageHelper();
-		int totalCount = appInfoService.getCount(appInfo);
+		int totalCount = adminService.getCount(appInfo);
 		
 		if(totalCount != 0){
 			ph.setPageSize(7);
@@ -84,7 +87,7 @@ public class AppBackendController {
 		}
 		ph.setCurrentPage(currentPage);
 		
-		List<AppInfo> appList = appInfoService.getAppInfoLikePageHelper(ph,appInfo);
+		List<AppInfo> appList = adminService.getAppInfoLikePageHelper(ph,appInfo);
 		System.out.println("appInfoList--------------------------------------------" + appList);
 		request.setAttribute("appList", appList);
 		request.setAttribute("ph", ph);

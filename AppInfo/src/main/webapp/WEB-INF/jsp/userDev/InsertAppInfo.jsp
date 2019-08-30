@@ -23,8 +23,8 @@
 	rel="stylesheet">
 <script src="<%=request.getContextPath()%>/static/js/jquery.min.js"></script>
 </head>
-<body class="nav-md">
 
+<body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
 
