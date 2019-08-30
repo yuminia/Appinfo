@@ -85,9 +85,8 @@
 			versionId,(select Max(versionNo) from app_version where appid=versionId) versionNo,
 			status,
 			downloads 
-		from app_info i , app_version v 
-		where i.versionId=v.id 
-		and  i.createdBy=#{createId}
+		from app_info i 
+		where i.createdBy=#{createId}
 		<if test="appInfo.softwareName!=null and appInfo.softwareName!=''">
 			and softwareName like concat('%',#{appInfo.softwareName},'%') 
 		</if>

@@ -26,7 +26,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input id="softwareName" class="form-control col-md-7 col-xs-12"
 									data-validate-length-range="6" data-validate-words="2"
-									name="softwareName" placeholder="请输入软件名称" required="required"
+									name="softwareName" placeholder="请输入软件名称" required 
 									type="text">
 							</div>
 						</div>
@@ -37,7 +37,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input id="interfaceLanguage" class="form-control col-md-7 col-xs-12"
 									data-validate-length-range="6" data-validate-words="2"
-									name="APKName" placeholder="请输入APK名称" type="text">
+									name="APKName" placeholder="请输入APK名称" required type="text">
 							</div>
 						</div>
 						<div class="item form-group">
@@ -47,7 +47,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input id="supportROM" class="form-control col-md-7 col-xs-12"
 									data-validate-length-range="6" data-validate-words="2"
-									name="supportROM" placeholder="请输入支持ROM大小" type="text">
+									name="supportROM" placeholder="请输入支持ROM大小" required type="text">
 							</div>
 						</div>
 						<div class="item form-group">
@@ -57,7 +57,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input id="interfaceLanguage" class="form-control col-md-7 col-xs-12"
 									data-validate-length-range="6" data-validate-words="2"
-									name="interfaceLanguage" placeholder="请输入界面语言" type="text">
+									name="interfaceLanguage" placeholder="请输入界面语言" required type="text">
 							</div>
 						</div>
 						<div class="item form-group">
@@ -67,7 +67,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input id="softwareSize" class="form-control col-md-7 col-xs-12"
 									data-validate-length-range="6" data-validate-words="2"
-									name="softwareSize" placeholder="请输入软件大小" type="text">
+									name="softwareSize" placeholder="请输入软件大小" required type="text">
 							</div>
 						</div>
 						<div class="item form-group">
@@ -77,7 +77,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input id="downloads" class="form-control col-md-7 col-xs-12"
 									data-validate-length-range="6" data-validate-words="2"
-									name="downloads" placeholder="请输入下载次数" type="text">
+									name="downloads" value="0" type="text" readonly>
 							</div>
 						</div>
 						<div class="item form-group">
@@ -178,24 +178,40 @@
 	$("#addAppInfo").submit(function(){
 		//var data = $(this).serialize();
 		var data = new FormData(document.getElementById("addAppInfo"));
-		$.ajax({
-			url:"<%=request.getContextPath() %>/app/appInfo/addAppInfoSubmit",
-			data:data,
-			type:"post",
-			processData:false,
-			contentType:false,
-			success:function(data){
-				console.log(data);
-				console.log(typeof data);
-				if(data == true){
-					alert("添加成功");
-					$("#contentDiv").load("${pageContext.request.contextPath}/app/appInfo/AppList",
-	        				{"pageIndex":1});
-				}else if(data == false){
-					alert("添加失败,请检查数据");
-				}
+		var mark = true;
+		$("input:required").each(function(index,item){
+			var text = $(item).val();
+			if(text== null || text == ''){
+				mark = false;
 			}
-		})
+		});
+		if(mark){
+			$.ajax({
+				url:"<%=request.getContextPath() %>/app/appInfo/addAppInfoSubmit",
+				data:data,
+				type:"post",
+				processData:false,
+				contentType:false,
+				success:function(data){
+					console.log(data);
+					console.log(typeof data);
+					if(data == true){
+						alert("添加成功");
+						$("#contentDiv").load("${pageContext.request.contextPath}/app/appInfo/AppList",
+		        				{"pageIndex":1});
+					}else{
+						alert(data);
+					}
+				},
+				error:function(err){
+					console.log(err)
+					alert(err["responseText"])
+				}
+			})
+		}else{
+			alert("请正确填写...")
+		}
+		
 	})
 	
 	

@@ -98,11 +98,11 @@ public class AppInfoController {
 			if( result == 1 ){
 				return "true";
 			}else{
-				return "false";
+				return errorInfo;
 			}
 		}else{
-			request.setAttribute("errorInfo", errorInfo);
-			return "false";
+//			request.setAttribute("errorInfo", errorInfo);
+			return errorInfo;
 		}
 	}
 	
