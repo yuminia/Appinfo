@@ -124,17 +124,12 @@
                                                 <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="0"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.versionNo}" default="暂无数据"/></td>
                                                 <td class=" last">
-                                                	<c:forEach items="${appVersionList }" var="version">
-                                                		<c:if test="${version.id==appInfo.versionId && version.versionNo==appInfo.versionNo}">
-                                                			<c:if test="${version.publishStatus == 1}" var="audit">
-			                                                	<a  class="btn btn-xs btn-warning" href="javascript:audit(${appInfo.id });">审核</a>
-		                                                	</c:if>
-		                                                	<c:if test="${!audit }">
-			                                                	<a  class="btn btn-xs btn-success" href="javascript:;">审核</a>
-		                                                	</c:if>
-                                                		</c:if>
-                                                	</c:forEach>
-                                                	
+                                                	<c:if test="" var="audit">
+                                                	<a  class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
+                                                	</c:if>
+                                                	<c:if test="">
+                                                	<a  class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
+                                                	</c:if>
                                                 </td>
                                             </tr>
                                             </c:forEach>

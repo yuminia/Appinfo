@@ -35,12 +35,26 @@
 	</select>
 
 	<!-- /** 增加APP信息*/public Integer addAppInfo(AppInfo appInfo); -->
-	<insert id="addAppInfo">
-		insert into app_info
-		(softwareName,APKName,supportROM,interfaceLanguage,softwareSize,updateDate,devId,appInfo,
-		onSaleDate,categoryLevel1,categoryLevel2,categoryLevel3,createdBy,creationDate,logoPicPath,logoLocPath,versionId)
-		values(#{softwareName},#{APKName},#{supportROM},#{interfaceLanguage},#{softwareSize},#{updateDate},#{devId},#{appInfo}，
-		#{onSaleDate},#{categoryLevel1},#{categoryLevel2},#{categoryLevel3},#{createdBy},#{creationDate},#{logoPicPath},#{logoLocPath},#{versionId})
+	<insert id="addAppInfo" parameterType="AppInfo" >
+		insert into app_info(
+			`softwareName`,`APKName`,
+			`supportROM`,`interfaceLanguage`,
+			`softwareSize`,`updateDate`,
+			`devId`,`appInfo`,
+			`status`,`onSaleDate`,
+			`categoryLevel1`,`categoryLevel2`,`categoryLevel3`,
+			`createdBy`,`creationDate`,`flatformId`,
+			`logoPicPath`,`logoLocPath`,`versionId`  
+		) values(
+			#{softwareName},#{APKName},
+			#{supportROM},#{interfaceLanguage},
+			#{softwareSize},#{updateDate},
+			#{devId},#{appInfo},
+			#{status},#{onSaleDate},
+			#{categoryLevel1},#{categoryLevel2},#{categoryLevel3},
+			#{createdBy},#{creationDate},#{flatformId},
+			#{logoPicPath},#{logoLocPath},#{versionId} 
+		)
 	</insert>
 
 	<!-- /** 修改APP信息*/public Integer updateAppInfo(AppInfo appInfo); -->
@@ -63,63 +77,62 @@
 	<select id="getAppInfoLikePageHelper" parameterType="map" 
 		resultType="AppInfo">
 		select 
-			softwareName,APKName,softwareSize,
+			softwareName,APKName,softwareSize,i.createdBy,
 			flatformId,(select flatformName from flatform where id=flatformId) flatformName,
 			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
 			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
 			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
-			versionId,(select versionNo from app_version where id=versionId) versionNo,
+			versionId,(select Max(versionNo) from app_version where appid=versionId) versionNo,
 			status,
 			downloads 
 		from app_info i , app_version v 
 		where i.versionId=v.id 
-		<if test="softwareName!=null and softwareName!=''">
+		and  i.createdBy=#{createId}
+		<if test="appInfo.softwareName!=null and appInfo.softwareName!=''">
 			and softwareName like concat('%',#{appInfo.softwareName},'%') 
 		</if>
-		<if test="categoryLevel1!=null and categoryLevel1!=''">
+		<if test="appInfo.categoryLevel1!=null and appInfo.categoryLevel1!=''">
 			and categoryLevel1=#{appInfo.categoryLevel1} 
 		</if>
-		<if test="categoryLevel2!=null and categoryLevel2!=''">
+		<if test="appInfo.categoryLevel2!=null and appInfo.categoryLevel2!=''">
 			and categoryLevel2=#{appInfo.categoryLevel2} 
 		</if>
-		<if test="categoryLevel3!=null and categoryLevel3!=''">
+		<if test="appInfo.categoryLevel3!=null and appInfo.categoryLevel3!=''">
 			and categoryLevel3=#{appInfo.categoryLevel3} 
 		</if>
-		<if test="status!=null and status!=''">
+		<if test="appInfo.status!=null and appInfo.status!=''">
 			and status=#{appInfo.status} 
 		</if>
-		<if test="softwareName!=null and softwareName!=''">
+		<if test="appInfo.flatformId!=null and appInfo.flatformId!=''">
 			and flatformId=#{appInfo.flatformId} 
 		</if>
 		limit #{ph.startNo},#{ph.pageSize}
 	</select>
 	
-	<!-- /** 根据条件  查询总记录数 */ public Integer getCount(AppInfo appInfo); -->
-	<select id="getCount" parameterType="AppInfo" 
+	<!-- /** 根据条件  查询总记录数 */ public Integer getCount(Map<String, Object> map); -->
+	<select id="getCount" parameterType="map" 
 		resultType="int">
 		select 
 			count(1) 
 		from app_info 
-		<trim prefix="where" prefixOverrides="and">
-			<if test="softwareName!=null and softwareName!=''">
-				and softwareName like concat('%',#{softwareName},'%') 
+		where createdBy=#{createId} 
+			<if test="appInfo.softwareName!=null and appInfo.softwareName!=''">
+				and softwareName like concat('%',#{appInfo.softwareName},'%') 
 			</if>
-			<if test="categoryLevel1!=null and categoryLevel1!=''">
-				and categoryLevel1=#{categoryLevel1} 
+			<if test="appInfo.categoryLevel1!=null and appInfo.categoryLevel1!=''">
+				and categoryLevel1=#{appInfo.categoryLevel1} 
 			</if>
-			<if test="categoryLevel2!=null and categoryLevel2!=''">
-				and categoryLevel2=#{categoryLevel2} 
+			<if test="appInfo.categoryLevel2!=null and appInfo.categoryLevel2!=''">
+				and categoryLevel2=#{appInfo.categoryLevel2} 
 			</if>
-			<if test="categoryLevel3!=null and categoryLevel3!=''">
-				and categoryLevel3=#{categoryLevel3} 
+			<if test="appInfo.categoryLevel3!=null and appInfo.categoryLevel3!=''">
+				and categoryLevel3=#{appInfo.categoryLevel3} 
 			</if>
-			<if test="status!=null and status!=''">
-				and status=#{status} 
+			<if test="appInfo.status!=null and appInfo.status!=''">
+				and status=#{appInfo.status} 
 			</if>
-			<if test="softwareName!=null and softwareName!=''">
-				and flatformId=#{flatformId} 
+			<if test="appInfo.flatformId!=null and appInfo.flatformId!=''">
+				and flatformId=#{appInfo.flatformId} 
 			</if>
-		</trim>
-		
 	</select>
 </mapper>

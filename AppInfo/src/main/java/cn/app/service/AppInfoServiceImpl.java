@@ -50,16 +50,20 @@ public class AppInfoServiceImpl implements AppInfoService {
 	}
 
 	@Override
-	public List<AppInfo> getAppInfoLikePageHelper(PageHelper ph, AppInfo appInfo) {
+	public List<AppInfo> getAppInfoLikePageHelper(PageHelper ph, AppInfo appInfo ,Integer createId) {
 		Map<String,Object> map = new HashMap<>();
 		map.put("ph", ph);
 		map.put("appInfo", appInfo);
+		map.put("createId", createId);
 		return appInfoMapper.getAppInfoLikePageHelper(map);
 	}
 
 	@Override
-	public Integer getCount(AppInfo appInfo) {
-		return appInfoMapper.getCount(appInfo);
+	public Integer getCount(AppInfo appInfo,int createId) {
+		Map<String,Object> map = new HashMap<>();
+		map.put("appInfo", appInfo);
+		map.put("createId", createId);
+		return appInfoMapper.getCount(map);
 	}
 
 }

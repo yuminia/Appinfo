@@ -30,8 +30,9 @@ public interface AppInfoService {
 	public Integer deleteAppInfo(Integer id);
 	
 	/**分页 并 模糊查询 APP信息*/
-	public List<AppInfo> getAppInfoLikePageHelper(PageHelper ph,AppInfo appInfo);
+	public List<AppInfo> getAppInfoLikePageHelper(PageHelper ph,AppInfo appInfo,Integer createId);
 	
-	/** 根据条件  查询总记录数 */
-	public Integer getCount(AppInfo appInfo);
+	/** 根据条件  查询总记录数 
+	 * @param createId */
+	public Integer getCount(AppInfo appInfo, int createId);
 }

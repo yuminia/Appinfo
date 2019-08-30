@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java=UTF-8
-encoding//src/main/webapp/WEB-INF/jsp/userDev/main.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/userDev/AppInfoLimit.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/userDev/AppList.jsp=UTF-8
 encoding/<project>=UTF-8
