@@ -124,7 +124,12 @@
                                                 <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="0"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.versionNo}" default="暂无数据"/></td>
                                                 <td class=" last">
-                                                	<a class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
+                                                	<c:if test="${ }" var="audit">
+                                                	<a  class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
+                                                	</c:if>
+                                                	<c:if test="">
+                                                	<a  class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
+                                                	</c:if>
                                                 </td>
                                             </tr>
                                             </c:forEach>
@@ -177,6 +182,7 @@
 
              <!-- footer content -->
 	<script type="text/javascript">
+		$("#nav").attr("class", "leftNav none");
 		/* $("#adminList").click(function(){
 			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList");
 			}); */
