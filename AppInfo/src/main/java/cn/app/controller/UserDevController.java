@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
 import cn.app.bean.AppInfo;
 import cn.app.bean.Category;
+import cn.app.bean.Flatform;
 import cn.app.bean.UserDev;
 import cn.app.service.AppInfoService;
 import cn.app.service.CategoryService;
+import cn.app.service.FlatformService;
 import cn.app.service.UserDevService;
 import cn.app.utils.PageHelper;
 
@@ -30,11 +32,76 @@ public class UserDevController {
 	private AppInfoService appInfoService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private FlatformService flatformService;
+	
 	/** 登录成功页面 main.jsp */
-	@RequestMapping("main")
-	public String main(AppInfo appInfo,
+	@RequestMapping(value="main",method=RequestMethod.GET)
+	public String main1(@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
+			HttpServletRequest request ){
+		System.out.println("GET   appInfo====== null");
+		
+		//加载flatformList
+		List<Flatform> flatformList = flatformService.getFlatformList();
+		
+		//加载 categoryList1
+		List<Category> categoryList1 = categoryService.getCategoryListByParentId(1);
+		
+		//加载 相关AppInfo 分页数据
+		int currentPage = Integer.parseInt(pageIndex);
+		PageHelper ph = new PageHelper();
+		int totalCount = appInfoService.getCount(null);
+		
+		if(totalCount != 0){
+			ph.setPageSize(6);
+			ph.setTotalCount(totalCount);
+			if( currentPage <= 0 ){ currentPage = 1; }
+			if( currentPage >= ph.getTotalPageCount() ){ currentPage = ph.getTotalPageCount(); }
+		}
+		ph.setCurrentPage(currentPage);
+		
+		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,new AppInfo());
+		request.setAttribute("appInfoList", appInfoList);
+		request.setAttribute("categoryList1", categoryList1);
+		request.setAttribute("flatformList", flatformList);
+		request.setAttribute("ph", ph);
+		return "userDev/main";
+	}
+	/** 登录成功页面 main.jsp */
+	@RequestMapping(value="appInfoTable",method=RequestMethod.POST)
+	public String main(
+			@RequestParam(value="softwareName",required=false,defaultValue="")String softwareName,
+			@RequestParam(value="categoryLevel1",required=false,defaultValue="")Integer categoryLevel1,
+			@RequestParam(value="categoryLevel2",required=false,defaultValue="")Integer categoryLevel2,
+			@RequestParam(value="categoryLevel3",required=false,defaultValue="")Integer categoryLevel3,
+			@RequestParam(value="status",required=false,defaultValue="")Integer status,
+			@RequestParam(value="flatformId",required=false,defaultValue="")Integer flatformId,
 			@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
 			HttpServletRequest request ){
+		AppInfo appInfo = new AppInfo();
+		if(softwareName != null && softwareName != ""){
+			appInfo.setSoftwareName(softwareName);
+		}
+		if(categoryLevel1 != null && categoryLevel1 != 0){
+			appInfo.setCategoryLevel1(categoryLevel1);
+		}
+		if(categoryLevel2 != null && categoryLevel2 != 0){
+			appInfo.setCategoryLevel2(categoryLevel2);
+		}
+		if(categoryLevel3 != null && categoryLevel3 != 0){
+			appInfo.setCategoryLevel3(categoryLevel3);
+		}
+		if(status != null && status != 0){
+			appInfo.setStatus(status);
+		}
+		if(flatformId != null && flatformId != 0){
+			appInfo.setFlatformId(flatformId);
+		}
+		System.out.println("POST    appInfo====== "+appInfo);
+		
+		//加载flatformList
+		List<Flatform> flatformList = flatformService.getFlatformList();
+		
 		//加载 categoryList1
 		List<Category> categoryList1 = categoryService.getCategoryListByParentId(1);
 		
@@ -44,7 +111,7 @@ public class UserDevController {
 		int totalCount = appInfoService.getCount(appInfo);
 		
 		if(totalCount != 0){
-			ph.setPageSize(7);
+			ph.setPageSize(6);
 			ph.setTotalCount(totalCount);
 			if( currentPage <= 0 ){ currentPage = 1; }
 			if( currentPage >= ph.getTotalPageCount() ){ currentPage = ph.getTotalPageCount(); }
@@ -55,8 +122,9 @@ public class UserDevController {
 		System.out.println("appInfoList--------------------------------------------" + appInfoList);
 		request.setAttribute("appInfoList", appInfoList);
 		request.setAttribute("categoryList1", categoryList1);
+		request.setAttribute("flatformList", flatformList);
 		request.setAttribute("ph", ph);
-		return "userDev/main";
+		return "userDev/AppInfoLimit";
 	}
 	
 	@RequestMapping("userDevList")
