@@ -13,7 +13,6 @@ import cn.app.service.AppInfoService;
 /**
  * AppInfoController
  * @author PC
- *
  */
 @Controller
 @RequestMapping("/app/bean/AppInfo")
@@ -21,14 +20,11 @@ public class AppInfoController {
 	@Autowired
 	private AppInfoService appInfoService;
 	
-	
-	
 	/** 查询所有APP信息*/
 	@RequestMapping("getAppInfoList")
 	@ResponseBody
 	public List<AppInfo> getAppInfoList(){
 		return appInfoService.getAppInfoList();
-		
 	}
 	
 	

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,7 +39,12 @@ public class UserDevController {
 	public String main1(@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
 			HttpServletRequest request ){
 		System.out.println("GET   appInfo====== null");
+		UserDev userDev = (UserDev) request.getSession().getAttribute("loginUserDev");
 		
+		if(userDev == null){
+			return "login";
+		}
+		int createId = userDev.getId();
 		//加载flatformList
 		List<Flatform> flatformList = flatformService.getFlatformList();
 		
@@ -50,7 +54,7 @@ public class UserDevController {
 		//加载 相关AppInfo 分页数据
 		int currentPage = Integer.parseInt(pageIndex);
 		PageHelper ph = new PageHelper();
-		int totalCount = appInfoService.getCount(null);
+		int totalCount = appInfoService.getCount(null,createId);
 		
 		if(totalCount != 0){
 			ph.setPageSize(6);
@@ -60,7 +64,7 @@ public class UserDevController {
 		}
 		ph.setCurrentPage(currentPage);
 		
-		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,new AppInfo());
+		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,new AppInfo(),createId);
 		request.setAttribute("appInfoList", appInfoList);
 		request.setAttribute("categoryList1", categoryList1);
 		request.setAttribute("flatformList", flatformList);
@@ -78,6 +82,12 @@ public class UserDevController {
 			@RequestParam(value="flatformId",required=false,defaultValue="")Integer flatformId,
 			@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
 			HttpServletRequest request ){
+		UserDev userDev = (UserDev) request.getSession().getAttribute("loginUserDev");
+		
+		if(userDev == null){
+			return "login";
+		}
+		int createId = userDev.getId();
 		AppInfo appInfo = new AppInfo();
 		if(softwareName != null && softwareName != ""){
 			appInfo.setSoftwareName(softwareName);
@@ -108,7 +118,7 @@ public class UserDevController {
 		//加载 相关AppInfo 分页数据
 		int currentPage = Integer.parseInt(pageIndex);
 		PageHelper ph = new PageHelper();
-		int totalCount = appInfoService.getCount(appInfo);
+		int totalCount = appInfoService.getCount(appInfo,createId);
 		
 		if(totalCount != 0){
 			ph.setPageSize(6);
@@ -118,7 +128,7 @@ public class UserDevController {
 		}
 		ph.setCurrentPage(currentPage);
 		
-		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,appInfo);
+		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,appInfo,createId);
 		System.out.println("appInfoList--------------------------------------------" + appInfoList);
 		request.setAttribute("appInfoList", appInfoList);
 		request.setAttribute("categoryList1", categoryList1);
@@ -143,7 +153,7 @@ public class UserDevController {
 	@RequestMapping("userDevlogOut")
 	public String userDevlogOut(UserDev userDev,HttpServletRequest request){
 		request.getSession().removeAttribute("loginUserDev");
-		return "userDev/userDevLogin";
+		return "index";
 	}
 	
 	/** Dev 用户登录 提交 */
@@ -155,20 +165,20 @@ public class UserDevController {
 			request.getSession().setAttribute("loginUserDev", dbuserDev);
 			return "userDev/main";
 		}else{
-			return "userDev/userDevLogin";
+			return "index";
 		}
 	}
 	
-	/** Dev 用户注册 提交 */
+	/** Dev 用户注册 提交 ******************/
 	@RequestMapping("userDevRegisterSubmit")
 	public String userDevRegisterSubmit(UserDev userDev){
 		userDev.setCreatedBy(1);
 		userDev.setCreationDate(new Date());
 		int res = userDevService.addUserDev(userDev);
 		if(res == 1){
-			return "login";
+			return "index";
 		}
-		return "login";
+		return "index";
 	}
 	
 	/** ajax匹配 DevCode */
