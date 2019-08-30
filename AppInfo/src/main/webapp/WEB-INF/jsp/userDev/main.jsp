@@ -312,29 +312,39 @@
 		                                <input name="softwareName" type="text" id="ex1" class="form-control" style="width:117px;"><br>
 		                                
 		                                <label>一级分类 </label>
-		                                <select class="form-control">
-		                                	<option>-- 请选择 --</option>
+		                                <select class="form-control" name="categoryLevel1" id="categoryLevel1">
+			                                	<option value="">-- 请选择 --</option>
+			                                <c:forEach items="${categoryList1 }" var="item">
+			                                	<option value="${item.id }">${item.categoryName }</option>
+			                                </c:forEach>
 		                                </select>
 		                            </div>
-		                            
+		                            <!--/**int(30) APP状态<br>
+												 * 1 待审核<br>* 2 审核未通过<br>* 3 审核通过<br>* 4 已上架<br>* 5 已下架*/-->
 		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
 		                                <label>APP状态 </label>
 		                                <select class="form-control">
-		                                	<option>-- 请选择 --</option>
+		                                	<option value="0">-- 请选择 --</option>
+		                                	<option value="1">待审核</option>
+		                                	<option value="2">审核未通过</option>
+		                                	<option value="3">审核通过</option>
+		                                	<option value="4">已上架</option>
+		                                	<option value="5">已下架</option>
 		                                </select><br>
 		                                
 		                                <label>二级分类 </label>
-		                                <select class="form-control">
-		                                	<option>-- 请选择 --</option>
+		                                <select class="form-control" name="categoryLevel2" id="categoryLevel2">
+		                                	<option value="0">-- 请选择 --</option>
 		                                </select>
 		                            </div>
+		                            
 		                            <div class="col-md-3 col-sm-12 col-xs-12 form-inline">
 		                                <label>所属平台 </label>
 		                                <select class="form-control">
 		                                	<option>-- 请选择 --</option>
 		                                </select><br>
 		                                <label>三级分类 </label>
-		                                <select class="form-control">
+		                                <select class="form-control" name="categoryLevel3" id="categoryLevel3">
 		                                	<option>-- 请选择 --</option>
 		                                </select>
 		                            </div>
@@ -465,6 +475,50 @@
 				$("body").load("${pageContext.request.contextPath}/app/userDev/main",
 					{"pageIndex":pageIndex,"userName":"${userName}"})
 			};
+			
+			//根据一级分类加载二级分类
+			$("#categoryLevel1").change(function(){
+				var categoryLevel1 = $("#categoryLevel1 option:selected").val();
+				$.ajax({
+					url:"<%=request.getContextPath() %>/app/category/getCategoryList",
+					data:{"categoryLevel1":categoryLevel1},
+					dataType:"json",
+					success:function(data){
+						var html = "<option value='0'>-- 请选择 --</option>";
+						if(data != null && data != ''){
+							data.forEach(function(item){
+								html += "<option value='"+ item["id"] +"'>"+ item["categoryName"] +"</option>";
+							});
+						}else{
+							$("#categoryLevel2").html("<option value='0'>-- 请选择 --</option>");
+							$("#categoryLevel3").html("<option value='0'>-- 请选择 --</option>");
+						}
+						$("#categoryLevel2").html(html);
+					}
+				});
+			});
+			
+			//根据二级分类加载三级分类
+			$("#categoryLevel2").change(function(){
+				var categoryLevel1 = $("#categoryLevel2 option:selected").val();
+				$.ajax({
+					url:"<%=request.getContextPath() %>/app/category/getCategoryList",
+					data:{"categoryLevel1":categoryLevel1},
+					dataType:"json",
+					success:function(data){
+						var html = "<option value='0'>-- 请选择 --</option>";
+						if(data != null && data != ''){
+							data.forEach(function(item){
+								html += "<option value='"+ item["id"] +"'>"+ item["categoryName"] +"</option>";
+							});
+						}else{
+							$("#categoryLevel3").html("<option value='0'>-- 请选择 --</option>");
+						}
+						$("#categoryLevel3").html(html);
+					}
+				});
+			});
+			//{categoryCode: "code2_01", categoryName: "社交聊天", creationTime: "2019-08-27 09:14:02", id: 5, parentId: 2}
         </script>
                             </div>
                         </div>
@@ -509,8 +563,8 @@
 
     <!-- moris js -->
     <script src="<%=request.getContextPath() %>/static/js/moris/raphael-min.js"></script>
-    <script src="<%=request.getContextPath() %>/static/js/moris/morris.js"></script>
-    <script src="<%=request.getContextPath() %>/static/js/moris/example.js"></script>
+<%--     <script src="<%=request.getContextPath() %>/static/js/moris/morris.js"></script> --%>
+<%--     <script src="<%=request.getContextPath() %>/static/js/moris/example.js"></script> --%>
 
 </body>
 
