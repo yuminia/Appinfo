@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.app.bean.UserBackend;
 import cn.app.dao.UserBackendMapper;
+import cn.app.utils.PageHelper;
 
 /**
 * @author yuminia
@@ -49,6 +50,18 @@ public class UserBackendServiceImpl implements UserBackendService{
 	@Override
 	public List<UserBackend> getUserBackendList(UserBackend userBackend) {
 		return userBackendMapper.getUserBackendList(userBackend);
+	}
+
+	@Override
+	public Integer getCount(UserBackend userBackend) {
+		
+		return userBackendMapper.getCount(userBackend);
+	}
+
+	@Override
+	public List<UserBackend> getUserBackendOfPageHelper(PageHelper ph, UserBackend userBackend) {
+		
+		return userBackendMapper.getUserBackendOfPageHelper(ph, userBackend);
 	}
 
 	

@@ -34,8 +34,21 @@ public class UserDevController {
 	@Autowired
 	private FlatformService flatformService;
 	
-	/** 登录成功页面 main.jsp */
+	/** 登录成功首页面 main.jsp */
 	@RequestMapping(value="main",method=RequestMethod.GET)
+	public String main(HttpServletRequest request ){
+		return "userDev/main";
+	}
+	
+	/** 登录成功首页面 main.jsp 
+	@RequestMapping(value="main",method=RequestMethod.POST)
+	public String main1(HttpServletRequest request ){
+		return "userDev/main";
+	}*/
+	
+	
+	/** 登录成功页面 main.jsp 备用get提交 */
+	@RequestMapping(value="main1",method=RequestMethod.GET)
 	public String main1(@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
 			HttpServletRequest request ){
 		System.out.println("GET   appInfo====== null");
@@ -71,71 +84,8 @@ public class UserDevController {
 		request.setAttribute("ph", ph);
 		return "userDev/main";
 	}
-	/** 登录成功页面 main.jsp */
-	@RequestMapping(value="appInfoTable",method=RequestMethod.POST)
-	public String main(
-			@RequestParam(value="softwareName",required=false,defaultValue="")String softwareName,
-			@RequestParam(value="categoryLevel1",required=false,defaultValue="")Integer categoryLevel1,
-			@RequestParam(value="categoryLevel2",required=false,defaultValue="")Integer categoryLevel2,
-			@RequestParam(value="categoryLevel3",required=false,defaultValue="")Integer categoryLevel3,
-			@RequestParam(value="status",required=false,defaultValue="")Integer status,
-			@RequestParam(value="flatformId",required=false,defaultValue="")Integer flatformId,
-			@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
-			HttpServletRequest request ){
-		UserDev userDev = (UserDev) request.getSession().getAttribute("loginUserDev");
-		
-		if(userDev == null){
-			return "login";
-		}
-		int createId = userDev.getId();
-		AppInfo appInfo = new AppInfo();
-		if(softwareName != null && softwareName != ""){
-			appInfo.setSoftwareName(softwareName);
-		}
-		if(categoryLevel1 != null && categoryLevel1 != 0){
-			appInfo.setCategoryLevel1(categoryLevel1);
-		}
-		if(categoryLevel2 != null && categoryLevel2 != 0){
-			appInfo.setCategoryLevel2(categoryLevel2);
-		}
-		if(categoryLevel3 != null && categoryLevel3 != 0){
-			appInfo.setCategoryLevel3(categoryLevel3);
-		}
-		if(status != null && status != 0){
-			appInfo.setStatus(status);
-		}
-		if(flatformId != null && flatformId != 0){
-			appInfo.setFlatformId(flatformId);
-		}
-		System.out.println("POST    appInfo====== "+appInfo);
-		
-		//加载flatformList
-		List<Flatform> flatformList = flatformService.getFlatformList();
-		
-		//加载 categoryList1
-		List<Category> categoryList1 = categoryService.getCategoryListByParentId(1);
-		
-		//加载 相关AppInfo 分页数据
-		int currentPage = Integer.parseInt(pageIndex);
-		PageHelper ph = new PageHelper();
-		int totalCount = appInfoService.getCount(appInfo,createId);
-		
-		if(totalCount != 0){
-			ph.setPageSize(6);
-			ph.setTotalCount(totalCount);
-			if( currentPage <= 0 ){ currentPage = 1; }
-			if( currentPage >= ph.getTotalPageCount() ){ currentPage = ph.getTotalPageCount(); }
-		}
-		ph.setCurrentPage(currentPage);
-		
-		List<AppInfo> appInfoList = appInfoService.getAppInfoLikePageHelper(ph,appInfo,createId);
-		System.out.println("appInfoList--------------------------------------------" + appInfoList);
-		request.setAttribute("appInfoList", appInfoList);
-		request.setAttribute("categoryList1", categoryList1);
-		request.setAttribute("flatformList", flatformList);
-		request.setAttribute("ph", ph);
-		return "userDev/AppInfoLimit";
-	}
+	
+	
 	
 	@RequestMapping("userDevList")
 	@ResponseBody

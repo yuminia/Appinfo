@@ -22,13 +22,9 @@ public class UserBackendController {
 	@Autowired
 	private UserBackendService userBackendService;
 	
-	/*@RequestMapping("login")
-	public String userBackendLogin(){
-		return "login";
-	}*/
 	
 	@RequestMapping("addAdmin")
-	public String userDevRegisterSubmit(UserBackend userBackend){
+	public String addAdmin(UserBackend userBackend){
 		userBackend.setCreatedBy(1);
 		userBackend.setCreationDate(new Date());
 		int res = userBackendService.addUserBackend(userBackend);

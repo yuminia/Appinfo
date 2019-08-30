@@ -3,6 +3,7 @@ package cn.app.service;
 import java.util.List;
 
 import cn.app.bean.UserBackend;
+import cn.app.utils.PageHelper;
 
 /**
 * @author yuminia
@@ -57,4 +58,20 @@ public interface UserBackendService {
 	* @param UserBackend userBackend
 	*/
 	public List<UserBackend> getUserBackendList(UserBackend userBackend);
+
+	/**
+	 * 查询条数
+	* @author yuminia
+	* @return Integer
+	* @param UserBackend userBackend
+	*/
+	public Integer getCount(UserBackend userBackend) ;
+	
+	/**
+	 * 分页
+	* @author yuminia
+	* @return List<UserBackend>
+	* @param PageHelper ph,UserBackend userBackend
+	*/
+	public List<UserBackend> getUserBackendOfPageHelper(PageHelper ph,UserBackend userBackend);
 }

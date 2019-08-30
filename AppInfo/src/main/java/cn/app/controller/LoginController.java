@@ -83,4 +83,9 @@ public class LoginController {
 		request.setAttribute("DevOrBackend", DevOrBackend);
 		return "login";
 	}
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
+		request.getSession().removeAttribute("loginUserBackend");
+		return "index";
+	}
 }

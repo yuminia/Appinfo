@@ -57,15 +57,15 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> APP管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="index.html">Dashboard</a>
+                                        <li><a id="appList" href="javascript:;">App列表</a>
                                         </li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="form.html">开发者用户</a>
+                                        <li><a id="adminList" href="javascript:;">开发者用户</a>
                                         </li>
-                                        <li><a href="form_advanced.html">管理者用户</a>
+                                        <li><a id="userList" href="javascript:;">管理者用户</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -125,8 +125,8 @@
                                     </li>
                                     <li><a href="javascript:;">Help</a></li>
                                     <li>
-                                    	<a href="<%=request.getContextPath() %>/app/userDev/userDevlogOut">
-                                    		<i class="fa fa-sign-out pull-right"></i> Log Out
+                                    	<a href="<%=request.getContextPath() %>/app/index">
+                                    		<i class="fa fa-sign-out pull-right"></i> 注销
                                     	</a>
                                     </li>
                                 </ul>
@@ -213,77 +213,8 @@
             <!-- /top navigation -->
 
             <!-- page content -->
-            <div class="right_col" role="main">
-                <div class="">
-                    <div class="page-title">
-                        <div class="title_left">
-                            <h3>App列表</h3>
-                        </div>
-
-                        <div class="title_right">
-                            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                                <div class="input-group">
-                                    <p  class="form-control">注    销    ——→</p>
-                                    <span class="input-group-btn">
-                            <button id="logout" class="btn btn-default" type="button">登 出!</button>
-                        </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <div class="row">
-
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="x_panel" style="height:600px;">
-                                <div class="x_title">
-                                    <a class="btn btn-success btn-sm" href="#">新增App基础信息</a>
-                                </div>
-                            	
-                            	<div class="x_content">
-                                    <table id="example" class="table table-striped responsive-utilities jambo_table">
-                                        <thead>
-                                            <tr class="headings">
-                                                <th>软件名称 </th>
-                                                <th>APK名称</th>
-                                                <th>软件大小(单位:M) </th>
-                                                <th>所属平台 </th>
-                                                <th>所属分类(一级分类/二级分类/三级分类) </th>
-                                                <th>状态 </th>
-                                                <th>下载次数 </th>
-                                                <th>最新版本 </th>
-                                                <th class=" no-link last"><span class="nobr">操作</span>
-                                                </th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                        	<c:forEach items="${requestScope.appList}" var="appInfo">
-                                            <tr class="even pointer">
-                                            	
-                                                <td class=" "><c:out value="${appInfo.softwareName}" default="暂无数据"/></td>
-                                                <td class=" "><c:out value="${appInfo.APKName}" default="暂无数据"/></td>
-                                                <td class=" "><c:out value="${appInfo.softwareSize}" default="暂无数据"/></td>
-                                                <td class=" "><c:out value="${appInfo.flatformId}" default="暂无数据"/></td>
-                                                <td class=" "><c:out value="${appInfo.categoryLevel3}" default="暂无数据"/></td>
-                                                <td class="a-right a-right "><c:out value="${appInfo.status}" default="暂无数据"/></td>
-                                                <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="暂无数据"/></td>
-                                                <td class="a-right a-right "><c:out value="暂无数据" default="暂无数据"/></td><!-- ${appInfo.versionNo} -->
-                                                <td class=" last">
-                                                	<a class="btn btn-xs btn-warning" href="#">审核</a>
-                                                </td>
-                                            </tr>
-                                            </c:forEach>
-                                        </tbody>
-
-                                    </table>
-                                </div>
-                            	
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="right_col" class="right_col" role="main">
+                
 
                 <!-- footer content -->
                 <footer>
@@ -325,7 +256,18 @@
     <script src="<%=request.getContextPath() %>/static/js/moris/raphael-min.js"></script>
     <script src="<%=request.getContextPath() %>/static/js/moris/morris.js"></script>
     <script src="<%=request.getContextPath() %>/static/js/moris/example.js"></script>
-
+	<script type="text/javascript">
+	$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/appList");
+	$("#adminList").click(function(){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList");
+		});
+	$("#appList").click(function(){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/appList");
+		});
+	$("#userList").click(function(){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/userList");
+		});
+	</script>
 </body>
 
 </html>
