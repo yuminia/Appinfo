@@ -31,10 +31,10 @@
                     <form action="${pageContext.request.contextPath}/app/doLogin" method="post">
                         <h1>登 录</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="登录名" required="required" name="userCode"/>
+                            <input type="text" class="form-control" placeholder="登录名" required="required" name="userCode" value="qq"/>
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="密码" required="required" name="userPassword"/>
+                            <input type="password" class="form-control" placeholder="密码" required="required" name="userPassword" value="qq"/>
                         </div>
                         <div>
                         	<input type="hidden" name="DevOrBackend" value="${DevOrBackend}">

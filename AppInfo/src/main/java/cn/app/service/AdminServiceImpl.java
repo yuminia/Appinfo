@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.app.bean.AppInfo;
+import cn.app.bean.AppVersion;
 import cn.app.dao.AdminMapper;
 import cn.app.utils.PageHelper;
 
@@ -34,6 +35,30 @@ public class AdminServiceImpl implements AdminService {
 	public Integer getCount(AppInfo appInfo) {
 		
 		return adminMapper.getCount(appInfo);
+	}
+
+	@Override
+	public List<AppVersion> getAppVersion() {
+		
+		return adminMapper.getAppVersion();
+	}
+
+	@Override
+	public AppVersion getAppVersionById(Integer id) {
+		
+		return adminMapper.getAppVersionById(id);
+	}
+
+	@Override
+	public AppInfo getAppInfoById(Integer id) {
+		
+		return adminMapper.getAppInfoById(id);
+	}
+
+	@Override
+	public Integer appInfoAudit(AppInfo appInfo) {
+		
+		return adminMapper.appInfoAudit(appInfo);
 	}
 
 }

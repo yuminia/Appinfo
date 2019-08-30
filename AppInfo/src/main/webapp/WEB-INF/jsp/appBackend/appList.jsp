@@ -124,12 +124,17 @@
                                                 <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="0"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.versionNo}" default="暂无数据"/></td>
                                                 <td class=" last">
-                                                	<c:if test="${ }" var="audit">
-                                                	<a  class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
-                                                	</c:if>
-                                                	<c:if test="">
-                                                	<a  class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">审核</a>
-                                                	</c:if>
+                                                	<c:forEach items="${appVersionList }" var="version">
+                                                		<c:if test="${version.id==appInfo.versionId && version.versionNo==appInfo.versionNo}">
+                                                			<c:if test="${version.publishStatus == 1}" var="audit">
+			                                                	<a  class="btn btn-xs btn-warning" href="javascript:audit(${appInfo.id });">审核</a>
+		                                                	</c:if>
+		                                                	<c:if test="${!audit }">
+			                                                	<a  class="btn btn-xs btn-success" href="javascript:;">审核</a>
+		                                                	</c:if>
+                                                		</c:if>
+                                                	</c:forEach>
+                                                	
                                                 </td>
                                             </tr>
                                             </c:forEach>
@@ -182,7 +187,12 @@
 
              <!-- footer content -->
 	<script type="text/javascript">
-		$("#nav").attr("class", "leftNav none");
+		function audit(id){
+			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/audit","id="+id);
+		}
+		
+		
+		//$("#nav").attr("class", "leftNav none");
 		/* $("#adminList").click(function(){
 			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList");
 			}); */

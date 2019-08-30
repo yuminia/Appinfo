@@ -63,9 +63,9 @@
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a id="adminList" href="javascript:;">开发者用户</a>
+                                        <li><a id="userList" href="javascript:;">开发者用户</a>
                                         </li>
-                                        <li><a id="userList" href="javascript:;">管理者用户</a>
+                                        <li><a id="adminList" href="javascript:;">管理者用户</a> 
                                         </li>
                                     </ul>
                                 </li>
@@ -80,22 +80,6 @@
                     </div>
                     <!-- /sidebar menu -->
 
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -116,91 +100,10 @@
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                                    <li><a href="javascript:;"> Profile</a> </li>
-                                    <li>
-                                        <a href="javascript:;">
-                                            <span class="badge bg-red pull-right">50%</span>
-                                            <span>Settings</span>
-                                        </a>
-                                    </li>
-                                    <li><a href="javascript:;">Help</a></li>
                                     <li>
                                     	<a href="<%=request.getContextPath() %>/app/index">
                                     		<i class="fa fa-sign-out pull-right"></i> 注销
                                     	</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li role="presentation" class="dropdown">
-                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="badge bg-green">6</span>
-                                </a>
-                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                        <img src="<%=request.getContextPath() %>/static/images/img.jpg" alt="Profile Image" />
-                                    </span>
-                                            <span>
-                                        <span>John Smith</span>
-                                            <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where... 
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                        <img src="<%=request.getContextPath() %>/static/images/img.jpg" alt="Profile Image" />
-                                    </span>
-                                            <span>
-                                        <span>John Smith</span>
-                                            <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where... 
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                        <img src="<%=request.getContextPath() %>/static/images/img.jpg" alt="Profile Image" />
-                                    </span>
-                                            <span>
-                                        <span>John Smith</span>
-                                            <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where... 
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <span class="image">
-                                        <img src="<%=request.getContextPath() %>/static/images/img.jpg" alt="Profile Image" />
-                                    </span>
-                                            <span>
-                                        <span>John Smith</span>
-                                            <span class="time">3 mins ago</span>
-                                            </span>
-                                            <span class="message">
-                                        Film festivals used to be do-or-die moments for movie makers. They were where... 
-                                    </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <div class="text-center">
-                                            <a>
-                                                <strong>See All Alerts</strong>
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                        </div>
                                     </li>
                                 </ul>
                             </li>
@@ -214,18 +117,6 @@
 
             <!-- page content -->
             <div id="right_col" class="right_col" role="main">
-                
-
-                <!-- footer content -->
-                <footer>
-                    <div class="">
-                        <p class="pull-right">App开发平台<a>Kimlabs</a>. |
-                            <span class="lead"> <i class="fa fa-paw"></i> App开发平台</span>
-                        </p>
-                    </div>
-                    <div class="clearfix"></div>
-                </footer>
-                <!-- /footer content -->
 
             </div>
             <!-- /page content -->

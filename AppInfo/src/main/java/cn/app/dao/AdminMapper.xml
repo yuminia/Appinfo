@@ -1,16 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.app.dao.AdminMapper">
+	
+	<!-- 审核 -->
+	<update id="appInfoAudit" parameterType="AppInfo">
+		update app_info set
+		
+		status=#{status}
+		
+		where id=#{id}
+	</update>
+	
+	<!-- 根据id获取app信息 -->
+	<select id="getAppInfoById" parameterType="int" resultType="AppInfo">
+		select
+			i.id,softwareName,APKName,softwareSize,flatformId,interfaceLanguage,downloads,appInfo,
+			(select flatformName from flatform where id=flatformId) flatformName,
+			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
+			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
+			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
+			status,logoPicPath,logoLocPath
+			,downloads,versionNo 
+		from app_info i inner join app_version v 
+		where i.versionId=v.id and i.id=#{id}
+	</select>
+	<!-- (case status 
+				when '1' then '待审核'   
+				when '2' then '审核未通过'
+				when '3' then '审核通过'
+				when '4' then '已上架'
+				when '5' then '已下架'
+			else '错误状态！'
+			end
+			)as  -->
+	<!-- 获取app版本列表 -->
+	<select id="getAppVersion" resultType="AppVersion">
+		select * 
+		from app_version v,app_info i
+		where v.id=i.versionId
+	</select>
+	
+	<!-- 根据id获取app版本信息 -->
+	<select id="getAppVersionById" parameterType="int" resultType="AppVersion">
+		select * 
+		from app_version v
+		where appId=#{id} and 
+		versionNo = (select MAX(versionNo) from app_version where v.appId=appId)
+	</select>
+	
 	<!-- /**分页 并 模糊查询 APP信息*/public List<AppInfo> getAppInfoLikePageHelper(Map<String, Object> map); -->
 	<select id="getAppInfoLikePageHelper" parameterType="map" 
 		resultType="AppInfo">
 		select 
-			softwareName,APKName,softwareSize,
+			i.id,softwareName,APKName,softwareSize,
 			flatformId,(select flatformName from flatform where id=flatformId) flatformName,
 			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
 			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
 			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
-			versionId,v.*,
+			versionId,(select versionNo from app_version where id=versionId) versionNo,
 			status,
 			downloads 
 		from app_info i , app_version v 
