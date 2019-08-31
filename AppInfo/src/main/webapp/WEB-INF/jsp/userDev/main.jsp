@@ -178,7 +178,7 @@
                 <div id="contentDiv">
                 	<div class="x_panel">
 	                	<div class="x_title">
-							<h2>
+							<h2   style="height:480px;">
 								欢迎你: ${loginUserDev.devName }
 								| 角色 : ${loginUserDev.devCode }
 							</h2>
@@ -191,6 +191,10 @@
         	function pageTo(page){
         		$("#contentDiv").load("${pageContext.request.contextPath}/app/"+page,
         				{"pageIndex":1});
+        	}
+        	
+        	function pageToGet(page){
+        		$("#contentDiv").load("${pageContext.request.contextPath}/app/"+page);
         	}
         	
         	function pageToMainTypeGet(page){

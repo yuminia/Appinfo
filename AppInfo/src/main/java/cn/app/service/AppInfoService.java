@@ -35,4 +35,7 @@ public interface AppInfoService {
 	/** 根据条件  查询总记录数 
 	 * @param createId */
 	public Integer getCount(AppInfo appInfo, int createId);
+	
+	/**根据APKName 查询APP信息*/
+	public AppInfo getAppInfoByAPKName(String APKName);
 }
