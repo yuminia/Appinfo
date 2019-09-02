@@ -60,4 +60,13 @@ public class AppInfoServiceImpl implements AppInfoService {
 		return appInfoMapper.getAppInfoByAPKName(APKName);
 	}
 
+	public int updateAppInfoStatusOn(Integer id) {
+		return appInfoMapper.updateAppInfoStatusOn(id);
+	}
+
+	@Override
+	public int updateAppInfoStatusDown(Integer id) {
+		return appInfoMapper.updateAppInfoStatusDown(id);
+	}
+
 }

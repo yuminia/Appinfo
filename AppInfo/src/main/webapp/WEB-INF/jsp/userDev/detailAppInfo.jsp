@@ -137,14 +137,45 @@
 							</div>
 						</div>
 						<div class="ln_solid"></div>
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-3">
-								<a href="javascript:;pageTo('appInfo/AppList');" class="btn btn-primary">返回</a>
-							</div>
-						</div>
+						
 					</form>
 
+					<div class="x_title">
+				
+						<h2>历史版本列表</h2>
+						<div class="x_content">
+							<table border="1" align="center" width="1000" height="180">
+								<tr>
+									<th>软件名称</th>
+									<th>版本号</th>
+									<th>版本大小(单位M)</th>
+									<th>发布状态</th>
+									<th>apk文件下载</th>
+									<th>最近更新时间</th>
+								</tr>
+								<c:forEach items="${appVersionList }" var="item">
+									<tr>
+										<td>${appInfo.softwareName }</td>
+										<td>${item.versionNo }</td>
+										<td>${item.versionSize }</td>
+										<td>${item.publishStatus }</td>
+										<td>${item.apkLocPath }</td>
+										<td>${item.modifyDate }</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				
 				</div>
+				
+				<div class="form-group">
+					<div class="col-md-6 col-md-offset-3">
+						<a href="javascript:;pageTo('appInfo/AppList');" class="btn btn-primary">返回</a>
+					</div>
+				</div>
+				
 			</div>
 		</div>
 	</div>

@@ -140,6 +140,15 @@
 		select * from app_info where APKName=#{APKName}
 	</select>
 	
+	<!--/**修改 APP状态为上架*/ public int updateAppInfoStatusOn(Integer id); -->
+	<update id="updateAppInfoStatusOn" parameterType="int">
+		update app_info set status=4 
+		where id=#{id}
+	</update>
 	
-	
+	<!--/**修改 APP状态为下架*/ public int updateAppInfoStatusDown(Integer id); -->
+	<update id="updateAppInfoStatusDown" parameterType="AppInfo">
+		update app_info set status=5 
+		where id=#{id}
+	</update>
 </mapper>

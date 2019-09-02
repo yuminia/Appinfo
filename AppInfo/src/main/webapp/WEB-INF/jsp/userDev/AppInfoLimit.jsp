@@ -62,6 +62,31 @@
                                 	操 &nbsp;&nbsp; 作 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" >
+                            <!--/**int(30) APP状态<br>
+					 		* 1 待审核<br>* 2 审核未通过<br>* 3 审核通过<br>* 4 已上架<br>* 5 已下架*/-->
+	                            <c:if test="${item.status==3 }">
+									<li>
+	                                	<a onclick="return doDelConfirm('上架名为:${item.softwareName }的APP,请确认!');" 
+	                                	 href="javascript:;pageToGet('appInfo/updateAppInfoStatus?type=up&id=${item.id }');">上架</a>
+	                                </li>
+	                                <li>
+	                                	<a onclick="return doDelConfirm('下架名为:${item.softwareName }的APP,请确认!');" 
+	                                	 href="javascript:;pageToGet('appInfo/updateAppInfoStatus?type=down&id=${item.id }');">下架</a>
+	                                </li>
+								</c:if>
+	                            <c:if test="${item.status==5 }">
+									<li>
+	                                	<a  onclick="return doDelConfirm('上架名为:${item.softwareName }的APP,请确认!');" 
+	                                	 href="javascript:;pageToGet('appInfo/updateAppInfoStatus?type=up&id=${item.id }');">上架</a>
+	                                </li>
+								</c:if>
+                                <c:if test="${item.status ==4 }">
+									<li>
+	                                	<a onclick="return doDelConfirm('下架名为:${item.softwareName }的APP,请确认!');" 
+	                                	 href="javascript:;pageToGet('appInfo/updateAppInfoStatus?type=down&id=${item.id }');">下架</a>
+	                                </li>
+								</c:if>
+                                
                                 <li>
                                 	<a href="javascript:;pageToGet('version/addAppVersionPage?appId=${item.id }');">新增版本</a>
                                 </li>
@@ -78,7 +103,7 @@
                                 
                                 <li>
 									<%--<a href="javascript:;return pageToGet('appInfo/deleteAppInfo?id=${item.id }');">删除</a> --%>
-									<a onclick="return doDelConfirm();" href="javascript:;pageToGet('appInfo/deleteAppInfo?id=${item.id }')">删除</a>
+									<a onclick="return doDelConfirm('你真的想删除吗?');" href="javascript:;pageToGet('appInfo/deleteAppInfo?id=${item.id }')">删除</a>
                                 </li>
                             </ul>
                         </div>
