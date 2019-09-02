@@ -35,5 +35,9 @@ public class UserDevServiceImpl implements UserDevService{
 	public UserDev getUserDevById(Integer id) {
 		return userDevMapper.getUserDevById(id);
 	}
+	
+	public int updateUserDevPassword(UserDev userDev) {
+		return userDevMapper.updateUserDevPassword(userDev);
+	}
 
 }

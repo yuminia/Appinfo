@@ -27,7 +27,8 @@
 
 	<!-- /**根据ID查询APP信息*/public Integer getAppInfoById(Integer id); -->
 	<select id="getAppInfoById" parameterType="int" resultType="AppInfo">
-		select * from app_info where id=#{id}
+		select a.*,(select Max(versionNo) from app_version where appId=a.id) versionNo 
+		from app_info a where a.id=#{id}
 	</select>
 
 	<!-- /** 增加APP信息*/public Integer addAppInfo(AppInfo appInfo); -->
@@ -138,6 +139,7 @@
 	<select id="getAppInfoByAPKName" parameterType="string" resultType="AppInfo">
 		select * from app_info where APKName=#{APKName}
 	</select>
+	
 	
 	
 </mapper>

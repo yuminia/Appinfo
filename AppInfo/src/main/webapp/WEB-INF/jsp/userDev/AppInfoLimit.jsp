@@ -63,10 +63,10 @@
                             </button>
                             <ul class="dropdown-menu" role="menu" >
                                 <li>
-                                	<a href="#">新增版本</a>
+                                	<a href="javascript:;pageToGet('version/addAppVersionPage?appId=${item.id }');">新增版本</a>
                                 </li>
                                 <li>
-                                	<a href="#">修改版本</a>
+                                	<a href="javascript:;pageToGet('version/updateAppVersionPage?appId=${item.id }');">修改版本</a>
                                 </li>
                                 <li>
 									<%--<a href="<%=request.getContextPath() %>/app/appInfo/updateAppInfo?id=${item.id }">修改</a> --%>

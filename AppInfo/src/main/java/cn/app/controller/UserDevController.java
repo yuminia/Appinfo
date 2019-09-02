@@ -47,6 +47,93 @@ public class UserDevController {
 	}*/
 	
 	
+	/**userDev修改密码提交   updateUserDevPasswordSubmit  */
+	@RequestMapping(value="updateUserDevPasswordSubmit",method=RequestMethod.POST)
+	@ResponseBody
+	public String updateUserDevPasswordSubmit(HttpServletRequest request,
+			@RequestParam(value="oldDevPassword",required=false,defaultValue="")String oldDevPassword,
+			@RequestParam(value="password1",required=false,defaultValue="")String password1,
+			@RequestParam(value="password2",required=false,defaultValue="")String password2){
+		System.out.println("oldDevPassword:"+oldDevPassword);
+		System.out.println("password1:"+password1);
+		System.out.println("password2:"+password2);
+		int res = 0;
+		//session 获取登录的UserDev
+		UserDev dbUserDev = (UserDev) request.getSession().getAttribute("loginUserDev");
+		//修改前 确认原密码与登录的UserDev 的密码相同
+		if(oldDevPassword.equals(dbUserDev.getDevPassword()) ){
+			//修改前确认新密码与 确认新密码相同
+			if( password1.equals(password2) ){
+				dbUserDev.setDevPassword(password2);
+				res = userDevService.updateUserDevPassword(dbUserDev);
+			}
+		}
+		if(res == 1){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+	
+	/**userDev修改资料提交   updateUserDevPageSubmit  */
+	@RequestMapping(value="updateUserDevPageSubmit",method=RequestMethod.POST)
+	@ResponseBody
+	public String updateUserDevPageSubmit(HttpServletRequest request,
+			@RequestParam(value="oldDevPassword",required=false,defaultValue="")String oldDevPassword,
+			@RequestParam(value="password1",required=false,defaultValue="")String password1,
+			@RequestParam(value="password2",required=false,defaultValue="")String password2){
+		System.out.println("oldDevPassword:"+oldDevPassword);
+		System.out.println("password1:"+password1);
+		System.out.println("password2:"+password2);
+		int res = 0;
+		//session 获取登录的UserDev
+		UserDev dbUserDev = (UserDev) request.getSession().getAttribute("loginUserDev");
+		//修改前 确认原密码与登录的UserDev 的密码相同
+		if(oldDevPassword.equals(dbUserDev.getDevPassword()) ){
+			//修改前确认新密码与 确认新密码相同
+			if( password1.equals(password2) ){
+				dbUserDev.setDevPassword(password2);
+				res = userDevService.updateUserDevPassword(dbUserDev);
+			}
+		}
+		if(res == 1){
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+	
+	/**userDev修改资料提交   updateUserDevSubmit  */
+	@RequestMapping(value="updateUserDevSubmit",method=RequestMethod.POST)
+	@ResponseBody
+	public String updateUserDevSubmit(HttpServletRequest request,UserDev userDev){
+		
+		System.out.println("userDev:-------"+ userDev);
+		int res = 0;
+		//session 获取登录的UserDev
+		UserDev dbUserDev = (UserDev) request.getSession().getAttribute("loginUserDev");
+		userDev.setId(dbUserDev.getId());
+		res = userDevService.updateUserDev(userDev);
+		if(res == 1){
+			request.getSession().setAttribute("loginUserDev", userDev);
+			return "true";
+		}else{
+			return "false";
+		}
+	}
+	
+	/**userDev修改密码页面跳转   updateUserDevPasswordPage  */
+	@RequestMapping(value="updateUserDevPasswordPage",method=RequestMethod.GET)
+	public String updateUserDevPasswordPage(){
+		return "userDev/updateUserDevPasswordPage";
+	}
+	
+	/**userDev修改资料页面跳转   updateUserDevPage  */
+	@RequestMapping(value="updateUserDevPage",method=RequestMethod.GET)
+	public String updateUserDev(){
+		return "userDev/updateUserDev";
+	}
+	
 	/** 登录成功页面 main.jsp 备用get提交 */
 	@RequestMapping(value="main1",method=RequestMethod.GET)
 	public String main1(@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,

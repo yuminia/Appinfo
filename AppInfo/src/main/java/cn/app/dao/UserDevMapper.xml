@@ -41,11 +41,8 @@
 		update dev_user 
 		set devCode=#{devCode},
 			devName=#{devName},
-			devPassword=#{devPassword},
 			devEmail=#{devEmail},
-			devInfo=#{devInfo},
-			modifyBy=#{modifyBy},
-			modifyDate=#{modifyDate} 
+			devInfo=#{devInfo} 
 		where id=#{id}
 	</update>
 	
@@ -55,4 +52,10 @@
 		where id=#{id}
 	</select>
 	
+	<!-- /** 根据id 修改用户密码 */public int updateUserDevPassword((UserDev userDev)); -->
+	<update id="updateUserDevPassword" parameterType="UserDev">
+		update dev_user 
+		set devPassword=#{devPassword} 
+		where id=#{id}
+	</update>
 </mapper>

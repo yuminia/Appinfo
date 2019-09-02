@@ -213,7 +213,7 @@
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-3">
 								<a href="javascript:;pageTo('appInfo/AppList');" class="btn btn-primary">返回</a>
-								<button id="send" type="submit" class="btn btn-success">保存</button>
+								<button id="send" type="submit" class="btn btn-success">修改</button>
 							</div>
 						</div>
 					</form>
