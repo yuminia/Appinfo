@@ -61,4 +61,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminMapper.appInfoAudit(appInfo);
 	}
 
+	@Override
+	public Integer vesionAudit(AppVersion appVersion) {
+		
+		return adminMapper.vesionAudit(appVersion);
+	}
+
 }

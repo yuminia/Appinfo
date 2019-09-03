@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
 <div class="x_content" id="AppInfoTable">
 	<table id="example"
 		class="table table-striped responsive-utilities jambo_table">
@@ -55,8 +54,35 @@
 						<td class="a-right a-right ">${item.downloads }</td>
 					</c:if>
 					<td class="a-right a-right ">${item.versionNo }</td>
-					<td class=" last"><a class="btn btn-xs btn-warning" href="#">修改</a>
-						<a class="btn btn-xs btn-danger" href="#">删除</a></td>
+					<td class="last">
+					<!-- Split button -->
+						
+                       	<div class="btn-group">
+                            <button type="button" class="btn btn-xs btn-danger dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                	操 &nbsp;&nbsp; 作 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" >
+                                <li>
+                                	<a href="javascript:;pageToGet('version/addAppVersionPage?appId=${item.id }');">新增版本</a>
+                                </li>
+                                <li>
+                                	<a href="javascript:;pageToGet('version/updateAppVersionPage?appId=${item.id }');">修改版本</a>
+                                </li>
+                                <li>
+									<%--<a href="<%=request.getContextPath() %>/app/appInfo/updateAppInfo?id=${item.id }">修改</a> --%>
+                                	<a href="javascript:;pageToGet('appInfo/updateAppInfo?id=${item.id }');">修改</a>
+                                </li>
+                                <li>
+                                	<a href="javascript:;pageToGet('appInfo/detailAppInfo?id=${item.id }');">查看</a>
+                                </li>
+                                
+                                <li>
+									<%--<a href="javascript:;return pageToGet('appInfo/deleteAppInfo?id=${item.id }');">删除</a> --%>
+									<a onclick="return doDelConfirm();" href="javascript:;pageToGet('appInfo/deleteAppInfo?id=${item.id }')">删除</a>
+                                </li>
+                            </ul>
+                        </div>
+					</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -84,12 +110,13 @@
 			</c:forEach>
 
 			<c:if test="${ph.currentPage != ph.totalPageCount }">
-				<li><a href="javascript:pageAppInfoList(${ph.currentPage+1 });"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
+				<li>
+					<a href="javascript:pageAppInfoList(${ph.currentPage+1 });" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
 			</c:if>
 
 		</ul>
 	</nav>
 </div>
-</html>

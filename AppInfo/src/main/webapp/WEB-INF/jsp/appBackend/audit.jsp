@@ -120,8 +120,8 @@
                                         <div class="ln_solid"></div>
                                         <div class="form-group">
                                             <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
-                                            	<a  class="btn btn-success" href="javascript:doAudit(${AppInfo.id },3);">审核通过</a>
-                                            	<a  class="btn btn-warning" href="javascript:doAudit(${AppInfo.id },2);">审核不通过</a>
+                                            	<a  class="btn btn-success" href="javascript:doAudit(${AppInfo.id },3,2);">审核通过</a>
+                                            	<a  class="btn btn-warning" href="javascript:doAudit(${AppInfo.id },2,1);">审核不通过</a>
                                                 <a  class="btn btn-primary" href="${pageContext.request.contextPath}/app/Backend/admin/main">返回</a>
                                             </div>
                                         </div>
@@ -182,8 +182,8 @@
             </div>
 
 <script type="text/javascript">
-	function doAudit(id,status){
-		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/doAudit",{"id":id,"status":status});
+	function doAudit(id,status,publishStatus){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/doAudit",{"id":id,"status":status,"publishStatus":publishStatus});
 	}
 </script>
 </body>

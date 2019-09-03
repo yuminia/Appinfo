@@ -53,14 +53,22 @@ public class AppBackendController {
 	}
 	
 	@RequestMapping("doAudit")
-	public String doAudit(HttpServletRequest request,Integer id,Integer status){
+	public String doAudit(HttpServletRequest request,Integer id,Integer status,Integer publishStatus){
 		AppInfo appInfo = adminService.getAppInfoById(id);
+		AppVersion appVersion = adminService.getAppVersionById(appInfo.getVersionId());
 		System.out.println("获取到app：============================》"+appInfo+
 				"/t 状态更改："+status);
+		System.out.println("获取到appVersion：============================》"+appVersion+
+				"/t 状态更改："+publishStatus);
 		appInfo.setStatus(status);
+		if (publishStatus==null) {
+			return "redirect:appList";
+		}
 		int result=adminService.appInfoAudit(appInfo);
+		int vresult = adminService.vesionAudit(appVersion);
 		request.setAttribute("result", result);
 		System.out.println("更改条数：============================》"+result);
+		System.out.println("更改条数：============================》"+vresult);
 		return "redirect:appList";
 	}
 	

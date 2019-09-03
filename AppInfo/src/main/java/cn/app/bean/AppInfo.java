@@ -66,6 +66,7 @@ public class AppInfo {
 	private String categoryName3;
 	private String flatformName;
 	private String versionNo;
+	private String publishStatus;
 	
 	
 	public String getVersionNo() {
@@ -254,5 +255,11 @@ public class AppInfo {
 				+ creationDate + ", modifyBy=" + modifyBy + ", modifyDate=" + modifyDate + ", logoPicPath="
 				+ logoPicPath + ", logoLocPath=" + logoLocPath + ", versionId=" + versionId + "]";
 	}
-	 
+	public String getPublishStatus() {
+		return publishStatus;
+	}
+	public void setPublishStatus(String publishStatus) {
+		this.publishStatus = publishStatus;
+	}
+	
 }

@@ -30,7 +30,7 @@
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="index.html" class="site_title">
 	                        <i class="fa fa-paw"></i> 
-	                        <span>APP 后台管理</span>
+	                        <span>APP开发平台管理</span>
                      	</a>
                     </div>
                     <div class="clearfix"></div>
@@ -55,13 +55,6 @@
                         <div class="menu_section">
                             <h3>高级管理员</h3>
                             <ul class="nav side-menu">
-                                <li><a><i class="fa fa-home"></i> APP管理 <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li>
-                                        	<a href="javascript:;pageTo('appInfo/AppList');">App列表</a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 <li>	
                                 	<a>
                                 		<i class="fa fa-edit"></i> 用户管理 
@@ -72,20 +65,33 @@
                                         	<a href="javascript:;pageToMainTypeGet('userDev/main');">欢迎页面</a>
                                         </li>
                                         <li>
-                                        	<a href="form_advanced.html">管理者用户</a>
+                                        	<a href="form_advanced.html">上传/修改 头像</a>
+                                        </li>
+                                        <li>
+                                        	<a href="javascript:;pageToGet('userDev/updateUserDevPage');">修改资料</a>
+                                        </li>
+                                        <li>
+                                        	<a href="javascript:;pageToGet('userDev/updateUserDevPasswordPage');">修改密码</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li>
-                                	<a>
-                                		<i class="fa fa-bug"></i>基础数据维护
-                                		<span class="fa fa-chevron-down"></span>
-                                	</a>
+                                <li><a><i class="fa fa-home"></i> APP管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a href="e_commerce.html">E-commerce</a>
+                                        <li>
+                                        	<a href="javascript:;pageTo('appInfo/AppList');">App列表</a>
                                         </li>
                                     </ul>
                                 </li>
+<!--                                 <li> -->
+<!--                                 	<a> -->
+<!--                                 		<i class="fa fa-bug"></i>基础数据维护 -->
+<!--                                 		<span class="fa fa-chevron-down"></span> -->
+<!--                                 	</a> -->
+<!--                                     <ul class="nav child_menu" style="display: none"> -->
+<!--                                         <li><a href="e_commerce.html">E-commerce</a> -->
+<!--                                         </li> -->
+<!--                                     </ul> -->
+<!--                                 </li> -->
                             </ul>
                         </div>
                     </div>
@@ -138,7 +144,7 @@
                             <li role="presentation" class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="badge bg-green">6</span>
+                                    <span class="badge bg-green">1</span>
                                 </a>
                                 <ul id="menu1" class="dropdown-menu list-unstyled msg_list animated fadeInDown" role="menu">
                                     <li>
@@ -185,6 +191,54 @@
 							<div class="clearfix"></div>
 						</div>
 	                    
+	                    <div class="x_content">
+		                    <div class="animate form">
+				                <section class="login_content">
+				                	<form id="updateUserDev" class="form-horizontal form-label-left" novalidate 
+				                		action="javascrpt:;" method="post">
+				                        <h1>UserDev 资料详情</h1>
+				                        <div class="item form-group" style="position: relative;">
+				                        	<label class="control-label col-md-3 col-sm-3 col-xs-12" for="devCode">用户编号 <span class="required">*</span></label>
+				                        	<div class="col-md-6 col-sm-6 col-xs-12">
+					                        	 ${loginUserDev.devCode }
+				                        	</div>
+				                        </div>
+				                        
+				                        <div class="item form-group">
+				                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="devName">登录名 <span class="required">*</span></label>
+				                             <div class="col-md-6 col-sm-6 col-xs-12">
+				                                  ${loginUserDev.devName }
+				                             </div>
+				                         </div>
+				                        <div class="item form-group">
+				                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="devEmail">邮箱 <span class="required">*</span>
+				                             </label>
+				                             <div class="col-md-6 col-sm-6 col-xs-12">
+				                                 ${loginUserDev.devEmail }
+				                             </div>
+				                         </div>
+				                        <div class="item form-group">
+				                             <label class="control-label col-md-3 col-sm-3 col-xs-12" for="devInfo">开发者信息<span class="required">*</span>
+				                             </label>
+				                             <div class="col-md-6 col-sm-6 col-xs-12">
+												${loginUserDev.devInfo }
+				                             </div>
+				                        </div>
+				                        
+				                        
+				                        <div class="clearfix"></div>
+				                        
+				                        <div class="separator">
+				                            <br />
+				                            <div>
+				                                <h1><i class="fa fa-paw" style="font-size: 26px;"></i> App开发平台</h1>
+				                            </div>
+				                        </div>
+				                    </form>
+				                </section>
+				            </div>
+	                    </div>
+	                    
 					</div>
                     
         <script type="text/javascript">
@@ -193,10 +247,17 @@
         				{"pageIndex":1});
         	}
         	
+        	function pageToGet(page){
+        		$("#contentDiv").load("${pageContext.request.contextPath}/app/"+page);
+        	}
+        	
         	function pageToMainTypeGet(page){
         		$("body").load("${pageContext.request.contextPath}/app/"+page);
         	}
 	      	
+        	
+        	
+        	
         </script>
                      
                 </div>

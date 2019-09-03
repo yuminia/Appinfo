@@ -14,6 +14,14 @@ import cn.app.utils.PageHelper;
 public interface AdminService {
 	
 	/**
+	 * 更改发布状态
+	* @author yuminia
+	* @return Integer
+	* @param AppVersion appVersion
+	*/
+	public Integer vesionAudit(AppVersion appVersion);
+	
+	/**
 	 * 审核
 	* @author yuminia
 	* @return Integer

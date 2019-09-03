@@ -31,4 +31,7 @@ public interface UserDevService {
 	/** 根据主键id 查询用户 */
 	public UserDev getUserDevById(Integer id);
 	
+	/** 根据id 修改用户密码 */
+	public int updateUserDevPassword(UserDev userDev);
+	
 }

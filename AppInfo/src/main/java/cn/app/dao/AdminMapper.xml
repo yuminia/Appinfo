@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.app.dao.AdminMapper">
 	
+	
+	<!-- 更改发布状态 -->
+	<update id="vesionAudit" parameterType="AppVersion">
+		update app_version set
+		
+		publishStatus=#{publishStatus}
+		
+		where id=#{id}
+	</update>
+	
 	<!-- 审核 -->
 	<update id="appInfoAudit" parameterType="AppInfo">
 		update app_info set
@@ -20,9 +30,9 @@
 			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
 			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
 			status,logoPicPath,logoLocPath
-			,downloads,versionNo 
+			,downloads,versionNo,versionId 
 		from app_info i inner join app_version v 
-		where i.versionId=v.id and i.id=#{id}
+		where i.versionId=v.id and i.id=#{id} and i.status=1
 	</select>
 	<!-- (case status 
 				when '1' then '待审核'   
@@ -43,9 +53,8 @@
 	<!-- 根据id获取app版本信息 -->
 	<select id="getAppVersionById" parameterType="int" resultType="AppVersion">
 		select * 
-		from app_version v
-		where appId=#{id} and 
-		versionNo = (select MAX(versionNo) from app_version where v.appId=appId)
+		from app_version
+		where id=#{id}
 	</select>
 	
 	<!-- /**分页 并 模糊查询 APP信息*/public List<AppInfo> getAppInfoLikePageHelper(Map<String, Object> map); -->
@@ -57,11 +66,11 @@
 			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
 			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
 			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
-			versionId,(select versionNo from app_version where id=versionId) versionNo,
+			versionId,(select MAX(versionNo) from app_version where id=versionId) versionNo,
 			status,
 			downloads 
 		from app_info i , app_version v 
-		where i.versionId=v.id 
+		where i.versionId=v.id  and i.status=1
 		<if test="softwareName!=null and softwareName!=''">
 			and softwareName like concat('%',#{appInfo.softwareName},'%') 
 		</if>
@@ -89,6 +98,7 @@
 		select 
 			count(1) 
 		from app_info 
+		where status=1
 		<trim prefix="where" prefixOverrides="and">
 			<if test="softwareName!=null and softwareName!=''">
 				and softwareName like concat('%',#{softwareName},'%') 

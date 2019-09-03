@@ -26,12 +26,9 @@
 	</select>
 
 	<!-- /**根据ID查询APP信息*/public Integer getAppInfoById(Integer id); -->
-	<select id="getAppInfoById" parameterType="int">
-		select
-			softwareName,APKName,softwareSize,flatformId,categoryLevel1,categoryLevel2,categoryLevel3,
-			status,downloads,versionNo 
-		from app_info inner app_version version 
-		where info.versionId=version.id and id=#{id}
+	<select id="getAppInfoById" parameterType="int" resultType="AppInfo">
+		select a.*,(select Max(versionNo) from app_version where appId=a.id) versionNo 
+		from app_info a where a.id=#{id}
 	</select>
 
 	<!-- /** 增加APP信息*/public Integer addAppInfo(AppInfo appInfo); -->
@@ -40,7 +37,7 @@
 			`softwareName`,`APKName`,
 			`supportROM`,`interfaceLanguage`,
 			`softwareSize`,`updateDate`,
-			`devId`,`appInfo`,
+			`devId`,`appInfo`,`downloads`,
 			`status`,`onSaleDate`,
 			`categoryLevel1`,`categoryLevel2`,`categoryLevel3`,
 			`createdBy`,`creationDate`,`flatformId`,
@@ -49,7 +46,7 @@
 			#{softwareName},#{APKName},
 			#{supportROM},#{interfaceLanguage},
 			#{softwareSize},#{updateDate},
-			#{devId},#{appInfo},
+			#{devId},#{appInfo},#{downloads},
 			#{status},#{onSaleDate},
 			#{categoryLevel1},#{categoryLevel2},#{categoryLevel3},
 			#{createdBy},#{creationDate},#{flatformId},
@@ -59,17 +56,20 @@
 
 	<!-- /** 修改APP信息*/public Integer updateAppInfo(AppInfo appInfo); -->
 	<update id="updateAppInfo" parameterType="AppInfo">
-		update app_info set
-		softwareName=#{softwareName},APKName=#{APKName},supportROM=#{supportROM},interfaceLanguage=#{interfaceLanguage},
-		softwareSize=#{softwareSize},updateDate=#{updateDate},devId=#{devId},appInfo=#{appInfo},onSaleDate=#{onSaleDate},
-		categoryLevel1=#{categoryLevel1},categoryLevel2=#{categoryLevel2},categoryLevel3=#{categoryLevel3},createdBy=#{createdBy},
-		creationDate=#{creationDate},logoPicPath=#{logoPicPath},logoLocPath=#{logoLocPath}
+		update app_info set 
+			softwareName=#{softwareName},APKName=#{APKName},
+			supportROM=#{supportROM},interfaceLanguage=#{interfaceLanguage},
+			softwareSize=#{softwareSize},updateDate=#{modifyDate},
+			devId=#{devId},appInfo=#{appInfo},onSaleDate=#{onSaleDate},
+			categoryLevel1=#{categoryLevel1},categoryLevel2=#{categoryLevel2},categoryLevel3=#{categoryLevel3},
+			logoPicPath=#{logoPicPath},logoLocPath=#{logoLocPath},
+			modifyBy=#{modifyBy},modifyDate=#{modifyDate} 
+		where id=#{id}
 	</update>
 	
-	<!-- /**根据ID 删除APP信息*/public Integer deleteAppInfo(AppInfo appInfo); -->
+	<!-- /**根据ID 删除APP信息*/public Integer deleteAppInfo(Integer id); -->
 	<delete id="deleteAppInfo" parameterType="int">
-	delete from app_info
-	where id=#{id}
+		delete from app_info where id=#{id}
 	</delete>
 	
 	
@@ -77,7 +77,7 @@
 	<select id="getAppInfoLikePageHelper" parameterType="map" 
 		resultType="AppInfo">
 		select 
-			softwareName,APKName,softwareSize,i.createdBy,
+			i.id,softwareName,APKName,softwareSize,i.createdBy,
 			flatformId,(select flatformName from flatform where id=flatformId) flatformName,
 			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
 			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
@@ -85,9 +85,8 @@
 			versionId,(select Max(versionNo) from app_version where appid=versionId) versionNo,
 			status,
 			downloads 
-		from app_info i , app_version v 
-		where i.versionId=v.id 
-		and  i.createdBy=#{createId}
+		from app_info i 
+		where i.createdBy=#{createId}
 		<if test="appInfo.softwareName!=null and appInfo.softwareName!=''">
 			and softwareName like concat('%',#{appInfo.softwareName},'%') 
 		</if>
@@ -135,4 +134,12 @@
 				and flatformId=#{appInfo.flatformId} 
 			</if>
 	</select>
+	
+	<!-- /**根据APKName 查询APP信息*/public AppInfo getAppInfoByAPKName(String APKName); -->
+	<select id="getAppInfoByAPKName" parameterType="string" resultType="AppInfo">
+		select * from app_info where APKName=#{APKName}
+	</select>
+	
+	
+	
 </mapper>
