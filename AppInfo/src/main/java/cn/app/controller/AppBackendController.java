@@ -43,9 +43,50 @@ public class AppBackendController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	//添加管理员
+	@RequestMapping("addAdmin")
+	public String  addAdmin(HttpServletRequest request,Integer createdBy){
+		request.setAttribute("createdBy", createdBy);
+		return "appBackend/addAdmin";
+	}
+	//提交添加
+	@RequestMapping("doAddAdmin")
+	public String  doAddAdmin(UserBackend userBackend){
+		int result=userBackendService.addUserBackend(userBackend);
+		System.out.println("添加用户：============================》"+userBackend);
+		System.out.println("添加条数：==================="+result);
+		return "appBackend/adminList";
+	}
+	//修改管理员
+	@RequestMapping(value="updAdmin",method=RequestMethod.POST)
+	public String  updAdmin(HttpServletRequest request,Integer id){
+		UserBackend userBackend=userBackendService.getUserBackendById(id);
+		request.setAttribute("userBackend", userBackend);
+		return "appBackend/updAdmin";
+	}
+	//修改提交
+	@RequestMapping(value="doUpdAdmin",method=RequestMethod.POST)
+	public String  doUpdAdmin(UserBackend userBackendresult){
+		UserBackend userBackend =userBackendService.getUserBackendById(userBackendresult.getId());
+		userBackend.setUserCode(userBackendresult.getUserCode());
+		userBackend.setUserName(userBackendresult.getUserName());
+		userBackend.setModifyBy(userBackendresult.getModifyBy());
+		int result=userBackendService.updateUserBackend(userBackend);
+		System.out.println("修改结果：============================》"+userBackendresult);
+		System.out.println("修改用户：============================》"+userBackend);
+		System.out.println("修改条数：==================="+result);
+		return "redirect:adminList";
+	}
+	//修改提交
+		@RequestMapping("delAdmin")
+		public String  delAdmin(Integer id){
+			userBackendService.delUserBackend(id);
+			return "redirect:adminList";
+		}
+	
 	//管理员主页
 	@RequestMapping("main")
-	public String  main(HttpServletRequest request){
+	public String  main(){
 		return "appBackend/main";
 	}
 	
@@ -54,21 +95,21 @@ public class AppBackendController {
 	public String audit(HttpServletRequest request,Integer id){
 		AppInfo appInfo = adminService.getAppInfoById(id);
 		AppVersion appVersion = adminService.getAppVersionById(id);
-		System.out.println("获取到app：============================》"+appInfo);
+		System.out.println("/n获取到app：============================》"+appInfo);
 		System.out.println("获取到app版本信息：============================》"+appVersion);
 		request.setAttribute("AppInfo", appInfo);
 		request.setAttribute("AppVersion", appVersion);
 		return "appBackend/audit";
 	}
-	
+	//审核处理
 	@RequestMapping("doAudit")
 	public String doAudit(HttpServletRequest request,Integer id,Integer status,Integer publishStatus){
 		AppInfo appInfo = adminService.getAppInfoById(id);
 		AppVersion appVersion = adminService.getAppVersionById(appInfo.getVersionId());
 		System.out.println("获取到app：============================》"+appInfo+
-				"/t 状态更改："+status);
+				" 状态更改："+status);
 		System.out.println("获取到appVersion：============================》"+appVersion+
-				"/t 状态更改："+publishStatus);
+				" 状态更改："+publishStatus);
 		appInfo.setStatus(status);
 		if (publishStatus==null) {
 			return "redirect:appList";
@@ -82,7 +123,8 @@ public class AppBackendController {
 	}
 	
 	@RequestMapping("adminList")
-	public String adminList(HttpServletRequest request,@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
+	public String adminList(HttpServletRequest request,
+			@RequestParam(value="pageIndex",required=false,defaultValue="1")String pageIndex,
 			UserBackend userBackend){
 		int currentPage = Integer.parseInt(pageIndex);
 		PageHelper ph = new PageHelper();
@@ -96,8 +138,8 @@ public class AppBackendController {
 		}
 		ph.setCurrentPage(currentPage);
 		
-		List<UserBackend> adminList = userBackendService.getUserBackendList(userBackend);
-		System.out.println("appInfoList============================》" + adminList);
+		List<UserBackend> adminList = userBackendService.getUserBackendOfPageHelper(ph, userBackend);
+		System.out.println("adminList============================》" + adminList);
 		request.setAttribute("adminList", adminList);
 		request.setAttribute("ph", ph);
 		return "appBackend/adminList";

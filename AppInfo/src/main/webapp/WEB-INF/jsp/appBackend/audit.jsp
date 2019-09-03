@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AppInfo</title>
+<title>App开发平台</title>
 <!-- Bootstrap core CSS -->
 <link href="<%=request.getContextPath()%>/static/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -122,7 +122,7 @@
                                             <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
                                             	<a  class="btn btn-success" href="javascript:doAudit(${AppInfo.id },3,2);">审核通过</a>
                                             	<a  class="btn btn-warning" href="javascript:doAudit(${AppInfo.id },2,1);">审核不通过</a>
-                                                <a  class="btn btn-primary" href="${pageContext.request.contextPath}/app/Backend/admin/main">返回</a>
+                                                <a id="back" class="btn btn-primary" href="">返回</a>
                                             </div>
                                         </div>
 
@@ -185,6 +185,9 @@
 	function doAudit(id,status,publishStatus){
 		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/doAudit",{"id":id,"status":status,"publishStatus":publishStatus});
 	}
+	$("#back").click(function (){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/appList");
+	});
 </script>
 </body>
 </html>

@@ -100,7 +100,6 @@
 			count(1) 
 		from app_info 
 		where status=1
-		<trim prefix="where" prefixOverrides="and">
 			<if test="softwareName!=null and softwareName!=''">
 				and softwareName like concat('%',#{softwareName},'%') 
 			</if>
@@ -119,7 +118,6 @@
 			<if test="softwareName!=null and softwareName!=''">
 				and flatformId=#{flatformId} 
 			</if>
-		</trim>
 		
 	</select>
 </mapper>

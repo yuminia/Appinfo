@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,7 @@
                          <div class="x_panel" style="height:600px;">
                              <div class="x_title">
                              	 <c:if test="${sessionScope.loginUserBackend.userType == 1}" var="lv">
-                             	 	<a class="btn btn-success btn-sm" href="javascript:addAdmin(${sessionScope.loginUserBackend.userType});">添加管理员</a>
+                             	 	<a class="btn btn-success btn-sm" href="javascript:addAdmin(${sessionScope.loginUserBackend.id});">添加管理员</a>
                              	 </c:if>
                              	 <c:if test="${!lv }">
                              	 	<a class="btn btn-default buttonDisabled" href="javascript:;">添加管理员</a>
@@ -53,12 +54,12 @@
                                              <td class=" "><c:out value="${admin.userName}" default="暂无数据"/></td>
                                              <td class=" "><c:out value="${admin.userType}" default="暂无数据"/></td>
                                              <td class=" "><c:out value="${admin.createdBy}" default="-\-"/></td>
-                                             <td class=" "><c:out value="${admin.creationDate}" default="暂无数据"/></td>
+                                             <td class=" "><fmt:formatDate pattern='yyyy-MM-dd HH:mm:ss'  value='${admin.creationDate}' /></td>
                                              <td class="a-right a-right "><c:out value="${admin.modifyBy}" default="-\-"/></td>
-                                             <td class="a-right a-right "><c:out value="${admin.modifyDate}" default="-\-"/></td>
+                                             <td class="a-right a-right "><fmt:formatDate pattern='yyyy-MM-dd HH:mm:ss'  value='${admin.modifyDate}' /></td>
                                              <td class=" last">
                                              	<c:if test="${lv || admin.id==sessionScope.loginUserBackend.id}" var="updlv">
-				                             	 	<a class="btn btn-xs btn-warning" href="javascript:updAdmin(${admin.id });">修改</a>             
+				                             	 	<a class="btn btn-xs btn-warning" href="javascript:;">修改</a><!-- updAdmin(${admin.id }) -->             
 				                             	 </c:if>
                                              	<c:if test="${lv && admin.id!=7}" >
 				                             	 	<a class="btn btn-xs btn-warning" href="javascript:delAdmin(${admin.id });">删除</a>
@@ -123,14 +124,18 @@
 	function adminList(pageIndex){
 		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList",{"pageIndex":pageIndex});
 		};
-	function addAdmin(userType){
-			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/addAdmin",{"userType":userType});
+	function addAdmin(id){
+			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/addAdmin",{"id":id});
 	};
 	function updAdmin(id){
 		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/updAdmin",{"id":id});
 	};
-	function delAdmin(pageIndex){
-		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/delAdmin",{"id":id});
+	function delAdmin(id){
+		var r = confirm("请确认删除！");
+		if (r == true) {
+			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/delAdmin",{"id":id});
+		}
+		
 	};
 		/* ${pageContext.request.contextPath}/app/Backend/admin/updAdmin?id=${admin.id}
 			${pageContext.request.contextPath}/app/Backend/admin/delAdmin?id=${admin.id}

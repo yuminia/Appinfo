@@ -3,6 +3,7 @@ package cn.app.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -80,6 +81,6 @@ public interface UserBackendMapper {
 	* @return List<UserBackend>
 	* @param PageHelper ph,UserBackend userBackend
 	*/
-	public List<UserBackend> getUserBackendOfPageHelper(PageHelper ph,UserBackend userBackend);
+	public List<UserBackend> getUserBackendOfPageHelper(@Param("ph")PageHelper ph,@Param("userBackend")UserBackend userBackend);
 
 }

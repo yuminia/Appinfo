@@ -63,8 +63,8 @@
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> 用户管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
-                                        <li><a id="userList" href="javascript:;">开发者用户</a>
-                                        </li>
+                                        <!-- <li><a id="userList" href="javascript:;">开发者用户</a>
+                                        </li> -->
                                         <li><a id="adminList" href="javascript:;">管理者用户</a> 
                                         </li>
                                     </ul>
@@ -101,7 +101,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
                                     <li>
-                                    	<a href="<%=request.getContextPath() %>/app/index">
+                                    	<a href="<%=request.getContextPath() %>/app/Backend/userBackendlogout">
                                     		<i class="fa fa-sign-out pull-right"></i> 注销
                                     	</a>
                                     </li>

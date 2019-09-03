@@ -2,6 +2,7 @@ package cn.app.controller;
 
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,12 @@ public class UserBackendController {
 	@Autowired
 	private UserBackendService userBackendService;
 	
+	/** 管理用户 注销 */
+	@RequestMapping("userBackendlogout")
+	public String userBackendlogout(HttpServletRequest request){
+		request.getSession().removeAttribute("loginUserBackend");
+		return "index";
+	}
 	
 	@RequestMapping("addAdmin")
 	public String addAdmin(UserBackend userBackend){

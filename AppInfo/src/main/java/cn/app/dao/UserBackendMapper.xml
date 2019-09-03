@@ -38,7 +38,7 @@
 			userName=#{userName},
 			userType=#{userType},
 			modifyBy=#{modifyBy},
-			modifyDate=#{modifyDate},
+			modifyDate=NOW(),
 			userPassword=#{userPassword} 
 		where id=#{id}
 	</update>
@@ -66,9 +66,9 @@
 		resultType="UserBackend">
 		select id,userCode,userName,
 		userType,
-		(select userName from backend_user b where b.createdBy=createdBy)createdBy,
+		createdBy,
 		creationDate,
-		(select userName from backend_user b where b.modifyBy=modifyBy)modifyBy,
+		modifyBy,
 		modifyDate
 		from backend_user 
 		limit #{ph.startNo},#{ph.pageSize}
