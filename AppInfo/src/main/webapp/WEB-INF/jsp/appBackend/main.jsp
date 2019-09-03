@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gentallela Alela! | </title>
+    <title>App开发平台</title>
     <!-- Bootstrap core CSS -->
     <link href="<%=request.getContextPath() %>/static/css/bootstrap.min.css" rel="stylesheet">
     <link href="<%=request.getContextPath() %>/static/fonts/css/font-awesome.min.css" rel="stylesheet">
@@ -69,12 +69,12 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-bug"></i>基础数据维护<span class="fa fa-chevron-down"></span></a>
+                                <!-- <li><a><i class="fa fa-bug"></i>基础数据维护<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="e_commerce.html">E-commerce</a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -145,8 +145,8 @@
 
     <!-- moris js -->
     <script src="<%=request.getContextPath() %>/static/js/moris/raphael-min.js"></script>
-    <script src="<%=request.getContextPath() %>/static/js/moris/morris.js"></script>
-    <script src="<%=request.getContextPath() %>/static/js/moris/example.js"></script>
+  <%--   <script src="<%=request.getContextPath() %>/static/js/moris/morris.js"></script>
+    <script src="<%=request.getContextPath() %>/static/js/moris/example.js"></script> --%>
 	<script type="text/javascript">
 	$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/appList");
 	$("#adminList").click(function(){

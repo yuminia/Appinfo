@@ -69,24 +69,25 @@
 			versionId,(select MAX(versionNo) from app_version where id=versionId) versionNo,
 			status,
 			downloads 
-		from app_info i , app_version v 
-		where i.versionId=v.id  and i.status=1
-		<if test="softwareName!=null and softwareName!=''">
+		from app_info i join app_version v 
+		on i.versionId=v.id
+		where i.status=1
+		<if test="appInfo.softwareName!=null and appInfo.softwareName!=''">
 			and softwareName like concat('%',#{appInfo.softwareName},'%') 
 		</if>
-		<if test="categoryLevel1!=null and categoryLevel1!=''">
+		<if test="appInfo.categoryLevel1!=null and appInfo.categoryLevel1!=''">
 			and categoryLevel1=#{appInfo.categoryLevel1} 
 		</if>
-		<if test="categoryLevel2!=null and categoryLevel2!=''">
+		<if test="appInfo.categoryLevel2!=null and appInfo.categoryLevel2!=''">
 			and categoryLevel2=#{appInfo.categoryLevel2} 
 		</if>
-		<if test="categoryLevel3!=null and categoryLevel3!=''">
+		<if test="appInfo.categoryLevel3!=null and appInfo.categoryLevel3!=''">
 			and categoryLevel3=#{appInfo.categoryLevel3} 
 		</if>
-		<if test="status!=null and status!=''">
+		<if test="appInfo.status!=null and appInfo.status!=''">
 			and status=#{appInfo.status} 
 		</if>
-		<if test="softwareName!=null and softwareName!=''">
+		<if test="appInfo.flatformId!=null and appInfo.flatformId!=''">
 			and flatformId=#{appInfo.flatformId} 
 		</if>
 		limit #{ph.startNo},#{ph.pageSize}

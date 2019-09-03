@@ -15,13 +15,13 @@
 		insert into backend_user(
 			userCode,userName,userType,createdBy,creationDate,modifyBy,modifyDate,userPassword
 		)values(
-			#{userCode},#{userName},#{userType},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate},#{userPassword}
+			#{userCode},#{userName},#{userType},#{createdBy},NOW(),#{modifyBy},#{modifyDate},#{userPassword}
 		)
 	</insert>
 	
 	<!-- 删除管理者用户 -->
 	<delete id="delUserBackend" parameterType="Integer">
-		delete from backend_user
+		delete  from backend_user
 		where id=#{id}
  	 </delete>
  	 

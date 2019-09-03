@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>App开发平台</title>
 </head>
 <body>
 	<div class="">
@@ -32,23 +32,6 @@
 								</c:forEach>
 							</select>
 						</div>
-	
-						<!--/**int(30) APP状态<br>
-													 * 1 待审核<br>* 2 审核未通过<br>* 3 审核通过<br>* 4 已上架<br>* 5 已下架*/-->
-						<div class="col-md-3 col-sm-12 col-xs-12 form-inline">
-							<label>APP状态 </label> <select class="form-control" id="status">
-								<option value="0">-- 请选择 --</option>
-								<option value="1">待审核</option>
-								<option value="2">审核未通过</option>
-								<option value="3">审核通过</option>
-								<option value="4">已上架</option>
-								<option value="5">已下架</option>
-							</select><br> <label>二级分类 </label> <select class="form-control"
-								name="categoryLevel2" id="categoryLevel2">
-								<option value="0">-- 请选择 --</option>
-							</select>
-						</div>
-	
 						<div class="col-md-3 col-sm-12 col-xs-12 form-inline">
 							<label>所属平台 </label> <select class="form-control"
 								name="flatformId" id="flatformId">
@@ -56,7 +39,14 @@
 								<c:forEach items="${flatformList }" var="item">
 									<option value="${item.id }">${item.flatformName }</option>
 								</c:forEach>
-							</select><br> <label>三级分类 </label> <select class="form-control"
+							</select>
+							 <br><label>二级分类 </label> <select class="form-control"
+								name="categoryLevel2" id="categoryLevel2">
+								<option value="0">-- 请选择 --</option>
+							</select>
+						</div>
+						<div class="col-md-3 col-sm-12 col-xs-12 form-inline">
+							<br><br> <label>三级分类 </label> <select class="form-control"
 								name="categoryLevel3" id="categoryLevel3">
 								<option value="0">-- 请选择 --</option>
 							</select>
@@ -81,7 +71,6 @@
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="x_panel" style="height:600px;">
                                 <div class="x_title">
-                                    <a class="btn btn-success btn-sm" href="#">新增App基础信息</a>
                                 </div>
                             	
                             	<div class="x_content">
@@ -104,11 +93,11 @@
                                         <tbody>
                                         	<c:forEach items="${requestScope.appList}" var="appInfo">
                                             <tr class="even pointer">
-                                                <td class=" ">${appInfo.softwareName}</td>
+                                                <td class=" "><c:out value="${appInfo.softwareName}" default="暂无数据"/></td>
                                                 <td class=" "><c:out value="${appInfo.APKName}" default="-\-"/></td>
-                                                <td class=" ">${appInfo.softwareSize}</td>
-                                                <td class=" ">${appInfo.flatformName}</td>
-                                                <td class=" ">${appInfo.categoryName1 }->${appInfo.categoryName2 }->${appInfo.categoryName3 }</td>
+                                                <td class=" "><c:out value="${appInfo.softwareSize}" default="暂无数据"/></td>
+                                                <td class=" "><c:out value="${appInfo.flatformName}" default="暂无数据"/></td>
+                                                <td class=" "><c:out value="${appInfo.categoryName1 }->${appInfo.categoryName2 }->${appInfo.categoryName3 }" default="-\-"/></td>
                                                 <c:if test="${appInfo.status == 1 }">
                                                 	<td class="a-right a-right ">待审核</td>
                                                 </c:if>
@@ -124,14 +113,21 @@
 												<c:if test="${appInfo.status == 5 }">
                                                 	<td class="a-right a-right ">已下架</td>
                                                 </c:if>
+                                                <c:if test="${appInfo.status == null }">
+                                                	<td class="a-right a-right ">\</td>
+                                                </c:if>
                                                 <td class="a-right a-right "><c:out value="${appInfo.downloads}" default="0"/></td>
                                                 <td class="a-right a-right "><c:out value="${appInfo.versionNo}" default="暂无数据"/></td>
                                                 <td class=" last">
-                                                	<a  class="btn btn-xs btn-warning" href="javascript:audit(${appInfo.id});">审核</a>
+                                                	<c:if test="${appInfo != null}" var="ifaudit">
+					                             	 	<a  class="btn btn-xs btn-warning" href="javascript:audit(${appInfo.id});">审核</a>
+					                             	 </c:if>
+					                             	 <c:if test="${!ifaudit }">
+					                             	 	<a  class="btn btn-xs btn-default buttonDisabled" href="javascript:;">审核</a>
+					                             	 </c:if>
                                                 </td>
                                             </tr>
                                             </c:forEach>
-                                            <!-- ${appInfo.versionNo} -->
                                         </tbody>
 										
                                     </table>
@@ -186,7 +182,6 @@
 		
 		//AppList 跳转
 		function pageAppInfoList(pageIndex){
-		//		var data = $("#searchCriteria").serialize();//这里获取的是text 不是 value
 			var softwareName = $("input[name='softwareName']").val();
 			var categoryLevel1 = $("#categoryLevel1 option:selected").val();
 			var categoryLevel2 = $("#categoryLevel2 option:selected").val();
@@ -243,10 +238,6 @@
 				}
 			});
 		});
-		//$("#nav").attr("class", "leftNav none");
-		/* $("#adminList").click(function(){
-			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList");
-			}); */
 	</script>
 </body>
 </html>

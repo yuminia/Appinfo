@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>App开发平台</title>
 </head>
 <body>
 	<div class="">
                  <div class="page-title">
                      <div class="title_left">
-                         <h3>App列表</h3>
+                         <h3>管理员列表</h3>
                      </div>
 
                  </div>
@@ -22,8 +22,13 @@
                      <div class="col-md-12 col-sm-12 col-xs-12">
                          <div class="x_panel" style="height:600px;">
                              <div class="x_title">
-                                 <a class="btn btn-success btn-sm" href="javascript:addAdmin(${sessionScope.loginUserBackend.id});">添加管理员</a>
-                             </div>
+                             	 <c:if test="${sessionScope.loginUserBackend.userType == 1}" var="lv">
+                             	 	<a class="btn btn-success btn-sm" href="javascript:addAdmin(${sessionScope.loginUserBackend.userType});">添加管理员</a>
+                             	 </c:if>
+                             	 <c:if test="${!lv }">
+                             	 	<a class="btn btn-default buttonDisabled" href="javascript:;">添加管理员</a>
+                             	 </c:if>
+                              </div>
                          	
                          	<div class="x_content">
                                  <table id="example" class="table table-striped responsive-utilities jambo_table">
@@ -52,12 +57,21 @@
                                              <td class="a-right a-right "><c:out value="${admin.modifyBy}" default="-\-"/></td>
                                              <td class="a-right a-right "><c:out value="${admin.modifyDate}" default="-\-"/></td>
                                              <td class=" last">
-                                             	<a class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">修改</a>
-                                             	<a class="btn btn-xs btn-warning" href="${pageContext.request.contextPath}/app/Backend/admin/audit?id=${appInfo.id}">删除</a>
+                                             	<c:if test="${lv || admin.id==sessionScope.loginUserBackend.id}" var="updlv">
+				                             	 	<a class="btn btn-xs btn-warning" href="javascript:updAdmin(${admin.id });">修改</a>             
+				                             	 </c:if>
+                                             	<c:if test="${lv && admin.id!=7}" >
+				                             	 	<a class="btn btn-xs btn-warning" href="javascript:delAdmin(${admin.id });">删除</a>
+				                             	 </c:if>
+                                             	<c:if test="${!updlv}">
+				                             	 	<a class="btn btn-xs btn-default buttonDisabled" href="javascript:;">修改</a>             
+				                             	 </c:if>
+				                             	 <c:if test="${!lv || admin.id==7}" >
+				                             	 	<a class="btn btn-xs btn-default buttonDisabled" href="javascript:;">删除</a>
+				                             	 </c:if>
                                              </td>
                                          </tr>
                                          </c:forEach>
-                                         <!-- ${appInfo.versionNo} -->
                                      </tbody>
 
                                  </table>
@@ -66,7 +80,7 @@
 									  <ul class="pagination">
 									  	<c:if test="${ph.currentPage != 1 }">
 									    	<li>
-									    		<a href="javascript:pageAppInfoList(${ph.currentPage-1});" aria-label="Previous">
+									    		<a href="javascript:adminList(${ph.currentPage-1});" aria-label="Previous">
 									    			<span aria-hidden="true">&laquo;</span>
 									    		</a>
 									    	</li>
@@ -76,20 +90,20 @@
 											<c:if test="${ph.currentPage == statu.count }">
 												<li>
 													<a class="middleNum" style="background:#999;" 
-														href="javascript:pageAppInfoList(${statu.count });">
+														href="javascript:adminList(${statu.count });">
 														${statu.count }
 													</a>
 												</li>
 											</c:if>
 											<c:if test="${ph.currentPage != statu.count }">
 												<li><a class="middleNum" 
-												href="javascript:pageAppInfoList(${statu.count });">${statu.count }</a></li>
+												href="javascript:adminList(${statu.count });">${statu.count }</a></li>
 											</c:if>
 										</c:forEach>
 										
 										<c:if test="${ph.currentPage != ph.totalPageCount }">
 										    <li>
-										      <a href="javascript:pageAppInfoList(${ph.currentPage+1 });" aria-label="Next">
+										      <a href="javascript:adminList(${ph.currentPage+1 });" aria-label="Next">
 										      	<span aria-hidden="true">&raquo;</span>
 										      </a>
 										    </li>
@@ -106,7 +120,21 @@
 
              <!-- footer content -->
 	<script type="text/javascript">
-		/* $("#adminList").click(function(){
+	function adminList(pageIndex){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList",{"pageIndex":pageIndex});
+		};
+	function addAdmin(userType){
+			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/addAdmin",{"userType":userType});
+	};
+	function updAdmin(id){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/updAdmin",{"id":id});
+	};
+	function delAdmin(pageIndex){
+		$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/delAdmin",{"id":id});
+	};
+		/* ${pageContext.request.contextPath}/app/Backend/admin/updAdmin?id=${admin.id}
+			${pageContext.request.contextPath}/app/Backend/admin/delAdmin?id=${admin.id}
+		$("#adminList").click(function(){
 			$("#right_col").load("${pageContext.request.contextPath}/app/Backend/admin/adminList");
 			}); */
 	</script>
