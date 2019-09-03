@@ -214,6 +214,9 @@
 							<div class="col-md-6 col-md-offset-3">
 								<a href="javascript:;pageTo('appInfo/AppList');" class="btn btn-primary">返回</a>
 								<button id="send" type="submit" class="btn btn-success">修改</button>
+								<c:if test="${appInfo.status == 2 }">
+									<button id="buttonStatus" type="button" class="btn btn-success">保存并在次提交审核</button>
+								</c:if>
 							</div>
 						</div>
 					</form>
@@ -250,6 +253,44 @@
 		$("#checkAPKNameSpan").text("");
 	});
 	
+	
+	//修改 status 状态为 1 待审核
+	$("#buttonStatus").click(function(){
+		$("input[name=status]").val('1');
+		//var data = $(this).serialize();
+		var data = new FormData(document.getElementById("updateAppInfo"));
+		var mark = true;
+		$("input:required").each(function(index,item){
+			var text = $(item).val();
+			if(text== null || text == '' ){
+				mark = false;
+			}
+		});
+		if(mark){
+			$.ajax({
+				url:"<%=request.getContextPath() %>/app/appInfo/updateAppInfoSubmit",
+				data:data,
+				type:"post",
+				processData:false,
+				contentType:false,
+				success:function(data){
+					if(data == true){
+						alert("修改成功");
+						$("#contentDiv").load("${pageContext.request.contextPath}/app/appInfo/AppList",
+		        				{"pageIndex":1});
+					}else{
+						alert(data);
+					}
+				},
+				error:function(err){
+					console.log(err);
+					alert(err["responseText"])
+				}
+			});
+		}else{
+			alert("请正确填写...再提交修改")
+		}
+	});
 	
 	
 	//updateAppInfoSubmit 表单提交

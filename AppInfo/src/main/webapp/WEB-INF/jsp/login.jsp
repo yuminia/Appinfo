@@ -68,8 +68,8 @@
                         <h1>注 册</h1>
                         <div style="position: relative;">
                         	<input id="registerDevCode" type="text" class="form-control" placeholder="devCode" name="devCode" required="required" />
-                        	<span id="checkDevCodeSpan"
-                        	 style="position: absolute;right:0px;top:8px;" ></span>
+                        	<span id="checkDevCodeSpan" 
+                        	 style="position: absolute;right:5px;top:8px;" ></span>
                         </div>
                         <div><input type="text" class="form-control" placeholder="登录名" name="devName" required="required" /></div>
                         <div><input type="password" class="form-control" placeholder="密码" name="devPassword" required="required" /></div>
@@ -104,9 +104,11 @@
 		$("#registerDevCode").blur(function(){
 			var devCode = $("#registerDevCode").val();
 			if( devCode != null && devCode.trim() != '' ){
+				console.log(1);
 				$.ajax({
 					url:"<%=request.getContextPath() %>/app/userDev/checkDevCode",
 					data:{"devCode":devCode},
+					type:"get",
 					success:function(data){
 						if( data == true ){//存在
 							$("#checkDevCodeSpan").css("color","red").html("用户名已存在,请重新输入");

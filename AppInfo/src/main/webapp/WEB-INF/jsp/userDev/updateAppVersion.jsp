@@ -54,9 +54,10 @@
 				</div>
 				<div class="x_content">
 					<form class="form-horizontal form-label-left" novalidate method="post"  enctype="multipart/form-data" 
-						action="javascript:;" id="addAppVersionSubmit" >
+						action="javascript:;" id="updateAppVersionSubmit" >
 						<span class="section">修改App最新增版本信息</span>
 						<input type="hidden" name="appId" value="${appInfo.id }">
+						<input type="hidden" name="id" value="${appVersion.id }">
 						<div class="item form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12" for="versionNo">版本号<span class="required">*</span></label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
@@ -80,14 +81,15 @@
 								for="publishStatus">发布状态<span class="required">*</span>
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
+								<input type="hidden" name="publishStatus" value="${appVersion.publishStatus}">
 								<c:if test="${appVersion.publishStatus ==1}">
 									<input id="publishStatus" class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2" name="publishStatus" 
+										data-validate-length-range="6" data-validate-words="2" 
 										value="预发布" required="required" readonly type="text">
 								</c:if>
 								<c:if test="${appVersion.publishStatus ==2}">
 									<input id="publishStatus" class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2" name="publishStatus" 
+										data-validate-length-range="6" data-validate-words="2" 
 										value="已发布" required="required" readonly type="text">
 								</c:if>
 							</div>
@@ -117,8 +119,8 @@
 						<div class="ln_solid"></div>
 						<div class="form-group">
 							<div class="col-md-6 col-md-offset-3">
-								<button type="submit" class="btn btn-primary">返回</button>
-								<button id="send" type="submit" class="btn btn-success">添加</button>
+								<a href="javascript:;pageTo('appInfo/AppList');" class="btn btn-primary">返回</a>
+								<button id="send" type="submit" class="btn btn-success">修改</button>
 							</div>
 						</div>
 					</form>
@@ -133,9 +135,9 @@
 
 <script>
 	//addAppVersionSubmit 表单提交
-	$("#addAppVersionSubmit").submit(function(){
+	$("#updateAppVersionSubmit").submit(function(){
 		//var data = $(this).serialize();
-		var data = new FormData(document.getElementById("addAppVersionSubmit"));
+		var data = new FormData(document.getElementById("updateAppVersionSubmit"));
 		var mark = true;
 		$("input:required").each(function(index,item){
 			var text = $(item).val();
@@ -145,14 +147,14 @@
 		});
 		if(mark){
 			$.ajax({
-				url:"<%=request.getContextPath() %>/app/version/addAppVersionSubmit",
+				url:"<%=request.getContextPath() %>/app/version/updateAppVersionSubmit",
 				data:data,
 				type:"post",
 				processData:false,
 				contentType:false,
 				success:function(data){
 					if(data == true){
-						alert("添加成功");
+						alert("修改成功");
 						$("#contentDiv").load("${pageContext.request.contextPath}/app/appInfo/AppList",
 		        				{"pageIndex":1});
 					}else{
@@ -165,7 +167,7 @@
 				}
 			});
 		}else{
-			alert("请正确填写...再提交");
+			alert("请正确填写...再提交修改");
 		}
 		
 	});

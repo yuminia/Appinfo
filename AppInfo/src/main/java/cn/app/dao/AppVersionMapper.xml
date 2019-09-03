@@ -35,6 +35,18 @@
 		)
 	</insert>
 	
-	
-	
+	<!--/**修改appVersion*/ Integer updateAppVersion(AppVersion appVersion); -->
+	<update id="updateAppVersion" parameterType="AppVersion">
+		update app_version
+		set versionNo=#{versionNo},
+			versionInfo=#{versionInfo},
+			publishStatus=#{publishStatus},
+			downloadLink=#{downloadLink},
+			versionSize=#{versionSize},
+			apkLocPath=#{apkLocPath},
+			modifyBy=#{modifyBy},
+			modifyDate=#{modifyDate},
+			apkFileName=#{apkFileName} 
+		where id=#{id}
+	</update>
 </mapper>

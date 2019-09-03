@@ -57,9 +57,9 @@
 	<!-- /** 修改APP信息*/public Integer updateAppInfo(AppInfo appInfo); -->
 	<update id="updateAppInfo" parameterType="AppInfo">
 		update app_info set 
-			softwareName=#{softwareName},APKName=#{APKName},
+			softwareName=#{softwareName},APKName=#{APKName},status=#{status},
 			supportROM=#{supportROM},interfaceLanguage=#{interfaceLanguage},
-			softwareSize=#{softwareSize},updateDate=#{modifyDate},
+			softwareSize=#{softwareSize},updateDate=#{modifyDate},versionId=#{versionId},
 			devId=#{devId},appInfo=#{appInfo},onSaleDate=#{onSaleDate},
 			categoryLevel1=#{categoryLevel1},categoryLevel2=#{categoryLevel2},categoryLevel3=#{categoryLevel3},
 			logoPicPath=#{logoPicPath},logoLocPath=#{logoLocPath},
@@ -82,7 +82,7 @@
 			categoryLevel1,(select categoryName from app_category where id=categoryLevel1) categoryName1,
 			categoryLevel2,(select categoryName from app_category where id=categoryLevel2) categoryName2,
 			categoryLevel3,(select categoryName from app_category where id=categoryLevel3) categoryName3,
-			versionId,(select Max(versionNo) from app_version where appid=versionId) versionNo,
+			versionId,(select Max(versionNo) from app_version where id=versionId) versionNo,
 			status,
 			downloads 
 		from app_info i 

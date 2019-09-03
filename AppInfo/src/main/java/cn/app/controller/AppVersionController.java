@@ -125,7 +125,7 @@ public class AppVersionController {
 		String errorInfo = "";//错误信息
 		String fileName = "";
 		boolean isResult = true;//是否出错
-//		if( !multipartFile.isEmpty() ){
+//	if( !multipartFile.isEmpty() ){
 		String oldName = multipartFile.getOriginalFilename();
 		//获取原文件后缀
 		String oldSuffix = FilenameUtils.getExtension(oldName);
@@ -152,15 +152,18 @@ public class AppVersionController {
 			isResult = false;
 			errorInfo = "文件格式错误!必须以apk结尾";
 		}
-//		}
+//	}
 		
 		if( isResult ){
 			System.out.println("isResult ==============" +isResult);
 			UserDev loginUser = (UserDev) request.getSession().getAttribute("loginUserDev");
 			appVersion.setCreatedBy(loginUser.getId());
 			appVersion.setCreationDate(new Date());
-			appVersion.setApkLocPath(fileName);
-			Integer result = appVersionService.addAppVersion(appVersion);
+			if( !"".equals(fileName) ){
+				appVersion.setApkLocPath(fileName);
+			}
+				
+			Integer result = appVersionService.updateAppVersion(appVersion);
 			System.out.println("------------appVersion :" + appVersion);
 			if( result == 1 ){
 				return "true";

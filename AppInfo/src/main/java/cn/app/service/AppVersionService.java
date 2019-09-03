@@ -14,6 +14,9 @@ public interface AppVersionService {
 	/**根据 appId 获取 最新版本信息 */
 	AppVersion getLastAppVersionByAppId(Integer appId);
 	
+	/**修改appVersion*/
+	Integer updateAppVersion(AppVersion appVersion);
+	
 	
 	
 }

@@ -50,53 +50,36 @@
 										class="badge bg-red pull-right">50%</span> <span>Settings</span>
 								</a></li>
 								<li><a href="javascript:;">Help</a></li>
-								<li><a href="login.html"><i
-										class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+								<li>
+									<a href="<%=request.getContextPath() %>/app/userDev/userDevlogOut">
+										<i class="fa fa-sign-out pull-right"></i> Log Out
+									</a>
+								</li>
 							</ul></li>
 
 						<li role="presentation" class="dropdown"><a
 							href="javascript:;" class="dropdown-toggle info-number"
 							data-toggle="dropdown" aria-expanded="false"> <i
-								class="fa fa-envelope-o"></i> <span class="badge bg-green">6</span>
+								class="fa fa-envelope-o"></i> <span class="badge bg-green">1</span>
 						</a>
 							<ul id="menu1"
 								class="dropdown-menu list-unstyled msg_list animated fadeInDown"
 								role="menu">
-								<li><a> <span class="image"><img
-											src="images/img.jpg" alt="Profile Image" /></span> <span> <span>JohnSmith</span>
-											<span class="time">3 mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li><a> <span class="image"> <img
-											src="images/img.jpg" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li><a> <span class="image"> <img
-											src="images/img.jpg" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
-								<li><a> <span class="image"> <img
-											src="images/img.jpg" alt="Profile Image" />
-									</span> <span> <span>John Smith</span> <span class="time">3
-												mins ago</span>
-									</span> <span class="message"> Film festivals used to be
-											do-or-die moments for movie makers. They were where... </span>
-								</a></li>
 								<li>
-									<div class="text-center">
-										<a> <strong>See All Alerts</strong> <i
-											class="fa fa-angle-right"></i>
-										</a>
-									</div>
+									<a> 
+										<span class="image">
+											<img src="images/img.jpg" alt="Profile Image" /></span>
+											<span> 
+												<span>JohnSmith</span>
+												<span class="time">3 mins ago</span>
+											</span> 
+											<span class="message"> Film festivals used to be
+												do-or-die moments for movie makers. They were where... </span>
+									</a>
 								</li>
-							</ul></li>
+								
+							</ul>
+						</li>
 
 					</ul>
 					</nav>
@@ -123,41 +106,41 @@
 									<h2>历史版本列表</h2>
 									
 									<div class="x_content">
-		<table border="1" align="center" width="1000" height="150">
-			<tr>
-				<th>软件名称</th>
-				<th>版本号</th>
-				<th>版本大小(单位M)</th>
-				<th>发布状态</th>
-				<th>apk文件下载</th>
-				<th>最近更新时间</th>
-			</tr>
-			<tr>
-				<th>软件名称</th>
-				<th>版本号</th>
-				<th>版本大小(单位M)</th>
-				<th>发布状态</th>
-				<th>apk文件下载</th>
-				<th>最近更新时间</th>
-			</tr>
-			<tr>
-				<th>软件名称</th>
-				<th>版本号</th>
-				<th>版本大小(单位M)</th>
-				<th>发布状态</th>
-				<th>apk文件下载</th>
-				<th>最近更新时间</th>
-			</tr>
-			<tr>
-				<th>软件名称</th>
-				<th>版本号</th>
-				<th>版本大小(单位M)</th>
-				<th>发布状态</th>
-				<th>apk文件下载</th>
-				<th>最近更新时间</th>
-			</tr>			
-		</table>
-	</div>     
+										<table border="1" align="center" width="1000" height="150">
+											<tr>
+												<th>软件名称</th>
+												<th>版本号</th>
+												<th>版本大小(单位M)</th>
+												<th>发布状态</th>
+												<th>apk文件下载</th>
+												<th>最近更新时间</th>
+											</tr>
+											<tr>
+												<th>软件名称</th>
+												<th>版本号</th>
+												<th>版本大小(单位M)</th>
+												<th>发布状态</th>
+												<th>apk文件下载</th>
+												<th>最近更新时间</th>
+											</tr>
+											<tr>
+												<th>软件名称</th>
+												<th>版本号</th>
+												<th>版本大小(单位M)</th>
+												<th>发布状态</th>
+												<th>apk文件下载</th>
+												<th>最近更新时间</th>
+											</tr>
+											<tr>
+												<th>软件名称</th>
+												<th>版本号</th>
+												<th>版本大小(单位M)</th>
+												<th>发布状态</th>
+												<th>apk文件下载</th>
+												<th>最近更新时间</th>
+											</tr>			
+										</table>
+									</div>     
 									
 									<ul class="nav navbar-right panel_toolbox">
 										<li><a class="collapse-link"><i

@@ -93,10 +93,12 @@
                                 <li>
                                 	<a href="javascript:;pageToGet('version/updateAppVersionPage?appId=${item.id }');">修改版本</a>
                                 </li>
-                                <li>
-									<%--<a href="<%=request.getContextPath() %>/app/appInfo/updateAppInfo?id=${item.id }">修改</a> --%>
-                                	<a href="javascript:;pageToGet('appInfo/updateAppInfo?id=${item.id }');">修改</a>
-                                </li>
+                                <c:if test="${item.status ==1 || item.status ==2 }">
+	                                <li>
+										<%--<a href="<%=request.getContextPath() %>/app/appInfo/updateAppInfo?id=${item.id }">修改</a> --%>
+	                                	<a href="javascript:;pageToGet('appInfo/updateAppInfo?id=${item.id }');">修改</a>
+	                                </li>
+                                </c:if>
                                 <li>
                                 	<a href="javascript:;pageToGet('appInfo/detailAppInfo?id=${item.id }');">查看</a>
                                 </li>
