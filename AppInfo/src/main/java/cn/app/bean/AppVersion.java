@@ -16,7 +16,7 @@ public class AppVersion {
 	private String versionNo;	
 	/**varchar(2000) 版本信息 */
 	private String versionInfo;	
-	/** int(30) 发表状态*/
+	/** int(30) 发表状态  1 ,预发布   2 已发布*/
 	private Integer publishStatus;
 	/**varchar(500) 下载链接*/
 	private String downloadLink;

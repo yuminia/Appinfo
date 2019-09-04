@@ -31,14 +31,14 @@
                     <form action="${pageContext.request.contextPath}/app/doLogin" method="post">
                         <h1>登 录</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="登录名" required="required" name="userCode" value="qq"/>
+                            <input type="text" class="form-control" placeholder="登录名" required="required" name="userCode" value=""/>
                         </div>
                         <div>
-                            <input type="password" class="form-control" placeholder="密码" required="required" name="userPassword" value="qq"/>
+                            <input type="password" class="form-control" placeholder="密码" required="required" name="userPassword" value=""/>
                         </div>
                         <div>
                         	<input type="hidden" name="DevOrBackend" value="${DevOrBackend}">
-                            <input type="submit" class="btn btn-default submit" value="登入">
+                            <input type="submit" class="btn btn-default submit" value="登入"><a type="button" class="btn btn-default submit" href="${pageContext.request.contextPath}">返回</a>
                             <a class="reset_pass" href="#">忘记密码?</a>
                         </div>
                         <div class="clearfix"></div>
@@ -68,8 +68,8 @@
                         <h1>注 册</h1>
                         <div style="position: relative;">
                         	<input id="registerDevCode" type="text" class="form-control" placeholder="devCode" name="devCode" required="required" />
-                        	<span id="checkDevCodeSpan"
-                        	 style="position: absolute;right:0px;top:8px;" ></span>
+                        	<span id="checkDevCodeSpan" 
+                        	 style="position: absolute;right:5px;top:8px;" ></span>
                         </div>
                         <div><input type="text" class="form-control" placeholder="登录名" name="devName" required="required" /></div>
                         <div><input type="password" class="form-control" placeholder="密码" name="devPassword" required="required" /></div>
@@ -104,9 +104,11 @@
 		$("#registerDevCode").blur(function(){
 			var devCode = $("#registerDevCode").val();
 			if( devCode != null && devCode.trim() != '' ){
+				console.log(1);
 				$.ajax({
 					url:"<%=request.getContextPath() %>/app/userDev/checkDevCode",
 					data:{"devCode":devCode},
+					type:"get",
 					success:function(data){
 						if( data == true ){//存在
 							$("#checkDevCodeSpan").css("color","red").html("用户名已存在,请重新输入");

@@ -38,4 +38,10 @@ public interface AppInfoService {
 	
 	/**根据APKName 查询APP信息*/
 	public AppInfo getAppInfoByAPKName(String APKName);
+	
+	/**修改 APP状态为上架*/
+	public int updateAppInfoStatusOn(Integer id);
+	
+	/**修改 APP状态为下架*/
+	public int updateAppInfoStatusDown(Integer id);
 }

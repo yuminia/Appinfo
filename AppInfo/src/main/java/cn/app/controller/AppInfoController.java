@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import cn.app.bean.AppInfo;
+import cn.app.bean.AppVersion;
 import cn.app.bean.Category;
 import cn.app.bean.Flatform;
 import cn.app.bean.UserDev;
 import cn.app.service.AppInfoService;
+import cn.app.service.AppVersionService;
 import cn.app.service.CategoryService;
 import cn.app.service.FlatformService;
 import cn.app.utils.PageHelper;
@@ -38,6 +40,8 @@ public class AppInfoController {
 	private FlatformService flatformService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private AppVersionService appVersionService;
 	
 	
 	/** ajax 匹配 checkAPKName */
@@ -197,6 +201,9 @@ public class AppInfoController {
 	/**detailAppInfo page*/
 	@RequestMapping(value="detailAppInfo",method=RequestMethod.GET)
 	public String detailAppInfo(HttpServletRequest request ,Integer id){
+		//历史版本集合
+		List<AppVersion> appVersionList = appVersionService.getAppVersionByAppId(id);
+		
 		//加载appInfo 
 		AppInfo appInfo = appInfoService.getAppInfoById(id);
 		System.out.println("appInfo---getAppInfoById : "+appInfo);
@@ -216,8 +223,26 @@ public class AppInfoController {
 		request.setAttribute("categoryList3", categoryList3);
 		request.setAttribute("flatformList", flatformList);
 		request.setAttribute("appInfo", appInfo);
+		request.setAttribute("appVersionList", appVersionList);
 		return "userDev/detailAppInfo";
 	}
+	
+	
+	/**updateAppInfoStatus page*/
+	@RequestMapping(value="updateAppInfoStatus",method=RequestMethod.GET)
+	public String updateAppInfoStatus(HttpServletRequest request ,
+			@RequestParam(value="id",required=true) Integer id,
+			@RequestParam(value="type",required=true) String type){
+		int res = 0;
+		if( "up".equals(type) ){
+			res = appInfoService.updateAppInfoStatusOn(id);
+		}else if( "down".equals(type) ){
+			res = appInfoService.updateAppInfoStatusDown(id);
+		}
+		
+		return "forward:/app/appInfo/AppList";
+	}
+	
 	
 	/**updateAppInfo page*/
 	@RequestMapping(value="updateAppInfo",method=RequestMethod.GET)

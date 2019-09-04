@@ -12,8 +12,6 @@ import cn.app.bean.UserDev;
 
 /**
 * @author yuminia
-* 
-* 
 */
 public class DevLoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws IOException {

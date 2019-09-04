@@ -116,6 +116,8 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/app/userDev/*"/>
+			<mvc:exclude-mapping path="/app/userDev/checkDevCode"/>
+			<mvc:exclude-mapping path="/app/userDev/userDevRegisterSubmit"/>
 			<bean class="cn.app.utils.DevLoginInterceptor"></bean>
 		</mvc:interceptor>
 		

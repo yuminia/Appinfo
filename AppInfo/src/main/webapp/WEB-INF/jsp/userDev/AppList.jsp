@@ -89,8 +89,8 @@
 
 <script type="text/javascript">
 	//确认 删除
-	function doDelConfirm(){
-		return  confirm("你真的想删除吗?");
+	function doDelConfirm(mesg){
+		return  confirm(mesg);
 	};
 
 
